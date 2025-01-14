@@ -1,0 +1,41 @@
+{Tue Jan 14 2025 17:11:37} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:12:18} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:14:12} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:14:18} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:14:43} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:14:43} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:14:44} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:14:44} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:14:58} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:15:13} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:15:18} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:16:21} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:16:22} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:16:27} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:16:28} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:17:30} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:17:31} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:17:37} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:17:38} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:17:50} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:17:51} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:18:27} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:18:28} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:18:43} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:18:44} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:18:57} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:18:58} [EXPRESS-CRAFT 🚀] info: [32mSuper Admin already exists[39m
+{Tue Jan 14 2025 17:18:58} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:19:03} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:19:04} [EXPRESS-CRAFT 🚀] info: [34mSuper Admin already exists[39m
+{Tue Jan 14 2025 17:19:04} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:27:59} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:28:00} [EXPRESS-CRAFT 🚀] info: [34mSuper Admin already exists[39m
+{Tue Jan 14 2025 17:28:00} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:30:00} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:30:01} [EXPRESS-CRAFT 🚀] info: [34mSuper Admin already exists[39m
+{Tue Jan 14 2025 17:30:01} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:53:24} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 14 2025 17:53:25} [EXPRESS-CRAFT 🚀] info: [34mSuper Admin already exists[39m
+{Tue Jan 14 2025 17:53:25} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 14 2025 17:53:25} [EXPRESS-CRAFT 🚀] info: 10.0.80.49 - POST /api/v1/auth/login 200 - 310.052 ms

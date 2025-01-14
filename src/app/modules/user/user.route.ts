@@ -1,0 +1,25 @@
+import express, { NextFunction, Request, Response } from 'express'
+import { UserController } from './user.controller'
+import auth from '../../middleware/auth'
+import { USER_ROLES } from '../../../enum/user'
+import fileUploadHandler from '../../middleware/fileUploadHandler'
+import validateRequest from '../../middleware/validateRequest'
+import { UserValidations } from './user.validation'
+
+const router = express.Router()
+
+router.post(
+  '/create-account',
+  auth(USER_ROLES.ADMIN, USER_ROLES.COMPANY, USER_ROLES.SUPER_ADMIN),
+  fileUploadHandler(),
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.body.data) {
+      req.body = UserValidations.createUserZodSchema.parse(
+        JSON.parse(req.body.data),
+      )
+    }
+    return UserController.createUser(req, res, next)
+  },
+)
+
+export const UserRoutes = router
