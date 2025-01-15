@@ -20,6 +20,7 @@ const createUserZodSchema = z.object({
   role: z.enum([USER_ROLES.ADMIN, USER_ROLES.COMPANY, USER_ROLES.EMPLOYEE], {
     required_error: 'Role is required',
   }),
+  company: z.string().optional(),
   budget: z.number().optional(),
   designation: z.string().optional(),
   duration: z.number().optional(),

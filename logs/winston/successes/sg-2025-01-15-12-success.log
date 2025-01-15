@@ -1,0 +1,66 @@
+{Wed Jan 15 2025 12:00:01} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:00:02} [EXPRESS-CRAFT 🚀] info: [32mSuper Admin created successfully[39m
+{Wed Jan 15 2025 12:00:02} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:00:12} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:00:13} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:00:17} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:00:17} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:00:24} [EXPRESS-CRAFT 🚀] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:00:25} [EXPRESS-CRAFT 🚀] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:02:37} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:02:38} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:05:21} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/auth/login 200 - 283.239 ms
+{Wed Jan 15 2025 12:08:50} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:08:51} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:09:52} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:09:53} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:10:03} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:10:04} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:10:34} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:10:34} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:10:37} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/user/create-account 200 - 414.593 ms
+{Wed Jan 15 2025 12:11:49} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/auth/login 200 - 305.984 ms
+{Wed Jan 15 2025 12:21:34} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:21:35} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:22:14} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:22:14} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:24:26} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:24:27} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:24:28} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:24:29} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:26:51} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:26:52} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:34:51} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:34:52} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:36:17} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:36:18} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:36:58} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:36:59} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:37:37} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:37:38} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:37:48} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:37:49} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:42:20} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:42:21} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:42:26} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:42:27} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:47:57} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:48:00} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:48:09} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:48:10} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:51:56} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/user/create-account 200 - 421.906 ms
+{Wed Jan 15 2025 12:52:54} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:52:55} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:54:01} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:54:02} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:54:03} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:54:04} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:54:50} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:54:51} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:55:35} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:55:36} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:56:33} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:56:34} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Wed Jan 15 2025 12:58:01} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/user/create-account 200 - 433.445 ms
+{Wed Jan 15 2025 12:59:04} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Wed Jan 15 2025 12:59:05} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m

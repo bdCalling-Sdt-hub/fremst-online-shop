@@ -38,7 +38,7 @@ const createUserToDB = async (
       payload.role === USER_ROLES.EMPLOYEE &&
       (user.role === USER_ROLES.COMPANY || user.role === USER_ROLES.SUPER_ADMIN)
     ) {
-      const { designation, budget, duration, ...userData } = payload
+      const { designation, budget, duration, company, ...userData } = payload
       const userDoc = await User.create([userData], { session })
       if (!userDoc || userDoc.length === 0) {
         throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create user.')
@@ -51,15 +51,19 @@ const createUserToDB = async (
 
       const endDateISO = endDate.toISOString()
 
+      const companyId = user.role === USER_ROLES.COMPANY ? user.authId : company
+
       const employeeDocs = await Employee.create(
         [
           {
+            company: companyId,
             designation: designation,
             user: userDoc[0]._id,
             budget: budget,
+            budgetLeft: budget,
             duration: duration,
             budgetExpiredAt: endDateISO,
-            role: USER_ROLES.EMPLOYEE,
+            createdBy: user.authId,
           },
         ],
         { session },
@@ -72,6 +76,15 @@ const createUserToDB = async (
           'Failed to create employee.',
         )
       }
+
+      //update the company employee count
+      await Company.updateOne(
+        { _id: companyId },
+        {
+          $inc: { totalEmployees: 1 },
+        },
+        { session },
+      )
     } else {
       const userDoc = await User.create([payload], { session })
       if (!userDoc || userDoc.length === 0) {
@@ -79,11 +92,15 @@ const createUserToDB = async (
       }
 
       const companyDocs = await Company.create(
-        {
-          user: userDoc[0]._id,
-        },
+        [
+          {
+            user: userDoc[0]._id,
+            createdBy: user.authId,
+          },
+        ],
         { session },
       )
+
       createdUser = companyDocs[0]
 
       if (!createdUser) {

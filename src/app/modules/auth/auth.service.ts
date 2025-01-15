@@ -21,7 +21,7 @@ const loginUser = async (
     { role: 1, status: 1 },
   ).select('+password')
   if (!isUserExist) {
-    throw new ApiError(StatusCodes.NOT_FOUND, 'User does not exist')
+    throw new ApiError(StatusCodes.NOT_FOUND, 'No user found with this email.')
   }
 
   if (isUserExist.status === USER_STATUS.RESTRICTED) {
@@ -51,13 +51,22 @@ const loginUser = async (
     roleBasedUser = await Employee.findOne({ user: isUserExist._id })
   }
 
+  if (!roleBasedUser) {
+    throw new ApiError(
+      StatusCodes.BAD_REQUEST,
+      'Failed to find user based on role',
+    )
+  }
   //create access and refresh token
   const accessToken = jwtHelper.createToken(
     {
       authId: isUserExist._id,
-      userId: roleBasedUser?._id,
       email: isUserExist.email,
       role: isUserExist.role,
+      ...(isUserExist.role !== USER_ROLES.ADMIN &&
+        isUserExist.role !== USER_ROLES.SUPER_ADMIN && {
+          userId: roleBasedUser._id,
+        }),
     },
     config.jwt.jwt_secret as Secret,
     config.jwt.jwt_expire_in as string,
@@ -66,7 +75,10 @@ const loginUser = async (
   const refreshToken = jwtHelper.createToken(
     {
       authId: isUserExist._id,
-      userId: roleBasedUser?._id,
+      ...(isUserExist.role !== USER_ROLES.ADMIN &&
+        isUserExist.role !== USER_ROLES.SUPER_ADMIN && {
+          userId: roleBasedUser._id,
+        }),
       email: isUserExist.email,
       role: isUserExist.role,
     },

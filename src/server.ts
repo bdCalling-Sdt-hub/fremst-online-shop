@@ -27,9 +27,8 @@ async function main() {
       try {
         const superAdmin = {
           name: 'Super Admin',
-          username: 'superadmin',
-          email: 'superadmin@example.com',
-          password: 'superadmin',
+          email: config.super_admin_email as string,
+          password: config.super_admin_password as string,
           role: 'super-admin',
         }
         const newAdmin = await User.create(superAdmin)
