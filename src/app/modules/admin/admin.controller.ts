@@ -8,6 +8,8 @@ import sendResponse from '../../../shared/sendResponse'
 import { StatusCodes } from 'http-status-codes'
 import { IGenericResponse } from '../../../interfaces/response'
 import { ICompany } from '../company/company.interface'
+import { employeeFilterableFields } from '../employee/employee.constants'
+import { IEmployee } from '../employee/employee.interface'
 
 const getCompanies = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, companyFilterableFields)
@@ -24,6 +26,35 @@ const getCompanies = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const getCompanyProfileInformation = catchAsync(async (req: Request, res: Response) => {
+
+  const company_id = req.params.id
+  const company = await AdminServices.getCompanyProfileInformation(company_id)
+  sendResponse<ICompany>(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Company retrieved successfully',
+    data: company,
+  })
+})  
+
+
+const getEmployees = catchAsync(async (req: Request, res: Response) => {
+  const filters = pick(req.query, employeeFilterableFields)
+  const paginationOptions = pick(req.query, paginationFields)
+  const employees = await AdminServices.getEmployeesFromDB(
+    filters,
+    paginationOptions,
+  )
+  sendResponse<IGenericResponse<IEmployee[]>>(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Employees retrieved successfully',
+    data: employees,
+  })
+})
 export const AdminController = {
   getCompanies,
+  getCompanyProfileInformation,
+  getEmployees,
 }

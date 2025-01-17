@@ -16,3 +16,7 @@ export type IEmployee = {
 }
 
 export type EmployeeModel = Model<IEmployee>
+
+export type IEmployeeFilters = {
+  searchTerm?: string
+}

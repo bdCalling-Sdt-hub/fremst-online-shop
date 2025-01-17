@@ -11,4 +11,16 @@ router.get(
   AdminController.getCompanies,
 )
 
+router.get(
+  '/employees',
+  auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN),
+  AdminController.getEmployees,
+)
+
+router.get(
+  '/companies/:id',
+  auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN),
+  AdminController.getCompanyProfileInformation,
+)
+
 export const AdminRoutes = router

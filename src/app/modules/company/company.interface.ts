@@ -6,6 +6,8 @@ export type ICompany = {
   createdBy: Types.ObjectId
   totalEmployees: number
   totalOrders: number
+  totalBudget: number
+  totalSpentBudget: number
   createdAt: Date
   updatedAt: Date
 }

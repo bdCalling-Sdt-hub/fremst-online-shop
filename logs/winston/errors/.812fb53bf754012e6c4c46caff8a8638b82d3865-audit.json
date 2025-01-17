@@ -54,6 +54,11 @@
             "date": 1736939577562,
             "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\errors\\sg-2025-01-15-17-error.log",
             "hash": "5da103e841a08939d079340f85f43fb48c59226682de44a2f94d6b9aff25f031"
+        },
+        {
+            "date": 1737118901252,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\errors\\sg-2025-01-17-19-error.log",
+            "hash": "b271ddcae646bf5d28b79270dbd7d1ef7f311025e60b443847120f615d2bd66d"
         }
     ],
     "hashType": "sha256"
