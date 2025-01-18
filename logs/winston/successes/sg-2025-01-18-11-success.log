@@ -1,0 +1,59 @@
+{Sat Jan 18 2025 11:00:56} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:00:58} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:01:03} [FREMST 🦥] info: 10.0.80.49 - PATCH /api/v1/category/678b354f5b6773a55ff99548 200 - 88.398 ms
+{Sat Jan 18 2025 11:01:28} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/category/ 200 - 82.616 ms
+{Sat Jan 18 2025 11:05:50} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:05:52} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:06:20} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:06:22} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:06:39} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:06:41} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:08:26} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:08:27} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:13:00} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:13:01} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:15:13} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:15:14} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:16:38} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:16:39} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:16:44} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:16:45} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:16:51} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/category/ 200 - 86.971 ms
+{Sat Jan 18 2025 11:16:54} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:16:56} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:20:01} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/category/ 200 - 84.699 ms
+{Sat Jan 18 2025 11:21:31} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:21:32} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:21:46} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:21:47} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:23:01} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/category/ 200 - 96.856 ms
+{Sat Jan 18 2025 11:23:14} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/category/ 200 - 85.567 ms
+{Sat Jan 18 2025 11:23:36} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/category/ 200 - 85.605 ms
+{Sat Jan 18 2025 11:23:53} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/category/ 200 - 94.885 ms
+{Sat Jan 18 2025 11:24:23} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/category/ 200 - 85.385 ms
+{Sat Jan 18 2025 11:24:40} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/category/ 200 - 85.197 ms
+{Sat Jan 18 2025 11:24:59} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/category/ 200 - 85.493 ms
+{Sat Jan 18 2025 11:25:28} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/category/ 200 - 86.451 ms
+{Sat Jan 18 2025 11:25:50} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/category/ 200 - 87.252 ms
+{Sat Jan 18 2025 11:25:53} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/category/ 200 - 85.773 ms
+{Sat Jan 18 2025 11:40:29} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:40:30} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:40:31} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:40:32} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:52:39} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:52:41} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:53:55} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:53:57} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:54:03} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:54:04} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:55:11} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:55:12} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:55:28} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:55:29} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:57:16} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:57:17} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:57:43} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:57:45} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:58:02} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 11:58:04} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 11:59:46} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/category/ 200 - 92.425 ms

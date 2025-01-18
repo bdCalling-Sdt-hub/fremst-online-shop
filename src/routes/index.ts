@@ -1,3 +1,6 @@
+import { SubcategoryRoutes } from '../app/modules/subcategory/subcategory.route';
+import { CategoryRoutes } from '../app/modules/category/category.route';
+import { ProductRoutes } from '../app/modules/product/product.route';
 import { AdminRoutes } from '../app/modules/admin/admin.route'
 import { EmployeeRoutes } from '../app/modules/employee/employee.route'
 import { CompanyRoutes } from '../app/modules/company/company.route'
@@ -13,6 +16,9 @@ export const apiRoutes: { path: string; route: any }[] = [
   { path: '/company', route: CompanyRoutes },
   { path: '/employee', route: EmployeeRoutes },
   { path: '/admin', route: AdminRoutes },
+  { path: '/product', route: ProductRoutes },
+  { path: '/category', route: CategoryRoutes },
+  { path: '/subcategory', route: SubcategoryRoutes }
 ]
 
 apiRoutes.forEach(route => router.use(route.path, route.route))
