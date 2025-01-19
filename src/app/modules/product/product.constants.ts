@@ -1,1 +1,2 @@
-export const PRODUCT_CONSTANT = 'someValue';
+export const productSearchableFields = ['title', 'description', 'additionalInfo',  'brand', 'tags', 'size', 'color']
+export const productFilterableFields = ['searchTerm', 'category', 'subcategory', 'minPrice', 'maxPrice']

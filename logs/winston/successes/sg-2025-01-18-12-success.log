@@ -16,3 +16,6 @@
 {Sat Jan 18 2025 12:02:17} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
 {Sat Jan 18 2025 12:02:18} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
 {Sat Jan 18 2025 12:02:19} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/category/ 200 - 170.854 ms
+{Sat Jan 18 2025 12:02:31} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sat Jan 18 2025 12:02:33} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Sat Jan 18 2025 12:02:33} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/category/ 200 - 174.605 ms
