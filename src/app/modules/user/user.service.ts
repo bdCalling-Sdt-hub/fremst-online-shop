@@ -80,12 +80,14 @@ const createUserToDB = async (
           'Failed to create employee.',
         )
       }
-
-      //update the company employee count
+      //make sure that the company total budget of the company is updated
       await Company.updateOne(
         { _id: companyId },
         {
-          $inc: { totalEmployees: 1 },
+          $inc: { 
+            totalEmployees: 1,
+            totalBudget: budget 
+          }
         },
         { session },
       )
@@ -113,8 +115,6 @@ const createUserToDB = async (
         throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create company.')
       }
       return createdUser
-    }else {
-      throw new ApiError(StatusCodes.BAD_REQUEST, 'You are not authorized to create users.')
     }
 
     await session.commitTransaction()
@@ -127,6 +127,33 @@ const createUserToDB = async (
   }
 }
 
+
+const updateUserToDB = async (user: JwtPayload, payload: Partial<IUser>) => {
+  const updatedUser = await User.findOneAndUpdate(user.authId, {$set: payload}, {
+    new: true,
+  }).populate({
+    path: 'company',
+    select: {
+      name: 1,
+      address: 1,
+      phone: 1,
+      email: 1,
+    },
+  }).populate({
+    path: 'user', 
+    select: {
+      name: 1,
+      email: 1,
+      address: 1,
+      contact: 1,
+      status: 1,
+      role: 1,
+    },
+  }).lean()
+  return updatedUser
+}
+
 export const UserServices = {
   createUserToDB,
+  updateUserToDB,
 }

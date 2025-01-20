@@ -16,17 +16,17 @@ const transporter = nodemailer.createTransport({
 const sendEmail = async (values: ISendEmail) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Salon-go" ${config.email.from}`,
+      from: `"Fremst online shop" ${config.email.from}`,
       to: values.to,
-      subject: values.subject,
+      subject: values.subject,  
       html: values.html,
-    })
+    });
 
-    logger.info('Mail send successfully', info.accepted)
+    logger.info('Mail send successfully', info.accepted);
   } catch (error) {
-    errorLogger.error('Email', error)
+    errorLogger.error('Email', error);
   }
-}
+};
 
 export const emailHelper = {
   sendEmail,

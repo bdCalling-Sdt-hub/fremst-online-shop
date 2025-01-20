@@ -18,3 +18,13 @@
 {Mon Jan 20 2025 12:39:01} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
 {Mon Jan 20 2025 12:39:08} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
 {Mon Jan 20 2025 12:40:03} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
+{Mon Jan 20 2025 12:40:09} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
+{Mon Jan 20 2025 12:42:18} [FREMST 🐞] error: 10.0.80.49 - POST /api/v1/auth/login 400 - 3.913 ms
+{Mon Jan 20 2025 12:42:37} [FREMST 🐞] error: 10.0.80.49 - POST /api/v1/auth/change-password 400 - 3.454 ms
+{Mon Jan 20 2025 12:42:45} [FREMST 🐞] error: 10.0.80.49 - POST /api/v1/auth/change-password 400 - 4.010 ms
+{Mon Jan 20 2025 12:42:53} [FREMST 🐞] error: 10.0.80.49 - POST /api/v1/auth/change-password 400 - 359.100 ms
+{Mon Jan 20 2025 12:44:02} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
+{Mon Jan 20 2025 12:44:36} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
+{Mon Jan 20 2025 12:44:56} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
+{Mon Jan 20 2025 12:45:08} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
+{Mon Jan 20 2025 12:46:53} [FREMST 🐞] error: Failed to create Super Admin Email already exist!

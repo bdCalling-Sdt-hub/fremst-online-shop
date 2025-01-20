@@ -29,6 +29,9 @@ async function main() {
           name: 'Super Admin',
           email: config.super_admin_email as string,
           password: config.super_admin_password as string,
+          profile: 'https://res.cloudinary.com/dmvht7o8m/image/upload/v1737370875/zcd3awdjgvsenzewd4t0.png',
+          address: 'Dhaka, Bangladesh',
+          contact: '+01889126591',
           role: 'super-admin',
         }
         const newAdmin = await User.create(superAdmin)

@@ -1,3 +1,12 @@
 import { z } from 'zod';
 
-export const EmployeeValidations = {  };
+const updateEmployeeZodSchema = z.object({
+    name: z.string().optional(),
+    address: z.string().optional(),
+    designation: z.string().optional(),
+    contact: z.string().optional(),
+});
+
+export const EmployeeValidations = { 
+    updateEmployeeZodSchema
+ };

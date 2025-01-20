@@ -22,4 +22,18 @@ router.post(
   },
 )
 
+router.patch(
+  '/',
+  auth(USER_ROLES.ADMIN, USER_ROLES.COMPANY, USER_ROLES.SUPER_ADMIN,USER_ROLES.EMPLOYEE),
+  fileUploadHandler(),
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.body.data) {
+      req.body = UserValidations.updateUserZodSchema.parse(
+        JSON.parse(req.body.data),
+      )
+    }
+    return UserController.updateUser(req, res, next)
+  },
+)
+
 export const UserRoutes = router

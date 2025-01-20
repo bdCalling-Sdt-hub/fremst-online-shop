@@ -27,6 +27,7 @@ export type IProduct = {
   brands: string[];
   tags: string[];
   availability: boolean;
+  totalSales: number;
   createdBy: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
@@ -39,8 +40,8 @@ export type IProductFilters = {
   searchTerm?: string;
   category?: string;
   subcategory?: string;
-  brands?: string;
-  tags?: string;
+  brand?: string;
+  tag?: string;
   sizes?: string;
   colors?: string;
 

@@ -1,3 +1,5 @@
+import { StatusCodes } from 'http-status-codes'
+import ApiError from '../../../errors/ApiError'
 import { paginationHelper } from '../../../helpers/paginationHelper'
 import { IPaginationOptions } from '../../../interfaces/pagination'
 import { IGenericResponse } from '../../../interfaces/response'
@@ -5,7 +7,10 @@ import { ICompany, ICompanyFilters } from '../company/company.interface'
 import { Company } from '../company/company.model'
 import { IEmployee, IEmployeeFilters } from '../employee/employee.interface'
 import { Employee } from '../employee/employee.model'
+import { User } from '../user/user.model'
 import { AdminModel } from './admin.interface'
+import { IUser } from '../user/user.interface'
+import mongoose, { Types } from 'mongoose'
 
 
 
@@ -187,9 +192,109 @@ const getEmployeesFromDB = async (
   }
 }
 
+const updateEmployee = async (id: Types.ObjectId, payload:Partial<IEmployee & IUser>) => {
+const session = await mongoose.startSession();
+session.startTransaction();
+
+try {
+  const {name, email, address, contact, profile, ...restData} = payload;
+
+  const isUserExist = await Employee.findOne({user: id}).populate('user',{name: 1, email: 1, address: 1, contact: 1, status: 1, role: 1}).session(session);
+  if (!isUserExist) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Requested user does not exist');
+  }
+
+  const updateFields: Partial<{ name: string; email: string; address: string; contact: string; profile: string }> = {};
+
+  if (name) updateFields.name = name;
+  if (email) updateFields.email = email;
+  if (address) updateFields.address = address;
+  if (contact) updateFields.contact = contact;
+  if (profile) updateFields.profile = profile;
+  
+  if (Object.keys(updateFields).length > 0) {
+    const updatedUser = await User.findByIdAndUpdate(id, { $set: updateFields }, { new: true, session });
+  
+    if (!updatedUser) {
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update user data');
+    }
+  }
+
+  const {budget, duration} = restData;
+
+  if ((budget !== isUserExist.budget && duration !== isUserExist.duration) && (budget !== undefined || duration !== undefined)) { 
+
+
+    const company = await Company.findOne({user: id}).session(session);
+    if (!company) {
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Requested company does not exist');
+    }
+
+    const totalBudget = company.totalBudget + (budget! + isUserExist.budget);
+    company.totalBudget = totalBudget;
+
+
+    const updatedCompany = await company.save({ session });
+
+    if (!updatedCompany) {  
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update company data');
+    }
+
+    const startDate = new Date()
+    
+    const endDate = new Date(startDate)
+    endDate.setMonth(startDate.getMonth() + duration!)
+    
+    const endDateISO = endDate.toISOString()
+    
+    restData.budgetAssignedAt = startDate;
+    restData.budgetExpiredAt = endDateISO as unknown as Date
+    restData.budget= budget! + isUserExist.budget || 0;
+    restData.budgetLeft = budget! + isUserExist.budgetLeft || 0;
+    restData.duration = duration!;
+
+
+  }
+
+  const updatedEmployee = await Employee.findOneAndUpdate({ user: id }, { $set: restData }, {
+    new: true,
+    session
+  });
+
+  if (!updatedEmployee) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update employee data');  
+  }
+
+  await session.commitTransaction();
+  return updatedEmployee;
+} catch (error) {
+  await session.abortTransaction();
+  throw error;
+} finally {
+  session.endSession();
+}
+
+};
+
+
+const updateCompany = async (id: Types.ObjectId, payload:Partial<ICompany & IUser>) => {
+  const isCompanyExist = await Company.findById(id);
+  if (!isCompanyExist) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Requested company does not exist');
+  }
+
+  const updatedCompany = await Company.findByIdAndUpdate(id, { $set: payload }, { new: true });
+  if (!updatedCompany) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update company data');
+  }
+  return updatedCompany;
+};
+
 
 export const AdminServices = {
   getCompaniesFromDB,
   getCompanyProfileInformation,
-  getEmployeesFromDB
+  getEmployeesFromDB,
+  updateEmployee,
+  updateCompany 
 }

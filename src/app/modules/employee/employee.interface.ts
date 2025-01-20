@@ -5,6 +5,9 @@ export type IEmployee = {
   user: Types.ObjectId
   company: Types.ObjectId
   designation: string
+  totalOrders: number
+  totalBudget: number
+  totalSpentBudget: number
   budget: number
   budgetLeft: number
   duration: number

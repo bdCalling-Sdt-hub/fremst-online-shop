@@ -18,10 +18,16 @@ const createCategory = async (data: ICategory) => {
     return result;
   };
   const getAllCategory = async () => {
-    const result = await Category.find({}).populate({
+    const result = await Category.find({}).select({
+      _id: 1,
+      title: 1,
+      slug: 1,
+      image: 1,
+      subCategories: 1,
+    }).populate({
       path: 'subCategories',
       select: {
-        _id:0,
+        _id: 1,
         title: 1,
         slug: 1,
       },

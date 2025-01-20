@@ -9,7 +9,6 @@ export type IUser = {
   password: string
   profile?: string
   status: string
-
   role: string
   createdAt: Date
   updatedAt: Date

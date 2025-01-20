@@ -12,7 +12,7 @@ const createProductZodSchema = z.object({
   category: z.string().min(1, 'Category is required'),
   subcategory: z.string().min(1, 'Subcategory is required'),
   quantity: z.number().int().nonnegative('Quantity must be a non-negative integer'),
-  brand: z.array(z.string()).min(1, 'At least one brand is required'),
+  brands: z.array(z.string()).min(1, 'At least one brand is required'),
   tags: z.array(z.string()),
   availability: z.boolean(),
 });

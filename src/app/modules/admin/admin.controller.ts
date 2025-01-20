@@ -10,6 +10,7 @@ import { IGenericResponse } from '../../../interfaces/response'
 import { ICompany } from '../company/company.interface'
 import { employeeFilterableFields } from '../employee/employee.constants'
 import { IEmployee } from '../employee/employee.interface'
+import { Types } from 'mongoose'
 
 const getCompanies = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, companyFilterableFields)
@@ -53,8 +54,40 @@ const getEmployees = catchAsync(async (req: Request, res: Response) => {
     data: employees,
   })
 })
+
+
+const updateEmployeeProfile = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body
+  const employee = await AdminServices.updateEmployee(
+    new Types.ObjectId(req.params.id),
+    payload,
+  )
+  sendResponse<IEmployee>(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Employee updated successfully',
+    data: employee,
+  })
+})
+
+  const updateCompanyProfile = catchAsync(async (req: Request, res: Response) => {
+    const payload = req.body
+    const company = await AdminServices.updateCompany(
+      new Types.ObjectId(req.params.id),
+      payload,
+    )
+    sendResponse<ICompany>(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: 'Company updated successfully',
+      data: company,
+    })
+  })
+
 export const AdminController = {
   getCompanies,
   getCompanyProfileInformation,
   getEmployees,
+  updateEmployeeProfile,
+  updateCompanyProfile
 }

@@ -1,84 +1,33 @@
 {
   "products": [
     {
-      "name": "Classic Cotton T-Shirt",
-      "price": 29.99,
-      "description": "Comfortable and stylish cotton t-shirt perfect for everyday wear",
+      "name": "Product 4",
+      "price": 549.99,
+      "description": "Product quality is world standard!",
       "additionalInfo": "Made from 100% organic cotton, Machine washable",
-      "sizes": ["S", "M", "L", "XL"],
-      "colors": ["White", "Black", "Navy", "Grey"],
-      "regularPrice": 34.99,
-      "salePrice": 29.99,
-      "featuredImages": "tshirt-featured.jpg",
-      "image": ["tshirt-1.jpg", "tshirt-2.jpg", "tshirt-3.jpg"],
-      "quantity": 100,
-      "brand": ["Cotton Comfort"],
-      "tags": ["t-shirt", "casual", "cotton", "basic"],
-      "availability": "in-stock"
-    },
-    {
-      "name": "Premium Denim Jeans",
-      "price": 79.99,
-      "description": "High-quality denim jeans with perfect fit and durability",
-      "additionalInfo": "Premium stretch denim, Slim fit design",
-      "sizes": ["S", "M", "L", "XL", "XXL"],
-      "colors": ["Blue", "Black", "Grey"],
-      "regularPrice": 89.99,
-      "salePrice": 79.99,
-      "featuredImages": "jeans-featured.jpg",
-      "image": ["jeans-1.jpg", "jeans-2.jpg", "jeans-3.jpg"],
-      "quantity": 75,
-      "brand": ["DenimCo"],
-      "tags": ["jeans", "denim", "casual", "premium"],
-      "availability": "in-stock"
-    },
-    {
-      "name": "Casual Sneakers",
-      "price": 59.99,
-      "description": "Versatile and comfortable sneakers for everyday use",
-      "additionalInfo": "Breathable mesh upper, Cushioned insole",
-      "sizes": ["UK7", "UK8", "UK9", "UK10", "UK11"],
-      "colors": ["White", "Black", "Grey", "Blue"],
-      "regularPrice": 69.99,
-      "salePrice": 59.99,
-      "featuredImages": "sneakers-featured.jpg",
-      "image": ["sneakers-1.jpg", "sneakers-2.jpg", "sneakers-3.jpg"],
-      "quantity": 50,
-      "brand": ["SportFlex"],
-      "tags": ["shoes", "sneakers", "casual", "comfortable"],
-      "availability": "in-stock"
-    },
-    {
-      "name": "Leather Wallet",
-      "price": 39.99,
-      "description": "Genuine leather wallet with multiple card slots",
-      "additionalInfo": "Full-grain leather, RFID protection",
-      "sizes": ["One Size"],
-      "colors": ["Brown", "Black"],
-      "regularPrice": 44.99,
-      "salePrice": 39.99,
-      "featuredImages": "wallet-featured.jpg",
-      "image": ["wallet-1.jpg", "wallet-2.jpg"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Navy",
+        "Grey"
+      ],
+      "salePrice": 529.99,
       "quantity": 200,
-      "brand": ["LeatherCraft"],
-      "tags": ["wallet", "leather", "accessories"],
-      "availability": "in-stock"
-    },
-    {
-      "name": "Hooded Sweatshirt",
-      "price": 49.99,
-      "description": "Warm and cozy hooded sweatshirt for casual wear",
-      "additionalInfo": "Fleece lined, Kangaroo pocket",
-      "sizes": ["S", "M", "L", "XL", "XXL"],
-      "colors": ["Grey", "Black", "Navy", "Maroon"],
-      "regularPrice": 54.99,
-      "salePrice": 49.99,
-      "featuredImages": "hoodie-featured.jpg",
-      "image": ["hoodie-1.jpg", "hoodie-2.jpg", "hoodie-3.jpg"],
-      "quantity": 150,
-      "brand": ["UrbanStyle"],
-      "tags": ["hoodie", "sweatshirt", "casual", "winter"],
-      "availability": "in-stock"
+      "category": "678b3ab5e1c09b999ac87269",
+      "subcategory": "678b439a98a2b293d226bd46",
+      "brands": [
+        "Fremst"
+      ],
+      "tags": [
+        "casual",
+        "fremst",
+        "basic"
+      ],
+      "availability": true
     }
   ]
 }

@@ -8,7 +8,14 @@ import { Company } from '../company/company.model'
 import { Employee } from '../employee/employee.model'
 import config from '../../../config'
 import { JwtPayload, Secret } from 'jsonwebtoken'
-import { ILoginResponse } from './auth.interface'
+import { IForgotPasswordRequest, ILoginResponse, IResetPasswordRequest, IVerifyTokenRequest } from './auth.interface'
+import bcrypt from 'bcrypt'
+import crypto from 'crypto'
+import { emailHelper } from '../../../helpers/emailHelper'
+import { emailTemplate } from '../../../shared/emailTemplate'
+
+
+
 
 const loginUser = async (
   email: string,
@@ -109,12 +116,78 @@ const changePassword = async (payload: {oldPassword: string, newPassword: string
     throw new ApiError(StatusCodes.BAD_REQUEST, 'Old password is incorrect')
   }
 
-  isUserExist.password = payload.newPassword
-  await isUserExist.save()
+  const hashedPassword = await bcrypt.hash(
+    payload.newPassword,
+    Number(config.bcrypt_salt_rounds),
+  )
 
+  await User.findByIdAndUpdate(
+    user.authId,
+    { password: hashedPassword },
+    { new: true },
+  )
 }
+
+const forgotPassword = async (payload: IForgotPasswordRequest): Promise<void> => {
+  const isUserExist = await User.findOne({ email: payload.email })
+  if (!isUserExist) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'User not found')
+  }
+
+  //create a new access token and mail it to the user
+  const passwordResetToken = jwtHelper.createToken(
+    { email: payload.email },
+    config.jwt.jwt_secret as Secret,
+    '5m',
+  )
+
+  const resetLink = `${config.frontend_url}/auth/reset-password?token=${passwordResetToken}`
+  const forgetPassword = emailTemplate.resetPassword({ email: payload.email, resetLink })
+  emailHelper.sendEmail(forgetPassword)
+
+
+};
+
+const resetPassword = async (payload: IResetPasswordRequest): Promise<void> => {
+  const { token, newPassword, confirmPassword } = payload;
+
+  if (newPassword !== confirmPassword) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Passwords do not match');
+  }
+
+  //verify token
+
+  const decodedToken = jwtHelper.verifyToken(
+    token,
+    config.jwt.jwt_secret as Secret,
+  )
+
+  if (!decodedToken) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to verify token');
+  }
+
+const isUserExist = await User.findOne({email: decodedToken.email}).select('+password')
+  if (!isUserExist) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Account not found');
+  }
+
+
+  const hashedPassword = await bcrypt.hash(
+    newPassword,
+    Number(config.bcrypt_salt_rounds)
+  );
+
+
+  await User.findByIdAndUpdate(isUserExist._id, {
+    $set: {
+      password: hashedPassword,
+    },
+  });
+};
 
 export const AuthServices = {
   loginUser,
   changePassword,
+  forgotPassword,
+  resetPassword,
 }

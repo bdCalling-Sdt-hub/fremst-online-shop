@@ -4,8 +4,9 @@ import sendResponse from '../../../shared/sendResponse'
 import { UserServices } from '../user/user.service'
 import { ILoginResponse } from './auth.interface'
 import { AuthServices } from './auth.service'
+import { Request, Response } from 'express'
 
-const loginUser = catchAsync(async (req, res) => {
+const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body
   const user = await AuthServices.loginUser(email, password)
   sendResponse<ILoginResponse>(res, {
@@ -16,8 +17,7 @@ const loginUser = catchAsync(async (req, res) => {
   })
 })
 
-
-const changePassword = catchAsync(async (req, res) => {
+const changePassword = catchAsync(async (req: Request, res: Response) => {
   const { oldPassword, newPassword, confirmPassword } = req.body
   const user = req.user
   await AuthServices.changePassword({ oldPassword, newPassword, confirmPassword }, user)
@@ -28,7 +28,33 @@ const changePassword = catchAsync(async (req, res) => {
   })
 })
 
+const forgotPassword = catchAsync(async (req: Request, res: Response) => {
+  await AuthServices.forgotPassword(req.body);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Password reset instructions sent to your email',
+  });
+});
+
+
+const resetPassword = catchAsync(async (req: Request, res: Response) => {
+  const token = req.headers.authorization || ''
+  const payload = {
+    token,
+    ...req.body
+  }
+  await AuthServices.resetPassword(payload);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Password reset successful',
+  });
+});
+
 export const AuthController = {
   loginUser,
   changePassword,
+  forgotPassword,
+  resetPassword,
 }

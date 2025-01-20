@@ -54,6 +54,11 @@ const productSchema = new Schema<IProduct, ProductModel>({
     type: Number,
     required: true,
   },
+  totalSales: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   brands: {
     type: [String],
     required: true,

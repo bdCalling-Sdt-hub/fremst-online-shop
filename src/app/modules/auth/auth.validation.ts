@@ -35,7 +35,37 @@ const changePasswordZodSchema = z.object({
   }),
 })
 
+const forgotPasswordZodSchema = z.object({
+  body: z.object({
+    email: z
+      .string({
+        required_error: 'Email is required',
+      })
+      .email('Invalid email format'),
+  }),
+});
+
+const resetPasswordZodSchema = z.object({
+  body: z.object({
+    newPassword: z
+      .string({
+        required_error: 'New password is required',
+      })
+      .min(8, 'Password must be at least 8 characters'),
+    confirmPassword: z
+      .string({
+        required_error: 'Confirm password is required',
+      })
+      .min(8, 'Password must be at least 8 characters'),
+  }),
+});
+
+
+
 export const AuthValidations = {
   loginUserZodSchema,
-  changePasswordZodSchema
+  changePasswordZodSchema,
+  forgotPasswordZodSchema,
+  resetPasswordZodSchema,
+
 }

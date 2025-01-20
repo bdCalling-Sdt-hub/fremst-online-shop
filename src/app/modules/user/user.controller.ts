@@ -17,6 +17,21 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const updateUser = catchAsync(async (req: Request, res: Response) => {
+  const payload = req.body
+  if (req.files && 'image' in req.files && req.files.image.length > 0) {
+    payload.profile = `/images/${req.files.image[0].filename}`
+  }
+  const user = await UserServices.updateUserToDB(req.user, payload)
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'User updated successfully!',
+    data: user,
+  })
+})
+
 export const UserController = {
   createUser,
+  updateUser,
 }

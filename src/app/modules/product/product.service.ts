@@ -36,7 +36,7 @@ const deleteProduct = async (id: Types.ObjectId) => {
 }
 
 const getAllProduct = async (filters:IProductFilters, paginationOptions:IPaginationOptions) => {
-    const { searchTerm, minPrice, maxPrice,category,subcategory, ...filtersData } = filters;
+    const { searchTerm, minPrice, maxPrice,category,subcategory, tag, brand, ...filtersData } = filters;
 
     const { page, limit, skip, sortBy, sortOrder } = paginationHelper.calculatePagination(paginationOptions);
     const sortCondition: { [key: string]: SortOrder } = {};
@@ -78,6 +78,17 @@ const getAllProduct = async (filters:IProductFilters, paginationOptions:IPaginat
         if (maxPrice !== undefined) priceCondition.$lte = maxPrice;
         andConditions.push({ salePrice: priceCondition });
     }
+
+    if(brand !== undefined || tag !==undefined){
+
+      andConditions.push({
+        $and: [
+          { brand: { $exists: true } },
+          { tags: { $exists: true } }
+        ]
+      });
+    }
+
 
 
 

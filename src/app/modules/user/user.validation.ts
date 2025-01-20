@@ -49,6 +49,15 @@ const createUserZodSchema = z
     }
   )
 
+const updateUserZodSchema = z.object({
+    name: z.string().optional(),
+    address: z.string().optional(),
+    contact: z.string().optional(),
+    designation: z.string().optional(),
+
+})
+
 export const UserValidations = {
   createUserZodSchema,
+  updateUserZodSchema
 }

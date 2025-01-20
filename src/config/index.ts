@@ -23,6 +23,7 @@ export default {
   stripe_secret: process.env.STRIPE_SECRET_KEY,
   stripe_account_id: process.env.STRIPE_ACCOUNT_ID,
   webhook_secret: process.env.WEBHOOK_SECRET,
+  frontend_url: process.env.FRONTEND_URL,
   email: {
     from: process.env.EMAIL_FROM,
     user: process.env.EMAIL_USER,

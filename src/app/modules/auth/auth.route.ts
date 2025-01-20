@@ -20,4 +20,16 @@ router.post(
   AuthController.changePassword,
 )
 
+router.post(
+  '/forgot-password',
+  validateRequest(AuthValidations.forgotPasswordZodSchema),
+  AuthController.forgotPassword
+)
+
+router.post(
+  '/reset-password',
+  validateRequest(AuthValidations.resetPasswordZodSchema),
+  AuthController.resetPassword
+)
+
 export const AuthRoutes = router
