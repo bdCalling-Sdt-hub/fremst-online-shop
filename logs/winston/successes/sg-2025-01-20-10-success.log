@@ -1,0 +1,4 @@
+{Mon Jan 20 2025 10:37:46} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Jan 20 2025 10:37:48} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Jan 20 2025 10:59:44} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/product/?minPrice=30&maxPrice=50 200 - 257.969 ms
+{Mon Jan 20 2025 10:59:48} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/product/ 200 - 238.748 ms

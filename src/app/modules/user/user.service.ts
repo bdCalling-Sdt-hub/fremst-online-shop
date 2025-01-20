@@ -12,8 +12,8 @@ import { ICompany } from '../company/company.interface'
 
 const createUserToDB = async (
   user: JwtPayload,
-  payload: IUser & IEmployee & ICompany,
-): Promise<IUser | IEmployee | ICompany> => {
+  payload: IUser & IEmployee & ICompany ,
+): Promise<IUser | IEmployee | ICompany | null> => {
   const session = await mongoose.startSession()
   let createdUser: IUser | IEmployee | ICompany | null = null
 
@@ -21,13 +21,17 @@ const createUserToDB = async (
     session.startTransaction()
 
     if (
-      payload.role === USER_ROLES.ADMIN &&
-      user.role === USER_ROLES.SUPER_ADMIN
+      (payload.role === USER_ROLES.ADMIN || payload.role === USER_ROLES.SUPER_ADMIN) 
     ) {
+
+      if((payload.role === USER_ROLES.SUPER_ADMIN && user.role !== USER_ROLES.SUPER_ADMIN) ||( payload.role === USER_ROLES.ADMIN && user.role !== USER_ROLES.SUPER_ADMIN)){
+       throw new ApiError(StatusCodes.BAD_REQUEST, 'Only Super Admin can create Super Admin or Admin')
+      }
+
       const userDocs = await User.create([payload], { session })
       createdUser = userDocs[0]
       if (!createdUser) {
-        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create admin.')
+        throw new ApiError(StatusCodes.BAD_REQUEST, `Failed to create ${payload.role}`)
       }
 
       await session.commitTransaction()
@@ -85,7 +89,9 @@ const createUserToDB = async (
         },
         { session },
       )
-    } else {
+
+      return createdUser
+    } else if (payload.role === USER_ROLES.COMPANY && (user.role === USER_ROLES.SUPER_ADMIN || user.role === USER_ROLES.ADMIN)) {
       const userDoc = await User.create([payload], { session })
       if (!userDoc || userDoc.length === 0) {
         throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create user.')
@@ -106,6 +112,9 @@ const createUserToDB = async (
       if (!createdUser) {
         throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create company.')
       }
+      return createdUser
+    }else {
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'You are not authorized to create users.')
     }
 
     await session.commitTransaction()

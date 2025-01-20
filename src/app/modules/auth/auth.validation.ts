@@ -15,6 +15,27 @@ const loginUserZodSchema = z.object({
   }),
 })
 
+const changePasswordZodSchema = z.object({
+  body: z.object({
+    oldPassword: z
+      .string({
+        required_error: 'Old password is required',
+      })
+      .min(8, 'Old password must be more than 8 characters'),
+    newPassword: z
+      .string({
+        required_error: 'New password is required',
+      })
+      .min(8, 'New password must be more than 8 characters'),
+    confirmPassword: z
+      .string({
+        required_error: 'Confirm password is required',
+      })
+      .min(8, 'Confirm password must be more than 8 characters'),
+  }),
+})
+
 export const AuthValidations = {
   loginUserZodSchema,
+  changePasswordZodSchema
 }

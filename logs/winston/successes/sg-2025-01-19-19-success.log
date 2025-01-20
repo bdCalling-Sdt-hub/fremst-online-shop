@@ -34,3 +34,7 @@
 {Sun Jan 19 2025 19:32:59} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/product/?searchTerm=Navy&minPrice=10 200 - 240.256 ms
 {Sun Jan 19 2025 19:33:07} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/product/?minPrice=10 200 - 238.321 ms
 {Sun Jan 19 2025 19:33:10} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/product/?minPrice=10&maxPrice= 200 - 160.255 ms
+{Sun Jan 19 2025 19:37:31} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/product/ 200 - 236.159 ms
+{Sun Jan 19 2025 19:38:14} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/product/?minPrice=10&maxPrice=30 200 - 236.034 ms
+{Sun Jan 19 2025 19:38:21} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/product/?minPrice=10&maxPrice=50 200 - 235.665 ms
+{Sun Jan 19 2025 19:38:29} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/product/?minPrice=30&maxPrice=50 200 - 235.965 ms

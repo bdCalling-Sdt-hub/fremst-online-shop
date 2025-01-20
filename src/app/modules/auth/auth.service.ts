@@ -7,7 +7,7 @@ import { USER_ROLES } from '../../../enum/user'
 import { Company } from '../company/company.model'
 import { Employee } from '../employee/employee.model'
 import config from '../../../config'
-import { Secret } from 'jsonwebtoken'
+import { JwtPayload, Secret } from 'jsonwebtoken'
 import { ILoginResponse } from './auth.interface'
 
 const loginUser = async (
@@ -92,6 +92,29 @@ const loginUser = async (
   }
 }
 
+const changePassword = async (payload: {oldPassword: string, newPassword: string, confirmPassword: string}, user:JwtPayload) => {
+  if (payload.newPassword !== payload.confirmPassword) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Password does not match')
+  }
+  const isUserExist = await User.findById(user.authId).select('+password')
+  if (!isUserExist) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'User not found')
+  }
+
+  const isPasswordMatched = await User.isPasswordMatched(
+    payload.oldPassword,
+    isUserExist.password,
+  )
+  if (!isPasswordMatched) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Old password is incorrect')
+  }
+
+  isUserExist.password = payload.newPassword
+  await isUserExist.save()
+
+}
+
 export const AuthServices = {
   loginUser,
+  changePassword,
 }

@@ -18,14 +18,13 @@ export type IProduct = {
   additionalInfo: string;
   sizes: string[];
   colors: string[];
-  regularPrice: number;
   salePrice: number;
   image: string;
   featuredImages: string[];
   category: Types.ObjectId;
   subcategory: Types.ObjectId;
   quantity: number;
-  brand: string[];
+  brands: string[];
   tags: string[];
   availability: boolean;
   createdBy: Types.ObjectId;
@@ -40,10 +39,11 @@ export type IProductFilters = {
   searchTerm?: string;
   category?: string;
   subcategory?: string;
-  brand?: string;
+  brands?: string;
   tags?: string;
-  size?: string;
-  color?: string;
+  sizes?: string;
+  colors?: string;
+
   minPrice?: number;
   maxPrice?: number;
 };
