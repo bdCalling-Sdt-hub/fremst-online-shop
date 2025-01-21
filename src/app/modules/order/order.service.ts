@@ -11,6 +11,7 @@ import { IPaginationOptions } from '../../../interfaces/pagination';
 import { paginationHelper } from '../../../helpers/paginationHelper';
 import { orderSearchableFields } from './order.constants';
 import { IGenericResponse } from '../../../interfaces/response';
+import { generateOrderId } from './order.utils';
 
 interface IMonthlyOrderStats {
   month: number;
@@ -38,6 +39,10 @@ const createOrder = async (
     if (!employee) {
       throw new ApiError(StatusCodes.NOT_FOUND, 'Employee not found or budget details missing.');
     }
+
+    //assign custom order id 
+    const orderId = await generateOrderId();
+   
 
     // Calculate total amount and verify products
     const orderItems: IOrderItem[] = [];
@@ -110,6 +115,7 @@ const createOrder = async (
     const order = await Order.create(
         [
           {
+            orderId,
             employee: employee._id,
             company: employee.company,
             items: orderItems,

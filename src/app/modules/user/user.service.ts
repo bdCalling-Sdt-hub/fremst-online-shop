@@ -64,6 +64,7 @@ const createUserToDB = async (
             designation: designation,
             user: userDoc[0]._id,
             budget: budget,
+            totalBudget: budget,
             budgetLeft: budget,
             duration: duration,
             budgetExpiredAt: endDateISO,
@@ -92,8 +93,11 @@ const createUserToDB = async (
         { session },
       )
 
-      return createdUser
-    } else if (payload.role === USER_ROLES.COMPANY && (user.role === USER_ROLES.SUPER_ADMIN || user.role === USER_ROLES.ADMIN)) {
+
+    } 
+    
+    if (payload.role === USER_ROLES.COMPANY && (user.role === USER_ROLES.SUPER_ADMIN || user.role === USER_ROLES.ADMIN)) {
+      console.log(payload,"INN")
       const userDoc = await User.create([payload], { session })
       if (!userDoc || userDoc.length === 0) {
         throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create user.')
@@ -108,13 +112,14 @@ const createUserToDB = async (
         ],
         { session },
       )
-
+      if (!companyDocs || companyDocs.length === 0) {
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create company.')
+      }
       createdUser = companyDocs[0]
-
+      console.log(createdUser)
       if (!createdUser) {
         throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create company.')
       }
-      return createdUser
     }
 
     await session.commitTransaction()

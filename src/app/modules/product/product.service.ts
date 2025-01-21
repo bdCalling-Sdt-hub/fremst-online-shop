@@ -155,4 +155,6 @@ const getSingleProduct = async (id: Types.ObjectId) => {
   return result;
 };
 
+
+
 export const ProductServices = { createProduct, updateProduct, deleteProduct, getAllProduct, getSingleProduct };

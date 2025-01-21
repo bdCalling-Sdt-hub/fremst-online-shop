@@ -8,9 +8,8 @@ import { Company } from '../company/company.model'
 import { IEmployee, IEmployeeFilters } from '../employee/employee.interface'
 import { Employee } from '../employee/employee.model'
 import { User } from '../user/user.model'
-import { AdminModel } from './admin.interface'
 import { IUser } from '../user/user.interface'
-import mongoose, { Types } from 'mongoose'
+import mongoose, { Types, PipelineStage } from 'mongoose'
 
 
 
@@ -30,90 +29,93 @@ const getCompanyProfileInformation = async (company_id: string) => {
   return company
 }
 
+
+
+
 const getCompaniesFromDB = async (
   filters: ICompanyFilters,
   paginationOptions: IPaginationOptions,
 ): Promise<IGenericResponse<ICompany[]>> => {
-  const { page, limit, skip, sortBy, sortOrder } =
-    paginationHelper.calculatePagination(paginationOptions)
+  
+  
+const { page, limit, skip, sortBy, sortOrder } =
+  paginationHelper.calculatePagination(paginationOptions)
 
-  const { searchTerm } = filters
+const { searchTerm, ...filterData } = filters
 
-  const result = await Company.aggregate([
-    {
-      $lookup: {
-        from: 'users',
-        localField: 'user',
-        foreignField: '_id',
-        as: 'user',
-      },
-    },
-    {
-      $unwind: '$user',
-    },
-    {
-      $lookup: {
-        from: 'users',
-        localField: 'createdBy',
-        foreignField: '_id',
-        as: 'createdBy',
-      },
-    },
-    {
-      $unwind: '$createdBy',
-    },
-    {
-      $match: {
-        ...(searchTerm && {
-          $or: [
-            { 'user.name': { $regex: searchTerm, $options: 'i' } },
-            { 'user.address': { $regex: searchTerm, $options: 'i' } },
-            { 'user.phone': { $regex: searchTerm, $options: 'i' } },
-            { 'user.email': { $regex: searchTerm, $options: 'i' } },
-          ],
-        }),
-      },
-    },
-    {
-      $project: {
-        'user._id': 1,
-        'user.name': 1,
-        'user.profile': 1,
-        'user.email': 1,
-        'user.address': 1,
-        'user.phone': 1,
-        'user.status': 1,
-        'createdBy._id': 1,
-        'createdBy.name': 1,
-        totalEmployees: 1,
-        _id: 1,
-      },
-    },
+const andConditions = []
 
-    {
-      $skip: skip,
-    },
-    {
-      $limit: limit,
-    },
-    {
-      $sort: {
-        [sortBy]: sortOrder === 'asc' ? 1 : -1,
-      },
-    },
-  ])
+if (searchTerm) {
+  andConditions.push({
+    $or: [
+      { 'user.name': { $regex: searchTerm, $options: 'i' } },
+      { 'user.email': { $regex: searchTerm, $options: 'i' } },
+      { 'user.address': { $regex: searchTerm, $options: 'i' } },
+    ],
+  })
+}
 
-  const total = await Company.countDocuments()
+if (Object.keys(filterData).length) {
+  andConditions.push({
+    $and: Object.entries(filterData).map(([field, value]) => ({
+      [field]: value,
+    })),
+  })
+}
 
-  return {
-    meta: {
-      page,
-      limit,
-      total,
-      totalPage: Math.ceil(total / limit),
+const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {}
+
+const result = await Company.aggregate([
+  {
+    $lookup: {
+      from: 'users',
+      localField: 'user',
+      foreignField: '_id',
+      as: 'user',
     },
-    data: result,
-  }
+  },
+  { $unwind: '$user' },
+  { $match: whereConditions },
+  {
+    $facet: {
+      total: [{ $count: 'count' }],
+      data: [
+        {
+          $project: {
+            _id: 1,
+            totalEmployees: 1,
+            totalOrders: 1,
+            totalBudget: 1,
+            totalSpentBudget: 1,
+            'user.name': 1,
+            'user.email': 1,
+            'user.address': 1,
+            'user.contact': 1,
+            'user.status': 1,
+          },
+        },
+        { $sort: { [sortBy]: sortOrder === 'asc' ? 1 : -1 } },
+        { $skip: skip },
+        { $limit: limit },
+      ],
+    },
+  },
+])
+
+const total = result[0].total[0]?.count || 0
+const data = result[0].data
+
+return {
+  meta: {
+    page,
+    limit,
+    total,
+    totalPage: Math.ceil(total / limit),
+  },
+  data,
+}
+
+
 }
 
 const getEmployeesFromDB = async (
@@ -137,7 +139,6 @@ const getEmployeesFromDB = async (
     {
       $unwind: '$user',
     },
-
     {
       $match: {
         ...(searchTerm && {
@@ -150,36 +151,40 @@ const getEmployeesFromDB = async (
       },
     },
     {
-      $project: {
-        'user._id': 1,
-        'user.name': 1,
-        'user.email': 1,
-        'user.profile': 1,
-        'user.address': 1,
-        designation: 1,
-        budget: 1,
-        duration: 1,
-        budgetLeft: 1,
-        budgetAssignedAt: 1,
-        budgetExpiredAt: 1,
-        'user.status': 1,
-        _id: 1,
-      },
-    },
-    {
-      $skip: skip,
-    },
-    {
-      $limit: limit,
-    },
-    {
-      $sort: {
-        [sortBy]: sortOrder === 'asc' ? 1 : -1,
+      $facet: {
+        total: [{ $count: 'count' }],
+        data: [
+          {
+            $project: {
+              'user._id': 1,
+              'user.name': 1,
+              'user.email': 1,
+              'user.profile': 1,
+              'user.address': 1,
+              designation: 1,
+              budget: 1,
+              duration: 1,
+              budgetLeft: 1,
+              budgetAssignedAt: 1,
+              budgetExpiredAt: 1,
+              'user.status': 1,
+              _id: 1,
+            },
+          },
+          {
+            $sort: {
+              [sortBy]: sortOrder === 'asc' ? 1 : -1,
+            },
+          },
+          { $skip: skip },
+          { $limit: limit },
+        ],
       },
     },
   ])
 
-  const total = await Employee.countDocuments()
+  const total = result[0].total[0]?.count || 0
+  const data = result[0].data
 
   return {
     meta: {
@@ -188,11 +193,11 @@ const getEmployeesFromDB = async (
       total,
       totalPage: Math.ceil(total / limit),
     },
-    data: result,
+    data,
   }
 }
 
-const updateEmployee = async (id: Types.ObjectId, payload:Partial<IEmployee & IUser>) => {
+const updateEmployee = async (id: Types.ObjectId, payload:Partial<IEmployee & IUser & {budgetUpdate?:boolean}>) => {
 const session = await mongoose.startSession();
 session.startTransaction();
 
@@ -220,17 +225,19 @@ try {
     }
   }
 
-  const {budget, duration} = restData;
+  const {budget, duration, budgetUpdate} = restData;
 
-  if ((budget !== isUserExist.budget && duration !== isUserExist.duration) && (budget !== undefined || duration !== undefined)) { 
+  if (Boolean(budgetUpdate)) { 
+    if(!budget || !duration){
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Budget and duration are required');
+    }
 
-
-    const company = await Company.findOne({user: id}).session(session);
+    const company = await Company.findById(isUserExist.company).session(session);
     if (!company) {
       throw new ApiError(StatusCodes.NOT_FOUND, 'Requested company does not exist');
     }
 
-    const totalBudget = company.totalBudget + (budget! + isUserExist.budget);
+    const totalBudget = company.totalBudget + budget!;
     company.totalBudget = totalBudget;
 
 
@@ -249,7 +256,8 @@ try {
     
     restData.budgetAssignedAt = startDate;
     restData.budgetExpiredAt = endDateISO as unknown as Date
-    restData.budget= budget! + isUserExist.budget || 0;
+    restData.budget= budget;
+    restData.totalBudget = budget! + isUserExist.budget || 0;
     restData.budgetLeft = budget! + isUserExist.budgetLeft || 0;
     restData.duration = duration!;
 

@@ -8,6 +8,7 @@ export type IOrderItem = {
 
 export type IOrder = {
   _id: Types.ObjectId;
+  orderId: string;
   name: string;
   employee: Types.ObjectId;
   company: Types.ObjectId;
