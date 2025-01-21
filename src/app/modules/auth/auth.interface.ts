@@ -8,15 +8,11 @@ export type IRefreshTokenResponse = {
 }
 
 export type IForgotPasswordRequest = {
-  email: string;
-};
+  email: string
+}
 
 export type IResetPasswordRequest = {
-  token: string;
-  newPassword: string;
-  confirmPassword: string;
-};
-
-export type IVerifyTokenRequest = {
-  token: string;
-};
+  token: string
+  newPassword: string
+  confirmPassword: string
+}

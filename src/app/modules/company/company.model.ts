@@ -6,6 +6,7 @@ const companySchema = new Schema<ICompany, CompanyModel>(
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     totalEmployees: { type: Number, required: true, default: 0 },
     totalOrders: { type: Number, required: true, default: 0 },
+    totalBudget: { type: Number, required: true, default: 0 },
     createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   },
   {
