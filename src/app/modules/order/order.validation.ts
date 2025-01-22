@@ -17,15 +17,6 @@ const createOrderZodSchema = z.object({
   }),
 });
 
-const updateOrderStatusZodSchema = z.object({
-  body: z.object({
-    status: z.enum(['delivered', 'cancelled'], {
-      required_error: 'Status is required',
-    }),
-  }),
-});
-
 export const OrderValidation = {
   createOrderZodSchema,
-  updateOrderStatusZodSchema,
 };

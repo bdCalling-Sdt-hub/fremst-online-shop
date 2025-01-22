@@ -1,3 +1,4 @@
+import {  IForgotPasswordRequest, ILoginResponse, IResetPasswordRequest } from './auth.interface';
 import { StatusCodes } from 'http-status-codes'
 import ApiError from '../../../errors/ApiError'
 import { USER_STATUS } from '../user/user.constants'
@@ -8,7 +9,7 @@ import { Company } from '../company/company.model'
 import { Employee } from '../employee/employee.model'
 import config from '../../../config'
 import { JwtPayload, Secret } from 'jsonwebtoken'
-import { IForgotPasswordRequest, ILoginResponse, IResetPasswordRequest, IVerifyTokenRequest } from './auth.interface'
+
 import bcrypt from 'bcrypt'
 import crypto from 'crypto'
 import { emailHelper } from '../../../helpers/emailHelper'

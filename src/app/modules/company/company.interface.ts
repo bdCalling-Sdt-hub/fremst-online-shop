@@ -8,6 +8,7 @@ export type ICompany = {
   totalOrders: number
   totalBudget: number
   totalSpentBudget: number
+  
   createdAt: Date
   updatedAt: Date
 }

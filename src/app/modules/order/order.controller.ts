@@ -5,6 +5,10 @@ import sendResponse from '../../../shared/sendResponse';
 import { StatusCodes } from 'http-status-codes';
 import { IOrder } from './order.interface';
 import { USER_ROLES } from '../../../enum/user';
+import pick from '../../../shared/pick';
+import { paginationFields } from '../../../interfaces/pagination';
+import { orderFilterableFields } from './order.constants';
+import { Types } from 'mongoose';
 
 const createOrder = catchAsync(async (req: Request, res: Response) => {
   const order = await OrderService.createOrder(req.user, req.body);
@@ -20,7 +24,7 @@ const updateOrderStatus = catchAsync(async (req: Request, res: Response) => {
   const order = await OrderService.updateOrderStatus(
     req.user,
     req.params.id,
-    req.body
+    req.params.status as 'delivered' | 'cancelled'
   );
   sendResponse<IOrder>(res, {
     statusCode: StatusCodes.OK,
@@ -56,8 +60,35 @@ const getYearlyOrderStats = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+
+const getAllOrders = catchAsync(async (req: Request, res: Response) => {
+  const filters = pick(req.query, orderFilterableFields);
+  const paginationOptions = pick(req.query, paginationFields);
+  const result = await OrderService.getAllOrders(filters, paginationOptions);
+  
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Orders retrieved successfully',
+    data: result,
+  });
+});
+
+
+const getSingleOrder = catchAsync(async (req: Request, res: Response) => {
+  const order = await OrderService.getSingleOrder(new Types.ObjectId(req.params.id));
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Order retrieved successfully',
+    data: order,
+  });
+});
+
 export const OrderController = {
   createOrder,
   updateOrderStatus,
   getYearlyOrderStats,
+  getAllOrders,
+  getSingleOrder,
 };

@@ -12,6 +12,7 @@ import { paginationHelper } from '../../../helpers/paginationHelper';
 import { orderSearchableFields } from './order.constants';
 import { IGenericResponse } from '../../../interfaces/response';
 import { generateOrderId } from './order.utils';
+import { Company } from '../company/company.model';
 
 interface IMonthlyOrderStats {
   month: number;
@@ -35,7 +36,7 @@ const createOrder = async (
 
   try {
     // Get employee details and verify budget
-    const employee = await Employee.findById(user.userId,{user: 1, budgetLeft: 1}).populate<{user:IUser}>('user', { name: 1, email: 1, address: 1, contact: 1, status: 1 }).session(session);
+    const employee = await Employee.findById(user.userId,{user: 1, budgetLeft: 1, company: 1}).populate<{user:IUser}>('user', { name: 1, email: 1, address: 1, contact: 1, status: 1 }).session(session);
     if (!employee) {
       throw new ApiError(StatusCodes.NOT_FOUND, 'Employee not found or budget details missing.');
     }
@@ -88,6 +89,12 @@ const createOrder = async (
 
       await Product.bulkWrite(bulkUpdates, { session });
 
+      await Company.findOneAndUpdate(
+        { _id: employee.company },
+        { $inc: {  totalOrders: 1, totalSpentBudget: totalAmount } },
+        { session }
+      );
+
     // Check if employee has sufficient budget
     const employeeUpdateResult = await Employee.findOneAndUpdate(
         {
@@ -110,7 +117,6 @@ const createOrder = async (
           'Insufficient budget for this order'
         );
       }
-
     // Create order
     const order = await Order.create(
         [
@@ -142,7 +148,7 @@ const createOrder = async (
 const updateOrderStatus = async (
   user: JwtPayload,
   orderId: string,
-  payload: IUpdateOrderStatus
+  status: 'delivered' | 'cancelled'
 ): Promise<IOrder> => {
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -162,7 +168,7 @@ const updateOrderStatus = async (
     }
 
     // If cancelling order, restore product quantities and employee budget
-    if (payload.status === 'cancelled') {
+    if (status === 'cancelled') {
       // Restore product quantities
       const productUpdates = order.items.map(item => ({
         updateOne: {
@@ -184,13 +190,21 @@ const updateOrderStatus = async (
         },
         { session }
       );
+
+      await Company.findByIdAndUpdate(
+        order.company,
+        { $inc: { totalOrders: -1, totalSpentBudget: -order.totalAmount } },
+        { session }
+      );
+
     }
+    
 
     const updatedOrder = await Order.findByIdAndUpdate(
       orderId,
-      { status: payload.status },
+      { status: status },
       { new: true, session }
-    );
+    );  
 
     if (!updatedOrder) {
       throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update order');
@@ -247,9 +261,7 @@ const getAllOrders = async (filters:IOrderFilterableFields, paginationOptions:IP
     const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
 
     const result = await Order.find(whereConditions)
-    .populate('employee', 'user')
-    .populate('company')
-    .populate('items.product')
+    .populate('items.product',{name: 1, salePrice: 1, price: 1, sizes: 1, colors: 1, quantity: 1})
     .sort(sortCondition)
     .skip(skip)
     .limit(limit)

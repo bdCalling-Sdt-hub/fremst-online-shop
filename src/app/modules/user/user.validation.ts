@@ -13,6 +13,8 @@ const createUserZodSchema = z
       required_error: 'Email is required',
     })
     .email('Invalid email address'),
+    contact: z.string({
+      required_error: 'Contact is required' }),
   password: z
     .string({
       required_error: 'Password is required',
@@ -25,7 +27,6 @@ const createUserZodSchema = z
   budget: z.number().optional(),
   designation: z.string().optional(),
   duration: z.number().optional(),
-  contact: z.string().optional(),
   address: z.string().optional(),
 })
 

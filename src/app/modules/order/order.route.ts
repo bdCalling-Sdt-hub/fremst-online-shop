@@ -17,11 +17,24 @@ router.post(
 
 // Update order status - Only admin and super admin can update status
 router.patch(
-  '/:id/status',
-  auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN),
-  validateRequest(OrderValidation.updateOrderStatusZodSchema),
+  '/:id/:status',
+
   OrderController.updateOrderStatus
 );
+
+router.get(
+  '/:id',
+  auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN, USER_ROLES.EMPLOYEE),
+  OrderController.getSingleOrder
+);
+
+router.get(
+  '/',
+  auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN, USER_ROLES.EMPLOYEE),
+  OrderController.getAllOrders
+);
+
+
 
 // Get yearly order statistics - Accessible by all authenticated users
 router.get(
