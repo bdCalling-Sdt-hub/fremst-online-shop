@@ -26,9 +26,34 @@ const getCompanyProfileInformation = async (company_id: string) => {
       status: 1,},
   })
   
+
+
+  if (!company) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Company not found')
+  }
+
   return company
 }
 
+
+const getEmployeeProfileInformationFromDB = async (employee_id: string) => {
+  const employee = await Employee.findById(employee_id,{user:1, company:1, designation:1, totalOrders:1, totalBudget:1, totalSpentBudget:1}).populate({
+    path: 'user',
+    select: {
+      name: 1,
+      email: 1,
+      address: 1,
+      contact: 1,
+      status: 1,
+    },
+  })
+
+  if (!employee) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Employee not found')
+  }
+  
+  return employee
+}
 
 
 
@@ -304,5 +329,6 @@ export const AdminServices = {
   getCompanyProfileInformation,
   getEmployeesFromDB,
   updateEmployee,
-  updateCompany 
+  updateCompany,
+  getEmployeeProfileInformationFromDB,
 }

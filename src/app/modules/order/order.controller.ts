@@ -85,10 +85,25 @@ const getSingleOrder = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getOrdersByEmployeeAndCompany = catchAsync(async (req: Request, res: Response) => {
+  const { employeeId, companyId } = req.query;
+  const filters = pick(req.query, orderFilterableFields);
+  const paginationOptions = pick(req.query, paginationFields);
+
+  const orders = await OrderService.getOrderForEmployeeAndCompany(req.user,  filters, paginationOptions,employeeId as string , companyId as string);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Orders retrieved successfully',
+    data: orders,
+  });
+});
+
 export const OrderController = {
   createOrder,
   updateOrderStatus,
   getYearlyOrderStats,
   getAllOrders,
   getSingleOrder,
+  getOrdersByEmployeeAndCompany
 };

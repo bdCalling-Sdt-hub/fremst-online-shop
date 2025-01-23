@@ -84,10 +84,22 @@ const updateEmployeeProfile = catchAsync(async (req: Request, res: Response) => 
     })
   })
 
+  const getEmployeeProfileInformation = catchAsync(async (req: Request, res: Response) => {
+    const employee_id = req.params.id
+    const employee = await AdminServices.getEmployeeProfileInformationFromDB(employee_id)
+    sendResponse<IEmployee>(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: 'Employee retrieved successfully',
+      data: employee,
+    })
+  })
+
 export const AdminController = {
   getCompanies,
   getCompanyProfileInformation,
   getEmployees,
   updateEmployeeProfile,
-  updateCompanyProfile
+  updateCompanyProfile,
+  getEmployeeProfileInformation,
 }

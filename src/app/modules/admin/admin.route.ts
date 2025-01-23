@@ -14,6 +14,7 @@ router.get(
   AdminController.getCompanies,
 )
 
+
 router.get(
   '/employees',
   auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN),
@@ -21,7 +22,13 @@ router.get(
 )
 
 router.get(
-  '/companies/:id',
+  '/employee/:id', 
+  auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN),
+  AdminController.getEmployeeProfileInformation,
+)
+
+router.get(
+  '/company/:id',
   auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN),
   AdminController.getCompanyProfileInformation,
 )

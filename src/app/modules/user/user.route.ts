@@ -3,7 +3,7 @@ import { UserController } from './user.controller'
 import auth from '../../middleware/auth'
 import { USER_ROLES } from '../../../enum/user'
 import fileUploadHandler from '../../middleware/fileUploadHandler'
-import validateRequest from '../../middleware/validateRequest'
+
 import { UserValidations } from './user.validation'
 
 const router = express.Router()
@@ -34,6 +34,12 @@ router.patch(
     }
     return UserController.updateUser(req, res, next)
   },
+)
+
+router.get(
+  '/profile',
+  auth(USER_ROLES.ADMIN, USER_ROLES.COMPANY, USER_ROLES.SUPER_ADMIN,USER_ROLES.EMPLOYEE),
+  UserController.getUserProfile
 )
 
 export const UserRoutes = router

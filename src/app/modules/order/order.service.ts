@@ -14,6 +14,7 @@ import { IGenericResponse } from '../../../interfaces/response';
 import { generateOrderId } from './order.utils';
 import { Company } from '../company/company.model';
 
+
 interface IMonthlyOrderStats {
   month: number;
   totalOrders: number;
@@ -353,10 +354,85 @@ const getYearlyOrderStats = async (
   };
 };
 
+const getOrderForEmployeeAndCompany = async (
+  user: JwtPayload,
+  filters: Record<string, any>,
+  paginationOptions: Record<string, any>,
+  employeeId?: string ,
+  companyId?: string,
+): Promise<IGenericResponse<IOrder[]>> => {
+
+  const id = companyId 
+    ? companyId 
+    : employeeId 
+    ? employeeId 
+    : user.userId;
+const objectId = new Types.ObjectId(id);
+const {searchTerm, ...filtersData} = filters;
+const {page, limit, skip, sortBy, sortOrder} =  paginationHelper.calculatePagination(paginationOptions);
+
+const andConditions = [];
+
+if(searchTerm){
+ orderSearchableFields.forEach(field => {
+    andConditions.push({
+       $or: [
+            { [field]: { $regex: searchTerm, $options: 'i' } }
+        ]
+    })
+ })   
+}
+
+if(Object.keys(filtersData).length){
+    andConditions.push({
+        $and: Object.entries(filtersData).map(([field, value]) => ({
+            [field]: value
+        }))
+    })
+}
+
+const sortCondition: { [key: string]: SortOrder } = {};
+
+if (sortBy && sortOrder) {
+    sortCondition[sortBy] = sortOrder;
+}
+
+console.log(objectId)
+
+andConditions.push({
+  $or: [{ company:objectId }, { employee:objectId }],
+});
+
+
+const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
+console.log(whereConditions, andConditions)
+const result = await Order.find(whereConditions)
+.populate('items.product',{name: 1, salePrice: 1, price: 1, sizes: 1, colors: 1, quantity: 1})
+.sort(sortCondition)
+.skip(skip)
+.limit(limit)
+
+const total = await Order.countDocuments(whereConditions);
+
+return {
+    meta: {
+        page,
+        limit,
+        total,
+        totalPage: Math.ceil(total / limit)
+    },
+    data: result
+}
+
+
+};
+
+
 export const OrderService = {
   createOrder,
   updateOrderStatus,
   getSingleOrder,
   getAllOrders,
   getYearlyOrderStats,
+  getOrderForEmployeeAndCompany
 };

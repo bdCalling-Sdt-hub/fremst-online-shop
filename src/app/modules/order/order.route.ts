@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { OrderController } from './order.controller';
 import auth from '../../middleware/auth';
 import { USER_ROLES } from '../../../enum/user';
@@ -8,6 +8,12 @@ import { OrderValidation } from './order.validation';
 const router = express.Router();
 
 // Create order - Only employees can create orders
+router.get(
+  '/user-order',
+  auth(USER_ROLES.EMPLOYEE, USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN, USER_ROLES.COMPANY),
+  OrderController.getOrdersByEmployeeAndCompany
+
+);
 router.post(
   '/',
   auth(USER_ROLES.EMPLOYEE),
@@ -33,7 +39,6 @@ router.get(
   auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN, USER_ROLES.EMPLOYEE),
   OrderController.getAllOrders
 );
-
 
 
 // Get yearly order statistics - Accessible by all authenticated users

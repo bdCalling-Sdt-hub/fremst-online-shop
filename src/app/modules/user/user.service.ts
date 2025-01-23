@@ -158,7 +158,48 @@ const updateUserToDB = async (user: JwtPayload, payload: Partial<IUser>) => {
   return updatedUser
 }
 
+
+const getUserProfileFromDB = async (user: JwtPayload) => {
+
+  
+
+if (user.role === USER_ROLES.COMPANY) {
+  const company = await Company.findById(user.userId)
+    .populate('user', 'name email address contact status role profile')
+    .lean();
+    if (!company) {
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Company not found')
+    }
+    return company
+} else if (user.role === USER_ROLES.EMPLOYEE) {
+  const employee = await Employee.findById(user.userId)
+    .populate({
+      path: 'user',
+      select: 'name email address contact status role profile'
+    })
+    .populate({
+      path: 'company',
+      select: 'name address phone email profile'
+    })
+    .lean();
+    if (!employee) {
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Employee not found')
+    }
+    return employee
+
+}else{
+  console.log(user.authId)
+  const admins = await User.findById(user.authId)
+  if(!admins){
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Admin not found')
+  }
+  return admins
+}
+
+ 
+}
 export const UserServices = {
   createUserToDB,
   updateUserToDB,
+  getUserProfileFromDB
 }
