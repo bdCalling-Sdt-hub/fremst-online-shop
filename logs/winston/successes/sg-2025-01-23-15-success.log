@@ -1,0 +1,52 @@
+{Thu Jan 23 2025 15:01:35} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:01:37} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:03:42} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:03:44} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:04:25} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:04:27} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:04:43} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:04:45} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:04:59} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:05:01} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:05:08} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:05:10} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:05:21} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:05:23} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:08:00} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:08:02} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:09:03} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/auth/contact 200 - 18.018 ms
+{Thu Jan 23 2025 15:09:07} [FREMST 🦥] info: Mail send successfully
+{Thu Jan 23 2025 15:10:02} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:10:04} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:10:15} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:10:17} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:10:20} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/auth/contact 200 - 14.747 ms
+{Thu Jan 23 2025 15:10:23} [FREMST 🦥] info: Mail send successfully
+{Thu Jan 23 2025 15:11:32} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:11:33} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:13:48} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:13:51} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:13:52} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:14:02} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:14:05} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:17:52} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:17:54} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:18:32} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:18:34} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:18:49} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:18:51} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:19:34} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:19:36} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:20:08} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:20:09} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:20:11} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:20:22} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/auth/contact 200 - 14.851 ms
+{Thu Jan 23 2025 15:20:25} [FREMST 🦥] info: Mail send successfully
+{Thu Jan 23 2025 15:20:25} [FREMST 🦥] info: Mail send successfully
+{Thu Jan 23 2025 15:22:30} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:22:31} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:22:39} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Thu Jan 23 2025 15:22:41} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Thu Jan 23 2025 15:22:51} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/auth/contact 200 - 14.576 ms
+{Thu Jan 23 2025 15:22:54} [FREMST 🦥] info: Mail send successfully
+{Thu Jan 23 2025 15:22:55} [FREMST 🦥] info: Mail send successfully

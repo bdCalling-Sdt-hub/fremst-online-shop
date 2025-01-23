@@ -16,3 +16,10 @@ export type IResetPasswordRequest = {
   newPassword: string
   confirmPassword: string
 }
+
+export type IContactForm = {
+  name: string;
+  email: string;
+  contact: string;
+  message: string;
+};

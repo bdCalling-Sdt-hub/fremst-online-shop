@@ -1,4 +1,4 @@
-import {  IForgotPasswordRequest, ILoginResponse, IResetPasswordRequest } from './auth.interface';
+import {  IForgotPasswordRequest, ILoginResponse, IResetPasswordRequest, IContactForm } from './auth.interface';
 import { StatusCodes } from 'http-status-codes'
 import ApiError from '../../../errors/ApiError'
 import { USER_STATUS } from '../user/user.constants'
@@ -11,12 +11,8 @@ import config from '../../../config'
 import { JwtPayload, Secret } from 'jsonwebtoken'
 
 import bcrypt from 'bcrypt'
-import crypto from 'crypto'
 import { emailHelper } from '../../../helpers/emailHelper'
 import { emailTemplate } from '../../../shared/emailTemplate'
-
-
-
 
 const loginUser = async (
   email: string,
@@ -186,9 +182,21 @@ const isUserExist = await User.findOne({email: decodedToken.email}).select('+pas
   });
 };
 
+const sendContactEmail = async (payload: IContactForm): Promise<void> => {
+
+  const contactEmail = emailTemplate.contactForm(payload)
+
+  emailHelper.sendEmail(contactEmail);
+
+  const replyEmail = emailTemplate.replyContactForm(payload)
+
+  emailHelper.sendEmail(replyEmail);
+};
+
 export const AuthServices = {
   loginUser,
   changePassword,
   forgotPassword,
   resetPassword,
+  sendContactEmail,
 }

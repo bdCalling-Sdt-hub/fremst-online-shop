@@ -1,3 +1,5 @@
+import { IContactForm } from '../app/modules/auth/auth.interface';
+import config from '../config';
 import { ICreateAccount, IResetPassword } from '../interfaces/emailTemplate'
 
 const createAccount = (values: ICreateAccount) => {
@@ -57,7 +59,191 @@ const resetPassword = (values: IResetPassword) => {
 };
 
 
+const contactForm = (payload: IContactForm) => {
+  const data = {
+    to: config.business_email as string,
+    subject: `Contact Form Submission - ${payload.name}`,
+    html:`
+     <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Form Submission</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="min-width:100%;">
+    <tr>
+      <td width="100%" style="min-width:100%;padding:10px;">
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+          <!-- Header -->
+          <tr>
+            <td style="padding:30px 40px;background-color:#292C61;border-radius:8px 8px 0 0;text-align:center;">
+              <img src="https://res.cloudinary.com/dmvht7o8m/image/upload/v1737624138/Heading_1_Link_FREMST_LOGOTYPE-01.svg_1_txcggv.png" alt="Logo" style="width:100px;margin-bottom:20px;">
+              <h1 style="color:#ffffff;margin:0;font-size:24px;">New Contact Message</h1>
+            </td>
+          </tr>
+          
+          <!-- Content -->
+          <tr>
+            <td style="padding:40px;">
+              <!-- Contact Details -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding-bottom:30px;">
+                    <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Contact Details</h2>
+                    <div style="background-color:#f8f9fa;padding:20px;border-radius:6px;">
+                      <p style="margin:0 0 10px;">
+                        <span style="color:#666666;">Name:</span>
+                        <strong style="color:#333333;margin-left:10px;">${payload.name}</strong>
+                      </p>
+                      <p style="margin:0 0 10px;">
+                        <span style="color:#666666;">Email:</span>
+                        <strong style="color:#333333;margin-left:10px;">${payload.email}</strong>
+                      </p>
+                      <p style="margin:0;">
+                        <span style="color:#666666;">Phone:</span>
+                        <strong style="color:#333333;margin-left:10px;">${payload.contact}</strong>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                
+                <!-- Message -->
+                <tr>
+                  <td>
+                    <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Message</h2>
+                    <div style="background-color:#f8f9fa;padding:20px;border-radius:6px;">
+                      <p style="color:#333333;margin:0;white-space:pre-wrap;">${payload.message}</p>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px;background-color:#f8f9fa;border-radius:0 0 8px 8px;text-align:center;">
+              <p style="margin:0;color:#666666;font-size:14px;">
+                This email was sent from Fremst Online Shop's contact form
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+
+    `,
+  };
+  return data;
+};
+
+
+const replyContactForm = (payload: IContactForm) => {
+  const data = {
+    to: payload.email, // Send the reply email to the user who submitted the form
+    subject: 'Thank You for Contacting Us!',
+    html: `
+    <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You for Contacting Us</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="min-width:100%;">
+    <tr>
+      <td width="100%" style="min-width:100%;padding:10px;">
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+          <!-- Header -->
+          <tr>
+            <td style="padding:30px 40px;background-color:#292C61;border-radius:8px 8px 0 0;text-align:center;">
+              <img src="https://res.cloudinary.com/dmvht7o8m/image/upload/v1737624138/Heading_1_Link_FREMST_LOGOTYPE-01.svg_1_txcggv.png" alt="Logo" style="width:100px;margin-bottom:20px;">
+              <h1 style="color:#ffffff;margin:0;font-size:24px;">Thank You for Reaching Out</h1>
+            </td>
+          </tr>
+          
+          <!-- Content -->
+          <tr>
+            <td style="padding:40px;">
+              <!-- Greeting -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding-bottom:30px;">
+                    <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Hello ${payload.name},</h2>
+                    <p style="color:#333333;margin:0 0 15px;">
+                      Thank you for getting in touch with us! We’ve received your message and will get back to you as soon as possible. Here’s a summary of your submission:
+                    </p>
+                  </td>
+                </tr>
+                
+                <!-- Submission Details -->
+                <tr>
+                  <td style="padding-bottom:30px;">
+                    <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Your Message</h2>
+                    <div style="background-color:#f8f9fa;padding:20px;border-radius:6px;">
+                      <p style="margin:0 0 10px;">
+                        <span style="color:#666666;">Name:</span>
+                        <strong style="color:#333333;margin-left:10px;">${payload.name}</strong>
+                      </p>
+                      <p style="margin:0 0 10px;">
+                        <span style="color:#666666;">Email:</span>
+                        <strong style="color:#333333;margin-left:10px;">${payload.email}</strong>
+                      </p>
+                      <p style="margin:0 0 10px;">
+                        <span style="color:#666666;">Phone:</span>
+                        <strong style="color:#333333;margin-left:10px;">${payload.contact}</strong>
+                      </p>
+                      <p style="margin:0;">
+                        <span style="color:#666666;">Message:</span>
+                        <strong style="color:#333333;margin-left:10px;white-space:pre-wrap;">${payload.message}</strong>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                
+                <!-- Additional Info -->
+                <tr>
+                  <td>
+                    <p style="color:#333333;margin:0 0 15px;">
+                      We appreciate your interest and look forward to assisting you further. If you have additional information or inquiries, feel free to reply to this email.
+                    </p>
+                    <p style="color:#333333;margin:0;">
+                      Best regards, <br>
+                      Fremst Online Shop Team
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px;background-color:#f8f9fa;border-radius:0 0 8px 8px;text-align:center;">
+              <p style="margin:0;color:#666666;font-size:14px;">
+                This email was sent from Fremst Online Shop. If you didn’t contact us, please disregard this email.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    `,
+  };
+  return data;
+};
+
+
 export const emailTemplate = {
   createAccount,
   resetPassword,
+  contactForm,
+  replyContactForm
 }

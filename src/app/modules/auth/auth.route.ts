@@ -32,4 +32,10 @@ router.post(
   AuthController.resetPassword
 )
 
+router.post(
+  '/contact',
+  validateRequest(AuthValidations.contactValidation),
+  AuthController.contactUs
+);
+
 export const AuthRoutes = router
