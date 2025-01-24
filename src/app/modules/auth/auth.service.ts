@@ -93,6 +93,7 @@ const loginUser = async (
   return {
     accessToken,
     refreshToken,
+    role: isUserExist.role as string ,
   }
 }
 

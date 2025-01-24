@@ -1,6 +1,7 @@
 export type ILoginResponse = {
   accessToken: string
   refreshToken: string
+  role: string
 }
 
 export type IRefreshTokenResponse = {

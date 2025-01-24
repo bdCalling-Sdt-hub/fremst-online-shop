@@ -1,0 +1,8 @@
+{Fri Jan 24 2025 12:12:11} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/employees 200 - 30.910 ms
+{Fri Jan 24 2025 12:12:50} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies 200 - 11.988 ms
+{Fri Jan 24 2025 12:13:02} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies 200 - 3.095 ms
+{Fri Jan 24 2025 12:13:24} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies 200 - 3.385 ms
+{Fri Jan 24 2025 12:57:46} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Fri Jan 24 2025 12:57:46} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Fri Jan 24 2025 12:58:19} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Fri Jan 24 2025 12:58:19} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m

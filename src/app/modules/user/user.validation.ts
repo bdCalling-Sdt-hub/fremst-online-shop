@@ -13,7 +13,7 @@ const createUserZodSchema = z
       required_error: 'Email is required',
     })
     .email('Invalid email address'),
-    contact: z.string({
+  contact: z.string({
       required_error: 'Contact is required' }),
   password: z
     .string({
