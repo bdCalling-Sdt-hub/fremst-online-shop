@@ -1,5 +1,12 @@
 import { Model, Types } from 'mongoose'
 
+type IAuthentication = {
+  passwordChangedAt: Date;
+  isResetPassword: boolean;
+  oneTimeCode: number;
+  expireAt: Date;
+}
+
 export type IUser = {
   _id: Types.ObjectId
   email: string
@@ -12,6 +19,7 @@ export type IUser = {
   role: string
   createdAt: Date
   updatedAt: Date
+  authentication: IAuthentication
 }
 
 export type UserModel = {

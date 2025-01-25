@@ -37,18 +37,16 @@ const forgotPassword = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-
 const resetPassword = catchAsync(async (req: Request, res: Response) => {
-  const token = req.headers.authorization || ''
-  const payload = {
-    token,
-    ...req.body
-  }
-  await AuthServices.resetPassword(payload);
+  const token = req.headers.authorization;
+  const { ...resetData } = req.body;
+  const result = await AuthServices.resetPassword(token!, resetData);
+
   sendResponse(res, {
-    statusCode: StatusCodes.OK,
     success: true,
-    message: 'Password reset successful',
+    statusCode: StatusCodes.OK,
+    message: 'Password reset successfully',
+    data: result,
   });
 });
 
@@ -63,10 +61,24 @@ const contactUs = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+
+const verifyEmail = catchAsync(async (req: Request, res: Response) => {
+
+  const {oneTimeCode, email} = req.body
+  const result = await AuthServices.verifyEmail(email, oneTimeCode)
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Email verified successfully',
+    data: result
+  });
+})
+
 export const AuthController = {
   loginUser,
   changePassword,
   forgotPassword,
   resetPassword,
   contactUs,
+  verifyEmail
 }

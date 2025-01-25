@@ -14,6 +14,12 @@ router.post(
 )
 
 router.post(
+  '/verify-email',
+  validateRequest(AuthValidations.verifyEmailZodSchema),
+  AuthController.verifyEmail
+);
+
+router.post(
   '/change-password',
   auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.COMPANY, USER_ROLES.EMPLOYEE),
   validateRequest(AuthValidations.changePasswordZodSchema),
@@ -37,5 +43,7 @@ router.post(
   validateRequest(AuthValidations.contactValidation),
   AuthController.contactUs
 );
+
+
 
 export const AuthRoutes = router

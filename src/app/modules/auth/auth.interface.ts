@@ -24,3 +24,12 @@ export type IContactForm = {
   contact: string;
   message: string;
 };
+
+export type IVerifyEmailRequest = {
+  email: string;
+  code: string;
+}
+
+export type ISendVerificationRequest = {
+  email: string;
+}

@@ -1,5 +1,0 @@
-{Fri Jan 24 2025 12:13:12} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/admin/companies/678792e612c3a93cd04fa870 404 - 1.092 ms
-{Fri Jan 24 2025 12:14:08} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/admin/companies/678792e612c3a93cd04fa870 404 - 0.932 ms
-{Fri Jan 24 2025 12:15:00} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/admin/company/678792e612c3a93cd04fa870 404 - 15.584 ms
-{Fri Jan 24 2025 12:57:46} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
-{Fri Jan 24 2025 12:58:19} [FREMST 🐞] error: Failed to create Super Admin Email already exist!

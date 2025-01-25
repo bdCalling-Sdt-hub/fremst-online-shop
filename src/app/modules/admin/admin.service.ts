@@ -10,6 +10,7 @@ import { Employee } from '../employee/employee.model'
 import { User } from '../user/user.model'
 import { IUser } from '../user/user.interface'
 import mongoose, { Types, PipelineStage } from 'mongoose'
+import { profile } from 'winston'
 
 
 
@@ -22,6 +23,7 @@ const getCompanyProfileInformation = async (company_id: string) => {
       name: 1,
       email: 1,
       address: 1,
+      profile: 1,
       contact: 1,
       status: 1,},
   })
@@ -44,6 +46,7 @@ const getEmployeeProfileInformationFromDB = async (employee_id: string) => {
       email: 1,
       address: 1,
       contact: 1,
+      profile:1,
       status: 1,
     },
   })
@@ -117,6 +120,7 @@ const result = await Company.aggregate([
             'user.address': 1,
             'user.contact': 1,
             'user.status': 1,
+            'user.profile': 1,
           },
         },
         { $sort: { [sortBy]: sortOrder === 'asc' ? 1 : -1 } },
@@ -186,6 +190,7 @@ const getEmployeesFromDB = async (
               'user.email': 1,
               'user.profile': 1,
               'user.address': 1,
+              'user.contact': 1,
               designation: 1,
               budget: 1,
               duration: 1,

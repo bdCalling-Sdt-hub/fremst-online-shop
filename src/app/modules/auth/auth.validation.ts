@@ -77,10 +77,22 @@ const contactValidation = z.object({
   })
 });
 
+const verifyEmailZodSchema = z.object({
+  body: z.object({
+    email: z.string({
+      required_error: 'Email is required'
+    }).email('Invalid email format'),
+    oneTimeCode: z.string({
+      required_error: 'One time code is required'
+    })
+  })
+});
+
 export const AuthValidations = {
   loginUserZodSchema,
   changePasswordZodSchema,
   forgotPasswordZodSchema,
   resetPasswordZodSchema,
   contactValidation,
+  verifyEmailZodSchema
 }

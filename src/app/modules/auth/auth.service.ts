@@ -13,6 +13,8 @@ import { JwtPayload, Secret } from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { emailHelper } from '../../../helpers/emailHelper'
 import { emailTemplate } from '../../../shared/emailTemplate'
+import { ResetToken } from '../resetToken/resetToken.model';
+import cryptoToken from '../../../helpers/cryptoToken';
 
 const loginUser = async (
   email: string,
@@ -127,59 +129,141 @@ const changePassword = async (payload: {oldPassword: string, newPassword: string
 }
 
 const forgotPassword = async (payload: IForgotPasswordRequest): Promise<void> => {
-  const isUserExist = await User.findOne({ email: payload.email })
+  const isUserExist = await User.findOne({ email: payload.email }).select("+authentication");
   if (!isUserExist) {
-    throw new ApiError(StatusCodes.NOT_FOUND, 'User not found')
+    throw new ApiError(StatusCodes.NOT_FOUND, 'User not found');
   }
 
-  //create a new access token and mail it to the user
-  const passwordResetToken = jwtHelper.createToken(
+  // Generate 6-digit OTP
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  const authentication = {
+    oneTimeCode: otp,
+    expireAt: new Date(Date.now() + 5 * 60000),
+  };
+  // Store OTP in user document with 5 minutes expiry
+  await User.findOneAndUpdate(
     { email: payload.email },
-    config.jwt.jwt_secret as Secret,
-    '5m',
-  )
+    {
+      $set: {
+        authentication: authentication
+      }
+    }
+  );
 
-  const resetLink = `${config.frontend_url}/auth/reset-password?token=${passwordResetToken}`
-  const forgetPassword = emailTemplate.resetPassword({ email: payload.email, resetLink })
-  emailHelper.sendEmail(forgetPassword)
-
-
+  // Send OTP via email
+  const forgetPassword = emailTemplate.resetPasswordOTP({ 
+    email: payload.email, 
+    otp: otp 
+  });
+  await emailHelper.sendEmail(forgetPassword);
 };
 
-const resetPassword = async (payload: IResetPasswordRequest): Promise<void> => {
-  const { token, newPassword, confirmPassword } = payload;
 
+const verifyEmail = async (email: string, oneTimeCode: string) => {
+  const isExistUser = await User.findOne({ email: email }).select('+authentication');
+  if (!isExistUser) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'User not found');
+  }
+  
+  if (!Number(oneTimeCode)) {
+    throw new ApiError(
+      StatusCodes.BAD_REQUEST,
+      'Please give the otp, check your email we send a code'
+    );
+  }
+
+  if (isExistUser.authentication?.oneTimeCode !== Number(oneTimeCode)) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'You provided wrong otp');
+  }
+
+  const date = new Date();
+  if (date > isExistUser.authentication?.expireAt) {
+    throw new ApiError(
+      StatusCodes.BAD_REQUEST,
+      'Otp already expired, Please try again'
+    );
+  }
+
+  await User.findOneAndUpdate(
+    { _id: isExistUser._id },
+    {
+      authentication: {
+        isResetPassword: true,
+        oneTimeCode: null,
+        expireAt: null,
+      },
+    }
+  );
+
+  let message;
+  let data;
+
+  //create token ;
+  const createToken = cryptoToken();
+  await ResetToken.create({
+    user: isExistUser._id,
+    token: createToken,
+    expireAt: new Date(Date.now() + 5 * 60000),
+  });
+  message =
+    'Verification Successful: Please securely store and utilize this code for reset password';
+  data = createToken;
+  return { data, message };
+
+}
+
+
+
+const resetPassword = async (token: string, payload: IResetPasswordRequest): Promise<void> => {
+  const { newPassword, confirmPassword } = payload;
+  //isExist token
+  const isExistToken = await ResetToken.isExistToken(token);
+  if (!isExistToken) {
+    throw new ApiError(StatusCodes.UNAUTHORIZED, 'You are not authorized');
+  }
+
+  //user permission check
+  const isExistUser = await User.findById(isExistToken.user).select(
+    '+authentication'
+  );
+  if (!isExistUser?.authentication?.isResetPassword) {
+    throw new ApiError(
+      StatusCodes.UNAUTHORIZED,
+      "You don't have permission to change the password. Please click again to 'Forgot Password'"
+    );
+  }
+
+  //validity check
+  const isValid = await ResetToken.isExpireToken(token);
+  if (!isValid) {
+    throw new ApiError(
+      StatusCodes.BAD_REQUEST,
+      'Token expired, Please click again to the forget password'
+    );
+  }
+
+  //check password
   if (newPassword !== confirmPassword) {
-    throw new ApiError(StatusCodes.BAD_REQUEST, 'Passwords do not match');
+    throw new ApiError(
+      StatusCodes.BAD_REQUEST,
+      "New password and Confirm password doesn't match!"
+    );
   }
 
-  //verify token
-
-  const decodedToken = jwtHelper.verifyToken(
-    token,
-    config.jwt.jwt_secret as Secret,
-  )
-
-  if (!decodedToken) {
-    throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to verify token');
-  }
-
-const isUserExist = await User.findOne({email: decodedToken.email}).select('+password')
-  if (!isUserExist) {
-    throw new ApiError(StatusCodes.BAD_REQUEST, 'Account not found');
-  }
-
-
-  const hashedPassword = await bcrypt.hash(
+  const hashPassword = await bcrypt.hash(
     newPassword,
     Number(config.bcrypt_salt_rounds)
   );
 
-
-  await User.findByIdAndUpdate(isUserExist._id, {
-    $set: {
-      password: hashedPassword,
+  const updateData = {
+    password: hashPassword,
+    authentication: {
+      isResetPassword: false,
     },
+  };
+
+  await User.findOneAndUpdate({ _id: isExistToken.user }, updateData, {
+    new: true,
   });
 };
 
@@ -200,4 +284,5 @@ export const AuthServices = {
   forgotPassword,
   resetPassword,
   sendContactEmail,
+  verifyEmail
 }

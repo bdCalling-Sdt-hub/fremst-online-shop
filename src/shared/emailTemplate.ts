@@ -240,10 +240,38 @@ const replyContactForm = (payload: IContactForm) => {
   return data;
 };
 
+const resetPasswordOTP = ({ email, otp }: { email: string; otp: string }) => ({
+  to: email,
+  subject: 'Reset Password OTP',
+  html: `
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="https://res.cloudinary.com/dmvht7o8m/image/upload/v1737370875/zcd3awdjgvsenzewd4t0.png" alt="Fremst Logo" style="height: 60px;">
+    </div>
+    <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
+      We received a request to reset your password. If you did not make this request, please ignore this email.
+    </p>
+    <p style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
+      Your password reset OTP is:
+    </p>
+    <div style="text-align: center; margin: 30px 0;">
+      <div style="display: inline-block; background-color: #4D3859; color: #ffffff; padding: 15px 30px; border-radius: 4px; font-weight: bold; font-family: Arial, sans-serif; font-size: 24px; letter-spacing: 2px;">
+        ${otp}
+      </div>
+    </div>
+    <p style="font-family: Arial, sans-serif; font-size: 14px; color: #666;">
+      This OTP will expire in 5 minutes for your security.
+    </p>
+    <p style="font-family: Arial, sans-serif; font-size: 14px; color: #333; margin-top: 20px;">
+      Thank you,<br>
+      The Fremst Team
+    </p>
+    `,
+});
 
 export const emailTemplate = {
   createAccount,
   resetPassword,
   contactForm,
-  replyContactForm
+  replyContactForm,
+  resetPasswordOTP
 }

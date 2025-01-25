@@ -19,6 +19,26 @@ const userSchema = new Schema<IUser, UserModel>(
     password: { type: String, select: 0, required: true },
     profile: { type: String },
     role: { type: String, required: true },
+    authentication: {
+      type: {
+        passwordChangedAt: {
+          type: Date,
+        },
+        isResetPassword: {
+          type: Boolean,
+          default: false,
+        },
+        oneTimeCode: {
+          type: Number,
+          default: null,
+        },
+        expireAt: {
+          type: Date,
+          default: null,
+        },
+      },
+      select: 0,
+    },
   },
   {
     timestamps: true,
