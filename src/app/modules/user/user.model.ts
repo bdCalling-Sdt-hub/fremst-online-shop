@@ -17,7 +17,8 @@ const userSchema = new Schema<IUser, UserModel>(
       default: 'active',
     },
     password: { type: String, select: 0, required: true },
-    profile: { type: String },
+    profile: { type: String, required: true },
+    address: { type: String, required: true },
     role: { type: String, required: true },
     authentication: {
       type: {

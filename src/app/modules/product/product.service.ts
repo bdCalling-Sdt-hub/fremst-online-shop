@@ -144,14 +144,15 @@ const getSingleProduct = async (id: Types.ObjectId) => {
       title: 1,
       slug: 1,
     },
-  }).populate({
-    path: 'subcategory',
-    select: {
-      _id: 0,
-      title: 1,
-      slug: 1,
-    },
-  });
+  })
+  // .populate({
+  //   path: 'subcategory',
+  //   select: {
+  //     _id: 0,
+  //     title: 1,
+  //     slug: 1,
+  //   },
+  // });
   return result;
 };
 

@@ -22,7 +22,7 @@ export type IProduct = {
   image: string;
   featuredImages: string[];
   category: Types.ObjectId;
-  subcategory: Types.ObjectId;
+  // subcategory: Types.ObjectId;
   quantity: number;
   brands: string[];
   tags: string[];

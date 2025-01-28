@@ -17,4 +17,5 @@ export type CompanyModel = Model<ICompany>
 
 export type ICompanyFilters = {
   searchTerm?: string
+
 }

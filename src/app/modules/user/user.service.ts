@@ -134,27 +134,14 @@ const createUserToDB = async (
 
 
 const updateUserToDB = async (user: JwtPayload, payload: Partial<IUser>) => {
-  const updatedUser = await User.findOneAndUpdate(user.authId, {$set: payload}, {
+  console.log(payload)
+  const updatedUser = await User.findByIdAndUpdate(user.authId, { $set: payload }, {
     new: true,
-  }).populate({
-    path: 'company',
-    select: {
-      name: 1,
-      address: 1,
-      phone: 1,
-      email: 1,
-    },
-  }).populate({
-    path: 'user', 
-    select: {
-      name: 1,
-      email: 1,
-      address: 1,
-      contact: 1,
-      status: 1,
-      role: 1,
-    },
   }).lean()
+
+  if (!updatedUser) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Failed to update profile')
+  }
   return updatedUser
 }
 

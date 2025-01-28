@@ -63,13 +63,14 @@ const getEmployeeProfileInformationFromDB = async (employee_id: string) => {
 const getCompaniesFromDB = async (
   filters: ICompanyFilters,
   paginationOptions: IPaginationOptions,
+
 ): Promise<IGenericResponse<ICompany[]>> => {
   
   
 const { page, limit, skip, sortBy, sortOrder } =
   paginationHelper.calculatePagination(paginationOptions)
 
-const { searchTerm, ...filterData } = filters
+const { searchTerm,...filterData } = filters
 
 const andConditions = []
 
@@ -91,7 +92,11 @@ if (Object.keys(filterData).length) {
   })
 }
 
+
+
 const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {}
+
+
 
 const result = await Company.aggregate([
   {
@@ -154,7 +159,7 @@ const getEmployeesFromDB = async (
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(paginationOptions)
 
-  const { searchTerm } = filters
+  const { searchTerm, companyId } = filters
 
   const result = await Employee.aggregate([
     {
@@ -177,6 +182,7 @@ const getEmployeesFromDB = async (
             { designation: { $regex: searchTerm, $options: 'i' } },
           ],
         }),
+        ...(companyId && { company:companyId }),
       },
     },
     {

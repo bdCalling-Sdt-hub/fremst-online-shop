@@ -22,4 +22,5 @@ export type EmployeeModel = Model<IEmployee>
 
 export type IEmployeeFilters = {
   searchTerm?: string
+  companyId?: string
 }

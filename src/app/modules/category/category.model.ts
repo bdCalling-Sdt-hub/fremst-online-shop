@@ -16,12 +16,12 @@ const categorySchema = new Schema<ICategory, CategoryModel>({
     type: String,
     required: true,
   },
-  subCategories: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Subcategory',
-    },
-  ],
+  // subCategories: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'Subcategory',
+  //   },
+  // ],
 }, {
   timestamps: true,
 });

@@ -1,0 +1,59 @@
+{Tue Jan 28 2025 10:31:35} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.127 ms
+{Tue Jan 28 2025 10:31:35} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/user/profile 200 - 14.732 ms
+{Tue Jan 28 2025 10:32:13} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.324 ms
+{Tue Jan 28 2025 10:32:13} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/user/profile 304 - 6.393 ms
+{Tue Jan 28 2025 10:33:31} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.088 ms
+{Tue Jan 28 2025 10:33:31} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/user/profile 304 - 8.397 ms
+{Tue Jan 28 2025 10:33:54} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.107 ms
+{Tue Jan 28 2025 10:33:54} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/user/profile 304 - 4.549 ms
+{Tue Jan 28 2025 10:34:34} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/admin/companies 204 - 0.153 ms
+{Tue Jan 28 2025 10:34:34} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies 200 - 22.855 ms
+{Tue Jan 28 2025 10:34:34} [FREMST 🦥] info: 10.0.80.49 - GET //images/screenshot-2025-01-23-172534-1737783308565.png 200 - 4.466 ms
+{Tue Jan 28 2025 10:39:26} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.164 ms
+{Tue Jan 28 2025 10:39:26} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/user/profile 304 - 4.936 ms
+{Tue Jan 28 2025 10:40:03} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.056 ms
+{Tue Jan 28 2025 10:40:03} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/user/profile 304 - 3.272 ms
+{Tue Jan 28 2025 10:40:52} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.065 ms
+{Tue Jan 28 2025 10:40:52} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/user/profile 304 - 5.586 ms
+{Tue Jan 28 2025 10:43:03} [FREMST 🦥] info: 115.127.157.41 - POST /api/v1/auth/login 200 - 222.790 ms
+{Tue Jan 28 2025 10:44:38} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 28 2025 10:44:38} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 28 2025 10:45:11} [FREMST 🦥] info: 115.127.157.41 - POST /api/v1/category/ 200 - 19.243 ms
+{Tue Jan 28 2025 10:46:59} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/admin/profile 204 - 0.397 ms
+{Tue Jan 28 2025 10:48:02} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/admin/profile 204 - 0.129 ms
+{Tue Jan 28 2025 10:49:28} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.061 ms
+{Tue Jan 28 2025 10:49:28} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/user/profile 304 - 6.261 ms
+{Tue Jan 28 2025 10:49:29} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/auth/refresh-token 204 - 0.054 ms
+{Tue Jan 28 2025 10:50:19} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/category/ 200 - 8.384 ms
+{Tue Jan 28 2025 10:50:41} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 28 2025 10:50:41} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 28 2025 10:50:46} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 28 2025 10:50:46} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 28 2025 10:51:07} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 28 2025 10:51:07} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 28 2025 10:51:16} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 28 2025 10:51:16} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 28 2025 10:51:30} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 28 2025 10:51:30} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 28 2025 10:51:45} [FREMST 🦥] info: 115.127.157.41 - POST /api/v1/category/ 200 - 19.711 ms
+{Tue Jan 28 2025 10:51:53} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 28 2025 10:51:54} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 28 2025 10:51:56} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 28 2025 10:51:56} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 28 2025 10:52:16} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/category/ 200 - 8.812 ms
+{Tue Jan 28 2025 10:53:15} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/auth/login 204 - 0.383 ms
+{Tue Jan 28 2025 10:53:42} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/auth/login 204 - 0.119 ms
+{Tue Jan 28 2025 10:54:07} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/auth/login 204 - 0.070 ms
+{Tue Jan 28 2025 10:54:07} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/auth/login 200 - 217.127 ms
+{Tue Jan 28 2025 10:54:07} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.195 ms
+{Tue Jan 28 2025 10:54:07} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/user/profile 304 - 8.989 ms
+{Tue Jan 28 2025 10:56:27} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.075 ms
+{Tue Jan 28 2025 10:56:27} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/auth/refresh-token 204 - 0.282 ms
+{Tue Jan 28 2025 10:58:24} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Tue Jan 28 2025 10:58:24} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Tue Jan 28 2025 10:58:56} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/auth/login 204 - 0.630 ms
+{Tue Jan 28 2025 10:58:56} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/auth/login 200 - 232.093 ms
+{Tue Jan 28 2025 10:58:56} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.107 ms
+{Tue Jan 28 2025 10:58:56} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/user/profile 304 - 8.995 ms
+{Tue Jan 28 2025 10:59:10} [FREMST 🦥] info: 10.0.80.49 - OPTIONS /api/v1/user/profile 204 - 0.089 ms
+{Tue Jan 28 2025 10:59:10} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/user/profile 304 - 4.559 ms

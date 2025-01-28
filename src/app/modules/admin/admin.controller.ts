@@ -13,11 +13,13 @@ import { IEmployee } from '../employee/employee.interface'
 import { Types } from 'mongoose'
 
 const getCompanies = catchAsync(async (req: Request, res: Response) => {
+
   const filters = pick(req.query, companyFilterableFields)
   const paginationOptions = pick(req.query, paginationFields)
   const companies = await AdminServices.getCompaniesFromDB(
     filters,
     paginationOptions,
+
   )
   sendResponse<IGenericResponse<ICompany[]>>(res, {
     statusCode: StatusCodes.OK,
@@ -43,6 +45,9 @@ const getCompanyProfileInformation = catchAsync(async (req: Request, res: Respon
 const getEmployees = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, employeeFilterableFields)
   const paginationOptions = pick(req.query, paginationFields)
+
+  filters.companyId = filters.companyId ? filters.companyId : req.user.userId
+
   const employees = await AdminServices.getEmployeesFromDB(
     filters,
     paginationOptions,

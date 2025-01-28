@@ -10,7 +10,7 @@ const createProductZodSchema = z.object({
   colors: z.array(z.string()).min(1, 'At least one color is required'),
   salePrice: z.number().positive('Sale price must be positive'),
   category: z.string().min(1, 'Category is required'),
-  subcategory: z.string().min(1, 'Subcategory is required'),
+  // subcategory: z.string().min(1, 'Subcategory is required'),
   quantity: z.number().int().nonnegative('Quantity must be a non-negative integer'),
   brands: z.array(z.string()).min(1, 'At least one brand is required'),
   tags: z.array(z.string()),

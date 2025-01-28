@@ -5,7 +5,7 @@ export type ICategory = {
   title: string;
   slug: string;
   image: string;
-  subCategories: Types.ObjectId[];
+  // subCategories: Types.ObjectId[];
   createdAt: Date;
   updatedAt: Date;
 };

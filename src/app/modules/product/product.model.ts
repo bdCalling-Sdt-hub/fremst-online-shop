@@ -45,11 +45,11 @@ const productSchema = new Schema<IProduct, ProductModel>({
     ref: 'Category',
     required: true,
   },
-  subcategory: {
-    type: Schema.Types.ObjectId,
-    ref: 'Subcategory',
-    required: true,
-  },
+  // subcategory: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Subcategory',
+  //   required: true,
+  // },
   quantity: {
     type: Number,
     required: true,

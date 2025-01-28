@@ -1,0 +1,16 @@
+{Sun Jan 26 2025 17:39:29} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 1.851 ms
+{Sun Jan 26 2025 17:39:29} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 304 - 27.169 ms
+{Sun Jan 26 2025 17:40:30} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/order/stats/2025?companyId=678f8e79bb8378091099e499 200 - 42.596 ms
+{Sun Jan 26 2025 17:41:16} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/order/stats/2025?employeeId=678f990870913c33d9f1a3b1 200 - 9.369 ms
+{Sun Jan 26 2025 17:41:20} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/order/stats/2025?employeeId=678f990870913c33d9f1a3b1 200 - 10.670 ms
+{Sun Jan 26 2025 17:41:21} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/order/stats/2025?employeeId=678f990870913c33d9f1a3b1 200 - 11.163 ms
+{Sun Jan 26 2025 17:41:40} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/order/user-order?companyId=678f8e79bb8378091099e499&status=cancelled 200 - 19.043 ms
+{Sun Jan 26 2025 17:41:45} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/order/user-order?companyId=678f8e79bb8378091099e499 200 - 10.927 ms
+{Sun Jan 26 2025 17:41:48} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/order/user-order?companyId=678f8e79bb8378091099e499 200 - 14.224 ms
+{Sun Jan 26 2025 17:41:51} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/order/user-order 200 - 10.185 ms
+{Sun Jan 26 2025 17:41:57} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/employees 200 - 6.792 ms
+{Sun Jan 26 2025 17:49:16} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/company/6794780c980642f05bf16ff7 204 - 0.354 ms
+{Sun Jan 26 2025 17:49:16} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/company/6794780c980642f05bf16ff7 304 - 13.605 ms
+{Sun Jan 26 2025 17:49:16} [FREMST 🦥] info: 115.127.157.41 - GET //images/screenshot-2025-01-23-172534-1737783308565.png 304 - 1.090 ms
+{Sun Jan 26 2025 17:49:20} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/company/6794780c980642f05bf16ff7 304 - 6.612 ms
+{Sun Jan 26 2025 17:49:20} [FREMST 🦥] info: 115.127.157.41 - GET //images/screenshot-2025-01-23-172534-1737783308565.png 304 - 0.992 ms

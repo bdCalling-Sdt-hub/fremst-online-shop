@@ -23,15 +23,16 @@ const createCategory = async (data: ICategory) => {
       title: 1,
       slug: 1,
       image: 1,
-      subCategories: 1,
-    }).populate({
-      path: 'subCategories',
-      select: {
-        _id: 1,
-        title: 1,
-        slug: 1,
-      },
-    });
+      // subCategories: 1,
+    })
+    // .populate({
+    //   // path: 'subCategories',
+    //   // select: {
+    //   //   _id: 1,
+    //   //   title: 1,
+    //   //   slug: 1,
+    //   // },
+    // });
     return result;
   };
 
