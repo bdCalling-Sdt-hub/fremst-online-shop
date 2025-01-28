@@ -11,6 +11,7 @@ import { ICompany } from '../company/company.interface'
 import { employeeFilterableFields } from '../employee/employee.constants'
 import { IEmployee } from '../employee/employee.interface'
 import { Types } from 'mongoose'
+import { IUser } from '../user/user.interface'
 
 const getCompanies = catchAsync(async (req: Request, res: Response) => {
 
@@ -81,7 +82,7 @@ const updateEmployeeProfile = catchAsync(async (req: Request, res: Response) => 
       new Types.ObjectId(req.params.id),
       payload,
     )
-    sendResponse<ICompany>(res, {
+    sendResponse<ICompany | IUser>(res, {
       statusCode: StatusCodes.OK,
       success: true,
       message: 'Company updated successfully',

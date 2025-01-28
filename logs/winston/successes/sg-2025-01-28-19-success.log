@@ -1,0 +1,15 @@
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.255 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/product?& 204 - 0.031 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/category 204 - 0.026 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/user/profile 304 - 5.750 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/product?& 304 - 5.315 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/category 304 - 1.861 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - GET ///images/orange-safety-vest-mockup-front-260nw-2431090961-1738068275973.jpg 200 - 4.423 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - GET ///images/safety-vest-jacket-isolated-security-260nw-2143595563-1738060360914.jpg 200 - 3.908 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - GET ///images/orange-safety-vest-mockup-front-260nw-2431090961-1738068271756.jpg 200 - 4.920 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - GET ///images/workpants-1738058942948.jpg 200 - 4.369 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - GET ///images/orange-safety-vest-mockup-front-260nw-2431090961-1738068287599.jpg 200 - 4.174 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - GET ///images/orange-safety-vest-mockup-front-260nw-2431090961-1738068275644.jpg 200 - 4.247 ms
+{Tue Jan 28 2025 19:01:04} [FREMST 🦥] info: 115.127.157.41 - GET ///images/workpants-1738053258910.jpg 200 - 3.670 ms
+{Tue Jan 28 2025 19:01:12} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/product?category=NaN&category=NaN 204 - 0.139 ms
+{Tue Jan 28 2025 19:01:57} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/product?category=NaN&category=NaN&category=NaN&category=NaN 204 - 0.248 ms

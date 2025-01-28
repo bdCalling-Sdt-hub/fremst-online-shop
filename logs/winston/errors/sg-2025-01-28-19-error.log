@@ -1,0 +1,2 @@
+{Tue Jan 28 2025 19:01:12} [FREMST 🐞] error: 115.127.157.41 - GET /api/v1/product?category=NaN&category=NaN 400 - 6.030 ms
+{Tue Jan 28 2025 19:01:57} [FREMST 🐞] error: 115.127.157.41 - GET /api/v1/product?category=NaN&category=NaN&category=NaN&category=NaN 400 - 6.966 ms

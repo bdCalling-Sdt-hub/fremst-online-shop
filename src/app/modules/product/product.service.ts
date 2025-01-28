@@ -36,7 +36,7 @@ const deleteProduct = async (id: Types.ObjectId) => {
 }
 
 const getAllProduct = async (filters:IProductFilters, paginationOptions:IPaginationOptions) => {
-    const { searchTerm, minPrice, maxPrice,category,subcategory, tag, brand, ...filtersData } = filters;
+    const { searchTerm, minPrice, maxPrice,category, tag, brand, ...filtersData } = filters;
 
     const { page, limit, skip, sortBy, sortOrder } = paginationHelper.calculatePagination(paginationOptions);
     const sortCondition: { [key: string]: SortOrder } = {};
@@ -61,7 +61,7 @@ const getAllProduct = async (filters:IProductFilters, paginationOptions:IPaginat
               { tags: { $regex: searchTerm, $options: 'i' } }
             ]
           });
-          console.log(andConditions)
+          
     }
 
     if (Object.keys(filtersData).length) {
@@ -89,6 +89,15 @@ const getAllProduct = async (filters:IProductFilters, paginationOptions:IPaginat
       });
     }
 
+    if(category !== undefined){
+      andConditions.push({
+        $or: [
+          { category: { $exists: true } },
+          { category: category }
+        ]
+      });
+    }
+
 
 
 
@@ -107,27 +116,12 @@ const getAllProduct = async (filters:IProductFilters, paginationOptions:IPaginat
             title: 1,
             slug: 1,
         },
-    }).populate({
-        path: 'subcategory',
-        select: {
-            _id: 1,
-            title: 1,
-            slug: 1,
-        },
-    }).sort(sortCondition).skip(skip).limit(limit);
+    }).sort(sortCondition);
 
 
 
-    const total = await Product.countDocuments(whereConditions);
-    return {
-        meta: {
-            page,
-            limit,
-            total,
-            totalPage: Math.ceil(total / limit),
-        },
-        data: result
-    }   
+    // const total = await Product.countDocuments(whereConditions);
+    return result
 };
 
 const getSingleProduct = async (id: Types.ObjectId) => {

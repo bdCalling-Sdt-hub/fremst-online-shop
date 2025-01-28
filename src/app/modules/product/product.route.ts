@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.post('/',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN), fileUploadHandler(),
 (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.body.data, "-----------", req.files)
     if (req.body.data) {
         req.body = ProductValidations.createProductZodSchema.parse(
             JSON.parse(req.body.data),

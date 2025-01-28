@@ -10,131 +10,128 @@ import { JwtPayload } from 'jsonwebtoken'
 import { Company } from '../company/company.model'
 import { ICompany } from '../company/company.interface'
 
+
+
+
 const createUserToDB = async (
   user: JwtPayload,
-  payload: IUser & IEmployee & ICompany ,
+  payload: IUser & IEmployee & ICompany,
 ): Promise<IUser | IEmployee | ICompany | null> => {
-  const session = await mongoose.startSession()
-  let createdUser: IUser | IEmployee | ICompany | null = null
+  const session = await mongoose.startSession();
+  let createdUser: IUser | IEmployee | ICompany | null = null;
 
   try {
-    session.startTransaction()
+    session.startTransaction();
 
+    // Validate roles
     if (
-      (payload.role === USER_ROLES.ADMIN || payload.role === USER_ROLES.SUPER_ADMIN) 
+      (payload.role === USER_ROLES.SUPER_ADMIN && user.role !== USER_ROLES.SUPER_ADMIN) ||
+      (payload.role === USER_ROLES.ADMIN && user.role !== USER_ROLES.SUPER_ADMIN)
     ) {
-
-      if((payload.role === USER_ROLES.SUPER_ADMIN && user.role !== USER_ROLES.SUPER_ADMIN) ||( payload.role === USER_ROLES.ADMIN && user.role !== USER_ROLES.SUPER_ADMIN)){
-       throw new ApiError(StatusCodes.BAD_REQUEST, 'Only Super Admin can create Super Admin or Admin')
-      }
-
-      const userDocs = await User.create([payload], { session })
-      createdUser = userDocs[0]
-      if (!createdUser) {
-        throw new ApiError(StatusCodes.BAD_REQUEST, `Failed to create ${payload.role}`)
-      }
-
-      await session.commitTransaction()
-      return createdUser
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Only Super Admin can create Super Admin or Admin');
     }
 
-    if (
-      payload.role === USER_ROLES.EMPLOYEE &&
-      (user.role === USER_ROLES.COMPANY || user.role === USER_ROLES.SUPER_ADMIN)
-    ) {
-      const { designation, budget, duration, company, ...userData } = payload
-      const userDoc = await User.create([userData], { session })
-      if (!userDoc || userDoc.length === 0) {
-        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create user.')
-      }
-
-      const startDate = new Date()
-
-      const endDate = new Date(startDate)
-      endDate.setMonth(startDate.getMonth() + duration)
-
-      const endDateISO = endDate.toISOString()
-
-      const companyId = user.role === USER_ROLES.COMPANY ? user.authId : company
-
-      const employeeDocs = await Employee.create(
-        [
-          {
-            company: companyId,
-            designation: designation,
-            user: userDoc[0]._id,
-            budget: budget,
-            totalBudget: budget,
-            budgetLeft: budget,
-            duration: duration,
-            budgetExpiredAt: endDateISO,
-            createdBy: user.authId,
-          },
-        ],
-        { session },
-      )
-      createdUser = employeeDocs[0]
-
-      if (!createdUser) {
-        throw new ApiError(
-          StatusCodes.BAD_REQUEST,
-          'Failed to create employee.',
-        )
-      }
-      //make sure that the company total budget of the company is updated
-      await Company.updateOne(
-        { _id: companyId },
-        {
-          $inc: { 
-            totalEmployees: 1,
-            totalBudget: budget 
-          }
-        },
-        { session },
-      )
-
-
-    } 
-    
-    if (payload.role === USER_ROLES.COMPANY && (user.role === USER_ROLES.SUPER_ADMIN || user.role === USER_ROLES.ADMIN)) {
-      console.log(payload,"INN")
-      const userDoc = await User.create([payload], { session })
-      if (!userDoc || userDoc.length === 0) {
-        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create user.')
-      }
-
-      const companyDocs = await Company.create(
-        [
-          {
-            user: userDoc[0]._id,
-            createdBy: user.authId,
-          },
-        ],
-        { session },
-      )
-      if (!companyDocs || companyDocs.length === 0) {
-        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create company.')
-      }
-      createdUser = companyDocs[0]
-      console.log(createdUser)
-      if (!createdUser) {
-        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create company.')
-      }
+    // Create User document
+    const userDoc = await User.create([payload], { session });
+    if (!userDoc || userDoc.length === 0) {
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create user.');
     }
 
-    await session.commitTransaction()
-    return createdUser
+    // Handle role-specific logic
+    switch (payload.role) {
+      case USER_ROLES.SUPER_ADMIN:
+      case USER_ROLES.ADMIN:
+        createdUser = userDoc[0];
+        break;
+
+      case USER_ROLES.EMPLOYEE:
+        if (user.role !== USER_ROLES.COMPANY && user.role !== USER_ROLES.SUPER_ADMIN) {
+          throw new ApiError(StatusCodes.BAD_REQUEST, 'Only Company or Super Admin can create employees.');
+        }
+
+        const { designation, budget, duration, company, ...userData } = payload;
+        const startDate = new Date();
+        const endDate = new Date(startDate);
+        endDate.setMonth(startDate.getMonth() + duration);
+
+        const companyId = user.role === USER_ROLES.COMPANY ? user.authId : company;
+
+        const employeeDoc = await Employee.create(
+          [
+            {
+              company: companyId,
+              designation,
+              user: userDoc[0]._id,
+              budget,
+              totalBudget: budget,
+              budgetLeft: budget,
+              duration,
+              budgetExpiredAt: endDate.toISOString(),
+              createdBy: user.authId,
+            },
+          ],
+          { session },
+        );
+
+        if (!employeeDoc || employeeDoc.length === 0) {
+          throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create employee.');
+        }
+
+        createdUser = employeeDoc[0];
+
+        // Update company budget and employee count
+        await Company.updateOne(
+          { _id: companyId },
+          {
+            $inc: {
+              totalEmployees: 1,
+              totalBudget: budget,
+            },
+          },
+          { session },
+        );
+        break;
+
+      case USER_ROLES.COMPANY:
+        if (user.role !== USER_ROLES.SUPER_ADMIN && user.role !== USER_ROLES.ADMIN) {
+          throw new ApiError(StatusCodes.BAD_REQUEST, 'Only Super Admin or Admin can create companies.');
+        }
+
+        const companyDoc = await Company.create(
+          [
+            {
+              user: userDoc[0]._id,
+              createdBy: user.authId,
+            },
+          ],
+          { session },
+        );
+
+        if (!companyDoc || companyDoc.length === 0) {
+          throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create company.');
+        }
+
+        createdUser = companyDoc[0];
+        break;
+
+      default:
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Invalid role specified.');
+    }
+
+    await session.commitTransaction();
+    return createdUser;
   } catch (error) {
-    await session.abortTransaction()
-    throw error
+    await session.abortTransaction();
+    throw error;
   } finally {
-    await session.endSession()
+    await session.endSession();
   }
-}
+};
 
 
 const updateUserToDB = async (user: JwtPayload, payload: Partial<IUser>) => {
-  console.log(payload)
+
+
   const updatedUser = await User.findByIdAndUpdate(user.authId, { $set: payload }, {
     new: true,
   }).lean()
