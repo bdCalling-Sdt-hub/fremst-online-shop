@@ -63,4 +63,7 @@ router.patch(
   }
 )
 
+
+router.get('/admins', auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), AdminController.getAllAdmin)
+
 export const AdminRoutes = router

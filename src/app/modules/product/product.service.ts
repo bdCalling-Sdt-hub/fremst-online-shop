@@ -19,8 +19,18 @@ const createProduct = async (payload: IProduct, user: JwtPayload) => {
     return product
 }
 
-const updateProduct = async (id: Types.ObjectId, payload: IProduct) => {  
-    const product = await Product.findByIdAndUpdate(id, {$set: payload}, { new: true });
+const updateProduct = async (id: Types.ObjectId, payload: IProduct & {existingFeaturedImages: string[]}) => {  
+
+    if(payload.existingFeaturedImages && payload.existingFeaturedImages.length > 0 ){
+      if(payload.featuredImages && payload.featuredImages.length > 0){
+        payload.featuredImages = [...payload.existingFeaturedImages, ...payload.featuredImages]
+      }
+      else{
+        payload.featuredImages = payload.existingFeaturedImages
+      }
+    }
+
+    const product = await Product.findByIdAndUpdate(id, {$set: payload }, { new: true });
     if(!product){
         throw new ApiError(StatusCodes.BAD_REQUEST,'Failed to update product')
     }
@@ -89,14 +99,20 @@ const getAllProduct = async (filters:IProductFilters, paginationOptions:IPaginat
       });
     }
 
-    if(category !== undefined){
+   // Multiple category filtering
+  if (category !== undefined) {
+    // If category is an array (from query params like ?category=cat1&category=cat2)
+    if (Array.isArray(category)) {
       andConditions.push({
-        $or: [
-          { category: { $exists: true } },
-          { category: category }
-        ]
+        category: { $in: category }, // Use $in operator to match any of the provided category IDs
+      });
+    } else {
+      // If category is a single value
+      andConditions.push({
+        category: category,
       });
     }
+  }
 
 
 
@@ -134,7 +150,7 @@ const getSingleProduct = async (id: Types.ObjectId) => {
   }).populate({
     path: 'category',
     select: {
-      _id: 0,
+      _id: 1,
       title: 1,
       slug: 1,
     },

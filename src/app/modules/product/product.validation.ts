@@ -19,7 +19,25 @@ const createProductZodSchema = z.object({
 
 
 
-const updateProductZodSchema = createProductZodSchema.partial();
+
+
+
+const updateProductZodSchema = z.object({
+  name: z.string().optional(),
+  price: z.number().positive('Price must be positive').optional(),
+  description: z.string().optional(),
+  additionalInfo: z.string().optional(),
+  sizes: z.array(z.enum([PRODUCT_SIZE.L, PRODUCT_SIZE.M, PRODUCT_SIZE.S, PRODUCT_SIZE.L, PRODUCT_SIZE.XL, PRODUCT_SIZE.XXL, PRODUCT_SIZE.XXXL])).optional(),
+  colors: z.array(z.string()).optional(),
+  salePrice: z.number().positive('Sale price must be positive').optional(),
+  category: z.string().optional(),
+  // subcategory: z.string().optional(),
+  quantity: z.number().int().nonnegative('Quantity must be a non-negative integer').optional(),
+  brands: z.array(z.string()).optional(),
+  tags: z.array(z.string()).optional(),
+  availability: z.boolean().optional(),
+  existingFeaturedImages: z.array(z.string()).optional(),
+});
 
 export const ProductValidations = {
   createProductZodSchema,

@@ -11,6 +11,7 @@ import { User } from '../user/user.model'
 import { IUser } from '../user/user.interface'
 import mongoose, { Types, PipelineStage } from 'mongoose'
 import { profile } from 'winston'
+import { USER_ROLES } from '../../../enum/user'
 
 
 
@@ -336,6 +337,12 @@ const updateCompany = async (id: Types.ObjectId, payload:Partial<ICompany & IUse
   return updatedCompany;
 };
 
+const getAllAdmin = async () => {
+  const admin = await User.find({ role: {$in: [USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN]}  });
+
+  return admin;
+};
+
 
 export const AdminServices = {
   getCompaniesFromDB,
@@ -344,4 +351,5 @@ export const AdminServices = {
   updateEmployee,
   updateCompany,
   getEmployeeProfileInformationFromDB,
+  getAllAdmin
 }

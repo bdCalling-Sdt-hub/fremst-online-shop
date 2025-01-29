@@ -3,6 +3,7 @@ import { UserServices } from './user.service'
 import catchAsync from '../../../shared/catchAsync'
 import sendResponse from '../../../shared/sendResponse'
 import { StatusCodes } from 'http-status-codes'
+import { Types } from 'mongoose'
 
 const createUser = catchAsync(async (req: Request, res: Response) => {
   console.log(req.body)
@@ -42,8 +43,20 @@ const getUserProfile = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const deleteAdmin = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params
+  const admin = await UserServices.deleteAdmin(req.user, new Types.ObjectId(id))
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Admin deleted successfully!',
+    data: admin,
+  })
+})
+
 export const UserController = {
   createUser,
   updateUser,
   getUserProfile,
+  deleteAdmin
 }

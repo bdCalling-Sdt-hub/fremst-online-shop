@@ -24,7 +24,7 @@ const updateOrderStatus = catchAsync(async (req: Request, res: Response) => {
   const order = await OrderService.updateOrderStatus(
     req.user,
     req.params.id,
-    req.params.status as 'delivered' | 'cancelled'
+    req.params.status as 'delivered' | 'cancelled' | 'shipped',
   );
   sendResponse<IOrder>(res, {
     statusCode: StatusCodes.OK,

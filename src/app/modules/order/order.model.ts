@@ -38,6 +38,14 @@ const orderSchema = new Schema<IOrder>(
           type: Number,
           required: true,
         },
+        color: {
+          type: String,
+    
+        },
+        size: {
+          type: String,
+  
+        },
       },
     ],
     totalAmount: {
@@ -46,7 +54,7 @@ const orderSchema = new Schema<IOrder>(
     },
     status: {
       type: String,
-      enum: ['pending', 'delivered', 'cancelled'],
+      enum: ['pending', 'delivered', 'cancelled', 'shipped'],
       default: 'pending',
     },
     additionalInfo: {

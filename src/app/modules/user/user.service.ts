@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Types } from 'mongoose'
 import { USER_ROLES } from '../../../enum/user'
 import { IUser } from './user.interface'
 import { User } from './user.model'
@@ -54,7 +54,7 @@ const createUserToDB = async (
         const endDate = new Date(startDate);
         endDate.setMonth(startDate.getMonth() + duration);
 
-        const companyId = user.role === USER_ROLES.COMPANY ? user.authId : company;
+        const companyId = user.role === USER_ROLES.COMPANY ? user.userId : company;
 
         const employeeDoc = await Employee.create(
           [
@@ -81,7 +81,7 @@ const createUserToDB = async (
 
         // Update company budget and employee count
         await Company.updateOne(
-          { _id: companyId },
+          companyId ,
           {
             $inc: {
               totalEmployees: 1,
@@ -145,7 +145,6 @@ const updateUserToDB = async (user: JwtPayload, payload: Partial<IUser>) => {
 
 const getUserProfileFromDB = async (user: JwtPayload) => {
 
-  
 
 if (user.role === USER_ROLES.COMPANY) {
   const company = await Company.findById(user.userId)
@@ -163,7 +162,11 @@ if (user.role === USER_ROLES.COMPANY) {
     })
     .populate({
       path: 'company',
-      select: 'name address phone email profile'
+  select:{_id:1, user:1},
+  populate:{
+    path:'user',
+    select:'name email address contact status profile'
+  }
     })
     .lean();
     if (!employee) {
@@ -182,8 +185,22 @@ if (user.role === USER_ROLES.COMPANY) {
 
  
 }
+
+const deleteAdmin = async (user: JwtPayload,id:Types.ObjectId) => {
+  if(user.role !== USER_ROLES.SUPER_ADMIN){
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'You do not have permission to delete this admin')
+  }
+  const admin = await User.findByIdAndDelete(id)
+  if (!admin) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Admin not found')
+  }
+  return admin
+}
+
+
 export const UserServices = {
   createUserToDB,
   updateUserToDB,
-  getUserProfileFromDB
+  getUserProfileFromDB,
+  deleteAdmin
 }

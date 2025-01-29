@@ -33,6 +33,9 @@ const createOrder = async (
   payload: IOrder
 ): Promise<IOrder> => {
   const session = await mongoose.startSession();
+
+  console.log(payload)
+
   session.startTransaction();
 
   try {
@@ -75,6 +78,8 @@ const createOrder = async (
         product: product._id,
         quantity: item.quantity,
         price: product.salePrice || product.price,
+        color: item.color,
+        size: item.size
       });
 
     }
@@ -149,7 +154,7 @@ const createOrder = async (
 const updateOrderStatus = async (
   user: JwtPayload,
   orderId: string,
-  status: 'delivered' | 'cancelled'
+  status: 'delivered' | 'cancelled' | 'shipped'
 ): Promise<IOrder> => {
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -161,12 +166,7 @@ const updateOrderStatus = async (
       throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
     }
 
-    if (order.status !== 'pending') {
-      throw new ApiError(
-        StatusCodes.BAD_REQUEST,
-        'Cannot update status of non-pending order'
-      );
-    }
+
 
     // If cancelling order, restore product quantities and employee budget
     if (status === 'cancelled') {
@@ -263,7 +263,15 @@ const getAllOrders = async (filters:IOrderFilterableFields, paginationOptions:IP
 
     const result = await Order.find(whereConditions)
     .populate('items.product',{name: 1, salePrice: 1, price: 1, sizes: 1, colors: 1, quantity: 1})
-    .sort(sortCondition)
+    .populate({
+      path: 'company',
+      select: {_id:0, user:1 },
+      populate: {
+        path: 'user',
+        select: {_id:0, name:1, email:1}
+      }
+    })
+    .sort({createdAt: -1})
     .skip(skip)
     .limit(limit)
 

@@ -68,9 +68,9 @@ const contactValidation = z.object({
     email: z.string({
       required_error: 'Email is required'
     }).email('Invalid email format'),
-    contact: z.string({
-      required_error: 'Contact number is required'
-    }),
+    // contact: z.string({
+    //   required_error: 'Contact number is required'
+    // }),
     message: z.string({
       required_error: 'Message is required'
     })

@@ -101,6 +101,17 @@ const updateEmployeeProfile = catchAsync(async (req: Request, res: Response) => 
     })
   })
 
+
+  const getAllAdmin = catchAsync(async (req: Request, res: Response) => {
+    const admin = await AdminServices.getAllAdmin()
+    sendResponse<IUser[]>(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: 'Admin retrieved successfully',
+      data: admin,
+    })
+  })
+
 export const AdminController = {
   getCompanies,
   getCompanyProfileInformation,
@@ -108,4 +119,5 @@ export const AdminController = {
   updateEmployeeProfile,
   updateCompanyProfile,
   getEmployeeProfileInformation,
+  getAllAdmin,
 }

@@ -4,6 +4,8 @@ export type IOrderItem = {
   product: Types.ObjectId;
   quantity: number;
   price: number;
+  color: string;
+  size: string;
 };
 
 export type IOrder = {

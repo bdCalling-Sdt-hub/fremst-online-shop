@@ -21,6 +21,7 @@ router.post('/', auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN),fileUpload
 router.patch('/:id', auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN),
     fileUploadHandler(),
     (req: Request, res: Response, next: NextFunction) => {
+      console.log(req.body.data)
       if (req.body.data) {
         req.body = CategoryValidations.updateCategoryZodSchema.parse(
           JSON.parse(req.body.data),

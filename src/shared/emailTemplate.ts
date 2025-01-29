@@ -100,10 +100,7 @@ const contactForm = (payload: IContactForm) => {
                         <span style="color:#666666;">Email:</span>
                         <strong style="color:#333333;margin-left:10px;">${payload.email}</strong>
                       </p>
-                      <p style="margin:0;">
-                        <span style="color:#666666;">Phone:</span>
-                        <strong style="color:#333333;margin-left:10px;">${payload.contact}</strong>
-                      </p>
+              
                     </div>
                   </td>
                 </tr>
@@ -192,10 +189,6 @@ const replyContactForm = (payload: IContactForm) => {
                       <p style="margin:0 0 10px;">
                         <span style="color:#666666;">Email:</span>
                         <strong style="color:#333333;margin-left:10px;">${payload.email}</strong>
-                      </p>
-                      <p style="margin:0 0 10px;">
-                        <span style="color:#666666;">Phone:</span>
-                        <strong style="color:#333333;margin-left:10px;">${payload.contact}</strong>
                       </p>
                       <p style="margin:0;">
                         <span style="color:#666666;">Message:</span>

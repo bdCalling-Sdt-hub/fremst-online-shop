@@ -12,12 +12,12 @@ const createProduct = catchAsync(async (req: Request, res: Response) => {
     const payload = req.body;
     const user = req.user;
 
-    if(req.files && 'image' in req.files && req.files.image.length > 0){
+    if(req.files && 'image' in req.files && req.files.image.length > 0 && req.files.image !== undefined){
         payload.image = `/images/${req.files.image[0].filename}`
     }
 
-    if(req.files && 'featuredImage' in req.files && req.files.featuredImage.length > 0){
-        payload.featuredImages = req.files.featuredImage.map((file) => `/images/${file.filename}`);
+    if(req.files && 'featuredImage' in req.files && req.files.featuredImage.length > 0 && req.files.featuredImage !== undefined){
+        payload.featuredImages = req.files.featuredImage.map((file) => `/featuredImage/${file.filename}`);
     }
 
     const product = await ProductServices.createProduct(payload, user);
@@ -32,12 +32,15 @@ const createProduct = catchAsync(async (req: Request, res: Response) => {
 
 const updateProduct = catchAsync(async (req: Request, res: Response) => {
     const payload = req.body;
-    if(req.files && 'image' in req.files && req.files.image.length > 0){
+
+    console.log(payload,"🦥🦥🦥🦥🦥🦥🦥")
+
+    if(req.files && 'image' in req.files && req.files.image.length > 0 && req.files.image !== undefined){
         payload.image = `/images/${req.files.image[0].filename}`
     }
 
-    if(req.files && 'featuredImage' in req.files && req.files.featuredImage.length > 0){
-        payload.featuredImages = req.files.featuredImage.map((file) => `/images/${file.filename}`);
+    if(req.files && 'featuredImage' in req.files && req.files.featuredImage.length > 0 && req.files.featuredImage !== undefined){
+        payload.featuredImages = req.files.featuredImage.map((file) => `/featuredImage/${file.filename}`);
     }
 
     const product = await ProductServices.updateProduct(new Types.ObjectId(req.params.id), payload);

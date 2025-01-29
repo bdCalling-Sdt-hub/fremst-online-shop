@@ -39,6 +39,12 @@ router.patch(
   },
 )
 
+router.delete(
+  '/admin/:id',
+  auth(USER_ROLES.SUPER_ADMIN),
+  UserController.deleteAdmin
+)
+
 router.get(
   '/profile',
   auth(USER_ROLES.ADMIN, USER_ROLES.COMPANY, USER_ROLES.SUPER_ADMIN,USER_ROLES.EMPLOYEE),
