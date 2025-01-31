@@ -28,119 +28,251 @@ interface IYearlyOrderStats {
   totalAmount: number;
 }
 
-const createOrder = async (
-  user: JwtPayload,
-  payload: IOrder
-): Promise<IOrder> => {
+// const createOrder = async (
+//   user: JwtPayload,
+//   payload: IOrder
+// ): Promise<IOrder> => {
+//   const session = await mongoose.startSession();
+
+//   console.log(payload)
+
+//   session.startTransaction();
+//   if (!payload.items || payload.items.length === 0) {
+//     throw new ApiError(StatusCodes.BAD_REQUEST, 'Order items cannot be empty.');
+//   }
+
+//   try {
+//     // Get employee details and verify budget
+//     const employee = await Employee.findById(user.userId,{user: 1, budgetLeft: 1, company: 1}).populate<{user:IUser}>('user', { name: 1, email: 1, address: 1, contact: 1, status: 1 }).session(session);
+//     if (!employee) {
+//       throw new ApiError(StatusCodes.NOT_FOUND, 'Employee not found or budget details missing.');
+//     }
+
+//     //assign custom order id 
+//     const orderId = await generateOrderId();
+   
+
+//     // Calculate total amount and verify products
+//     const orderItems: IOrderItem[] = [];
+//     let totalAmount = 0;
+
+//     for (const item of payload.items) {
+//       const product = await Product.findById(item.product).session(session);
+//       if (!product) {
+//         throw new ApiError(
+//           StatusCodes.NOT_FOUND,
+//           `Product not found with id: ${item.product}`
+//         );
+//       }
+
+//       if (product.quantity < item.quantity) {
+//         throw new ApiError(
+//           StatusCodes.BAD_REQUEST,
+//           `Insufficient stock for product: ${product.name}`
+//         );
+//       }
+
+//       const itemPrice = product.salePrice ?? product.price;
+//       if (typeof itemPrice !== 'number' || itemPrice <= 0) {
+//         throw new ApiError(StatusCodes.BAD_REQUEST, `Invalid price for product: ${product.name}`);
+//       }
+
+//       const itemTotal = itemPrice * item.quantity;
+//       totalAmount += itemTotal;
+
+//       orderItems.push({
+//         product: product._id,
+//         quantity: item.quantity,
+//         price: itemPrice,
+//         color: item.color,
+//         size: item.size
+//       });
+
+//     }
+    
+//     // Update product quantity and total sales
+//     const bulkUpdates = payload.items.map(item => ({
+//       updateOne: {
+//         filter: { _id: item.product, quantity: { $gte: item.quantity } }, // Ensure sufficient stock
+//         update: { $inc: { quantity: -item.quantity, totalSales: item.quantity } },
+//       },
+//     }));
+
+
+//       await Product.bulkWrite(bulkUpdates, { session });
+
+//       await Company.findOneAndUpdate(
+//         { _id: employee.company },
+//         { $inc: {  totalOrders: 1, totalSpentBudget: totalAmount } },
+//         { session }
+//       );
+
+//     // Check if employee has sufficient budget
+//     const employeeUpdateResult = await Employee.findOneAndUpdate(
+//         {
+//           _id: employee._id,
+//           budgetLeft: { $gte: totalAmount }, // Ensure sufficient budget
+//         },
+//         {
+//           $inc: {
+//             budgetLeft: -totalAmount,
+//             totalSpentBudget: totalAmount,
+//             totalOrders: 1,
+//           },
+//         },
+//         { session, new: true }
+//       );
+      
+//       if (!employeeUpdateResult) {
+//         throw new ApiError(
+//           StatusCodes.BAD_REQUEST,
+//           'Insufficient budget for this order'
+//         );
+//       }
+//     // Create order
+//     const order = await Order.create(
+//         [
+//           {
+//             orderId,
+//             employee: employee._id,
+//             company: employee.company,
+//             items: orderItems,
+//             totalAmount,
+//             address: payload.address || employee.user.address,
+//             contact: employee.user.contact,
+//             name: employee.user.name,
+//             additionalInfo: payload.additionalInfo,
+//           },
+//         ],
+//         { session }
+//       );
+//     await session.commitTransaction();
+//     return order[0];
+//   }
+//   catch (error) {
+//     await session.abortTransaction();
+//     throw error;
+//   } finally {
+//     session.endSession();
+//   }
+// };
+
+
+const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> => {
   const session = await mongoose.startSession();
-
-  console.log(payload)
-
   session.startTransaction();
 
   try {
+    // Validate payload items
+    if (!payload.items || payload.items.length === 0) {
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Order items cannot be empty.');
+    }
+
     // Get employee details and verify budget
-    const employee = await Employee.findById(user.userId,{user: 1, budgetLeft: 1, company: 1}).populate<{user:IUser}>('user', { name: 1, email: 1, address: 1, contact: 1, status: 1 }).session(session);
+    const employee = await Employee.findById(user.userId, { user: 1, budgetLeft: 1, company: 1 })
+      .populate<{ user: IUser }>('user', { name: 1, email: 1, address: 1, contact: 1, status: 1 })
+      .session(session);
+
     if (!employee) {
       throw new ApiError(StatusCodes.NOT_FOUND, 'Employee not found or budget details missing.');
     }
 
-    //assign custom order id 
+    if (!employee.user) {
+      throw new ApiError(StatusCodes.NOT_FOUND, 'User details not found for the employee.');
+    }
+
+    // Assign custom order ID
     const orderId = await generateOrderId();
-   
 
     // Calculate total amount and verify products
     const orderItems: IOrderItem[] = [];
     let totalAmount = 0;
 
-    for (const item of payload.items) {
+    const productValidationPromises = payload.items.map(async (item) => {
       const product = await Product.findById(item.product).session(session);
       if (!product) {
-        throw new ApiError(
-          StatusCodes.NOT_FOUND,
-          `Product not found with id: ${item.product}`
-        );
+        throw new ApiError(StatusCodes.NOT_FOUND, `Product not found with id: ${item.product}`);
       }
-
       if (product.quantity < item.quantity) {
-        throw new ApiError(
-          StatusCodes.BAD_REQUEST,
-          `Insufficient stock for product: ${product.name}`
-        );
+        throw new ApiError(StatusCodes.BAD_REQUEST, `Insufficient stock for product: ${product.name}`);
       }
-
-      const itemTotal = product.salePrice
-        ? product.salePrice * item.quantity
-        : product.price * item.quantity;
+      const itemPrice = product.salePrice ?? product.price;
+      if (typeof itemPrice !== 'number' || itemPrice <= 0) {
+        throw new ApiError(StatusCodes.BAD_REQUEST, `Invalid price for product: ${product.name}`);
+      }
+      const itemTotal = itemPrice * item.quantity;
       totalAmount += itemTotal;
 
       orderItems.push({
         product: product._id,
         quantity: item.quantity,
-        price: product.salePrice || product.price,
+        price: itemPrice,
         color: item.color,
-        size: item.size
+        size: item.size,
       });
+    });
 
-    }
-    
+    await Promise.all(productValidationPromises);
+
     // Update product quantity and total sales
-    const bulkUpdates = payload.items.map(item => ({
-        updateOne: {
-          filter: { _id: item.product },
-          update: { $inc: { quantity: -item.quantity, totalSales: item.quantity } },
-        },
-      }));
+    const bulkUpdates = payload.items.map((item) => ({
+      updateOne: {
+        filter: { _id: item.product, quantity: { $gte: item.quantity } },
+        update: { $inc: { quantity: -item.quantity, totalSales: item.quantity } },
+      },
+    }));
 
+    await Product.bulkWrite(bulkUpdates, { session });
 
-      await Product.bulkWrite(bulkUpdates, { session });
-
-      await Company.findOneAndUpdate(
-        { _id: employee.company },
-        { $inc: {  totalOrders: 1, totalSpentBudget: totalAmount } },
-        { session }
-      );
+    // Update company total orders and total spent budget
+    await Company.findOneAndUpdate(
+      { _id: employee.company },
+      { $inc: { totalOrders: 1, totalSpentBudget: totalAmount } },
+      { session }
+    );
 
     // Check if employee has sufficient budget
     const employeeUpdateResult = await Employee.findOneAndUpdate(
-        {
-          _id: employee._id,
-          budgetLeft: { $gte: totalAmount }, // Ensure sufficient budget
+      {
+        _id: employee._id,
+        budgetLeft: { $gte: totalAmount },
+      },
+      {
+        $inc: {
+          budgetLeft: -totalAmount,
+          totalSpentBudget: totalAmount,
+          totalOrders: 1,
         },
-        {
-          $inc: {
-            budgetLeft: -totalAmount,
-            totalSpentBudget: totalAmount,
-            totalOrders: 1,
-          },
-        },
-        { session, new: true }
-      );
-      
-      if (!employeeUpdateResult) {
-        throw new ApiError(
-          StatusCodes.BAD_REQUEST,
-          'Insufficient budget for this order'
-        );
-      }
+      },
+      { session, new: true }
+    );
+
+    if (!employeeUpdateResult) {
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Insufficient budget for this order');
+    }
+
     // Create order
+    const address = payload.address !== undefined ? payload.address : employee.user.address;
     const order = await Order.create(
-        [
-          {
-            orderId,
-            employee: employee._id,
-            company: employee.company,
-            items: orderItems,
-            totalAmount,
-            address: payload.address || employee.user.address,
-            contact: employee.user.contact,
-            name: employee.user.name,
-            additionalInfo: payload.additionalInfo,
-          },
-        ],
-        { session }
-      );
+      [
+        {
+          orderId,
+          employee: employee._id,
+          company: employee.company,
+          items: orderItems,
+          totalAmount,
+          address,
+          contact: employee.user.contact,
+          name: employee.user.name,
+          additionalInfo: payload.additionalInfo,
+          status: 'pending',
+        },
+      ],
+      { session }
+    );
+
     await session.commitTransaction();
+    console.log(`Order created with ID: ${order[0].orderId}`);
     return order[0];
   } catch (error) {
     await session.abortTransaction();
@@ -149,7 +281,6 @@ const createOrder = async (
     session.endSession();
   }
 };
-
 
 const updateOrderStatus = async (
   user: JwtPayload,

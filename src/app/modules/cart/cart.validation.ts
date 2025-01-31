@@ -2,20 +2,23 @@ import { z } from 'zod';
 
 const createOrUpdateCartZodSchema = z.object({
     body: z.object({
-        products: z.array(
-            z.object({
-                product: z.string({
-                    required_error: 'Product id is required',
-                }).optional(),
-                quantity: z.number({
-                    required_error: 'Quantity is required',
-                }).min(1, 'Quantity must be at least 1').optional(),
-                size: z.string().optional(),
-                color: z.string().optional(),
-            })
-        ).min(1, 'At least one product is required').optional(),
-
+       product: z.string({
+        required_error: 'Product id is required',
+       }),
+       quantity: z.number({
+        required_error: 'Quantity is required',
+       }).min(1, 'Quantity must be at least 1'),
+       size: z.string().optional(),
+       color: z.string().optional(),
     }),
 });
 
-export const CartValidations = {  createOrUpdateCartZodSchema };
+const removeProductFromCartZodSchema = z.object({
+    body: z.object({
+       product: z.string({
+        required_error: 'Product id is required',
+       }),
+    }),
+});
+
+export const CartValidations = {  createOrUpdateCartZodSchema, removeProductFromCartZodSchema };

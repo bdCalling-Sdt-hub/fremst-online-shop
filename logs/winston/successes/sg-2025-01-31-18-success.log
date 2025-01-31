@@ -1,0 +1,3 @@
+{Fri Jan 31 2025 18:04:38} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Fri Jan 31 2025 18:04:38} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Fri Jan 31 2025 18:04:38} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/order/stats/2025?companyId=678f8e79bb8378091099e499 200 - 17.300 ms

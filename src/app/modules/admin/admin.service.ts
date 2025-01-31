@@ -12,6 +12,7 @@ import { IUser } from '../user/user.interface'
 import mongoose, { Types, PipelineStage } from 'mongoose'
 import { profile } from 'winston'
 import { USER_ROLES } from '../../../enum/user'
+import { JwtPayload } from 'jsonwebtoken'
 
 
 
@@ -156,12 +157,14 @@ return {
 const getEmployeesFromDB = async (
   filters: IEmployeeFilters,
   paginationOptions: IPaginationOptions,
+  user:JwtPayload
 ): Promise<IGenericResponse<IEmployee[]>> => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(paginationOptions)
 
   const { searchTerm, companyId } = filters
-
+  companyId ? filters.companyId = companyId : filters.companyId = user.userId
+  console.log(companyId,"companyId")
   const result = await Employee.aggregate([
     {
       $lookup: {
@@ -183,7 +186,7 @@ const getEmployeesFromDB = async (
             { designation: { $regex: searchTerm, $options: 'i' } },
           ],
         }),
-        ...(companyId && { company:companyId }),
+        ...(companyId && { company: new Types.ObjectId(companyId) }),
       },
     },
     {

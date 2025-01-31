@@ -1,0 +1,3 @@
+{Fri Jan 31 2025 18:04:05} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/order/stats/2025?companyId=678f8e79bb8378091099e499 404 - 19.897 ms
+{Fri Jan 31 2025 18:04:14} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/order/stats/2025?companyId=678f8e79bb8378091099e499 401 - 3.334 ms
+{Fri Jan 31 2025 18:04:38} [FREMST 🐞] error: Failed to create Super Admin Email already exist!

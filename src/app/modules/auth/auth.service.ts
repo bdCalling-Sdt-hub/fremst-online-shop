@@ -1,4 +1,4 @@
-import {  IForgotPasswordRequest, ILoginResponse, IResetPasswordRequest, IContactForm } from './auth.interface';
+import {  IForgotPasswordRequest, ILoginResponse, IResetPasswordRequest, IContactForm, IRefreshTokenResponse } from './auth.interface';
 import { StatusCodes } from 'http-status-codes'
 import ApiError from '../../../errors/ApiError'
 import { USER_STATUS } from '../user/user.constants'
@@ -15,6 +15,7 @@ import { emailHelper } from '../../../helpers/emailHelper'
 import { emailTemplate } from '../../../shared/emailTemplate'
 import { ResetToken } from '../resetToken/resetToken.model';
 import cryptoToken from '../../../helpers/cryptoToken';
+import { IUser } from '../user/user.interface';
 
 const loginUser = async (
   email: string,
@@ -212,7 +213,41 @@ const verifyEmail = async (email: string, oneTimeCode: string) => {
 
 }
 
+const refreshToken = async (
+  token: string,
+): Promise<IRefreshTokenResponse | null> => {
+  let verifiedToken = null;
 
+  try {
+    // Verify the refresh token
+    verifiedToken = jwtHelper.verifyToken(
+      token,
+      config.jwt.jwt_refresh_secret as Secret,
+    );
+  } catch (error) {
+    if (error instanceof Error && error.name === 'TokenExpiredError') {
+      throw new ApiError(StatusCodes.UNAUTHORIZED, 'Refresh Token has expired');
+    }
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Invalid Refresh Token');
+  }
+
+  const {  role, userId, authId } = verifiedToken;
+
+  
+  const newAccessToken = jwtHelper.createToken(
+    {
+      id: authId,
+      userId: userId,
+      role: role,
+    },
+    config.jwt.jwt_secret as Secret,
+    config.jwt.jwt_expire_in as string,
+  );
+
+  return {
+    accessToken: newAccessToken,
+  };
+};
 
 const resetPassword = async (token: string, payload: IResetPasswordRequest): Promise<void> => {
   const { newPassword, confirmPassword } = payload;
@@ -284,5 +319,6 @@ export const AuthServices = {
   forgotPassword,
   resetPassword,
   sendContactEmail,
-  verifyEmail
+  verifyEmail,
+  refreshToken
 }

@@ -16,13 +16,13 @@ router.get(
 
 router.get(
   '/employees',
-  auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN),
+  auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.COMPANY),
   AdminController.getEmployees,
 )
 
 router.get(
   '/employee/:id', 
-  auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN),
+  auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.COMPANY),
   AdminController.getEmployeeProfileInformation,
 )
 

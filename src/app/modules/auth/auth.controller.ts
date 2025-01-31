@@ -74,11 +74,24 @@ const verifyEmail = catchAsync(async (req: Request, res: Response) => {
   });
 })
 
+
+const refreshToken = catchAsync(async (req: Request, res: Response) => {
+  const {refreshToken} = req.cookies
+  const result = await AuthServices.refreshToken(refreshToken)
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Refresh token retrieved successfully',
+    data: result
+  });
+})
+
 export const AuthController = {
   loginUser,
   changePassword,
   forgotPassword,
   resetPassword,
   contactUs,
-  verifyEmail
+  verifyEmail,
+  refreshToken
 }

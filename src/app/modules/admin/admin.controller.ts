@@ -52,6 +52,7 @@ const getEmployees = catchAsync(async (req: Request, res: Response) => {
   const employees = await AdminServices.getEmployeesFromDB(
     filters,
     paginationOptions,
+    req.user
   )
   sendResponse<IGenericResponse<IEmployee[]>>(res, {
     statusCode: StatusCodes.OK,

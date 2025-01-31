@@ -44,7 +44,7 @@ router.get(
 // Get yearly order statistics - Accessible by all authenticated users
 router.get(
   '/stats/:year',
-  auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN, USER_ROLES.EMPLOYEE),
+  auth(USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN, USER_ROLES.EMPLOYEE, USER_ROLES.COMPANY),
   OrderController.getYearlyOrderStats
 );
 
