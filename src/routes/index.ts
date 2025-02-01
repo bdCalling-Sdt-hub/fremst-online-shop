@@ -23,7 +23,7 @@ export const apiRoutes: { path: string; route: any }[] = [
   { path: '/category', route: CategoryRoutes },
   { path: '/subcategory', route: SubcategoryRoutes },
   { path: '/order', route: OrderRoutes },
-  { path: '/other', route: OtherRoutes },
+  { path: '/others', route: OtherRoutes },
   // { path: '/cart', route: CartRoutes }
 ]
 

@@ -22,6 +22,11 @@ const orderSchema = new Schema<IOrder>(
       ref: 'Company',
       required: true,
     },
+    pickup:{
+      type: Boolean,
+      required: true,
+      default: false  
+    },
     items: [
       {
         _id:false,
@@ -61,8 +66,10 @@ const orderSchema = new Schema<IOrder>(
       type: String,
     },
     address: {
-      type: String,
-      required: true,
+      _id: false,
+      streetAddress: { type: String },
+      city: { type: String },
+      postalCode: { type: String },
     },
     contact: {
       type: String,

@@ -30,6 +30,6 @@ router.patch('/:id', auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN),
       return CategoryController.updateCategory(req, res, next)
     },
 );
-router.get('/', auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN, USER_ROLES.COMPANY, USER_ROLES.EMPLOYEE),CategoryController.getAllCategory);
+router.get('/', auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.COMPANY, USER_ROLES.EMPLOYEE),CategoryController.getAllCategory);
 
 export const CategoryRoutes = router;

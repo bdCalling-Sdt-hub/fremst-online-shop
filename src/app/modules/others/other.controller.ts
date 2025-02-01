@@ -31,7 +31,56 @@ const createOrUpdateOthers = catchAsync(async (req: Request, res: Response) => {
   })
 
 
+  const createFaq = catchAsync(async (req: Request, res: Response) => {
+
+    const result = await OtherServices.createFaq(req.body);
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: 'Faq created successfully',
+      data: result,
+    });
+  })
+
+  const updateFaq = catchAsync(async (req: Request, res: Response) => {
+    const { ...faqData } = req.body;
+    const { id } = req.params;
+    const result = await OtherServices.updateFaq(id, faqData);
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: 'Faq updated successfully',
+      data: result,
+    });
+  })
+
+
+  const getFaqs = catchAsync(async (req: Request, res: Response) => {
+    const result = await OtherServices.getFaqs()
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: 'Faqs retrieved successfully',
+      data: result,
+    });
+  })
+
+  const removeFaq = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;  
+    const result = await OtherServices.removeFaq(id);
+    sendResponse(res, { 
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: 'Faq removed successfully',
+      data: result,
+    });
+  })
+
   export const OtherController = {
     createOrUpdateOthers,
-    getOthers  
+    getOthers,
+    createFaq,
+    updateFaq,
+    getFaqs,
+    removeFaq,
   }

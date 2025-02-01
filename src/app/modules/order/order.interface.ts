@@ -8,6 +8,12 @@ export type IOrderItem = {
   size: string;
 };
 
+type IAddress = {
+  streetAddress: string
+  city: string
+  postalCode: string
+}
+
 export type IOrder = {
   _id: Types.ObjectId;
   orderId: string;
@@ -18,7 +24,8 @@ export type IOrder = {
   totalAmount: number;
   status: 'pending' | 'delivered' | 'cancelled';
   additionalInfo?: string;
-  address: string;
+  address: IAddress;
+  pickup:boolean
   contact: string;
   createdAt: Date;
   updatedAt: Date;

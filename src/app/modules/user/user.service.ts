@@ -9,6 +9,7 @@ import { IEmployee } from '../employee/employee.interface'
 import { JwtPayload } from 'jsonwebtoken'
 import { Company } from '../company/company.model'
 import { ICompany } from '../company/company.interface'
+import { handleObjectUpdate } from './user.utils'
 
 
 
@@ -131,8 +132,17 @@ const createUserToDB = async (
 
 const updateUserToDB = async (user: JwtPayload, payload: Partial<IUser>) => {
 
-
-  const updatedUser = await User.findByIdAndUpdate(user.authId, { $set: payload }, {
+  const {address, ...restData} = payload;
+  let updatedUserData = { ...restData };
+  if (address && Object.keys(address).length > 0) {
+    updatedUserData = handleObjectUpdate(
+      address,
+      updatedUserData,
+      'address'
+    );
+  }
+  
+  const updatedUser = await User.findByIdAndUpdate(user.authId, { $set: updatedUserData }, {
     new: true,
   }).lean()
 

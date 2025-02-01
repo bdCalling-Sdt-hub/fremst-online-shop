@@ -27,13 +27,21 @@ const createUserZodSchema = z
   budget: z.number().optional(),
   designation: z.string().optional(),
   duration: z.number().optional(),
-  address: z.string().optional(),
+  address: z.object({
+    streetAddress: z.string().optional(),
+    city: z.string().optional(),
+    postalCode: z.string().optional(),
+  }).optional(),
 })
 
 
 const updateUserZodSchema = z.object({
   name: z.string().optional(),
-  address: z.string().optional(),
+  address: z.object({
+    streetAddress: z.string().optional(),
+    city: z.string().optional(),
+    postalCode: z.string().optional(),
+  }).optional(),
   contact: z.string().optional(),
   designation: z.string().optional(),
   duration: z.number().optional(),

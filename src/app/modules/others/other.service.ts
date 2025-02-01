@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes"
-import { IOthers } from "./other.interface"
-import { Other } from "./other.model"
+import { IFaq, IOthers } from "./other.interface"
+import { Faq, Other } from "./other.model"
 import ApiError from "../../../errors/ApiError"
 
 
@@ -8,9 +8,9 @@ const createOrUpdateOthers = async (payload: Partial<IOthers>) => {
     const other = await Other.findOne({type: payload.type})
    try{
        if(!other){
-           const newOther = await Other.create(payload)
+          await Other.create(payload)
        }else{
-           const   newOther = await Other.findOneAndUpdate({type: payload.type},payload)
+           await Other.findOneAndUpdate({type: payload.type},payload)
        }
 
     }catch(error){
@@ -30,9 +30,43 @@ const getOthers = async (type: string) => {
 }
 
 
+const createFaq = async (payload: IFaq) => {
+    const faq = await Faq.create(payload)
+    if(!faq){
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create faq')
+    }
+    return faq
+}
+
+const updateFaq = async (id: string, payload: IFaq) => {
+    const faq = await Faq.findByIdAndUpdate(id, payload, {new: true})
+    if(!faq){
+        throw new ApiError(StatusCodes.NOT_FOUND, 'Faq not found')
+    }
+    return faq
+}
+const getFaqs = async () => {
+    const faqs = await Faq.find({})
+    console.log(faqs)
+    return faqs || []
+}
+
+const removeFaq = async (id: string) => {
+    const faq = await Faq.findById(id)
+    if(!faq){
+        throw new ApiError(StatusCodes.NOT_FOUND, 'Faq not found')
+    }
+    await faq.deleteOne()
+    return `${faq.question} deleted successfully`
+}
+
 
 
 export const OtherServices = {
     createOrUpdateOthers,
-    getOthers
+    getOthers,
+    createFaq,
+    updateFaq,
+    getFaqs,
+    removeFaq
 }

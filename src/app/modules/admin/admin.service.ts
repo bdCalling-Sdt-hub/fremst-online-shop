@@ -13,6 +13,7 @@ import mongoose, { Types, PipelineStage } from 'mongoose'
 import { profile } from 'winston'
 import { USER_ROLES } from '../../../enum/user'
 import { JwtPayload } from 'jsonwebtoken'
+import { handleObjectUpdate } from '../user/user.utils'
 
 
 
@@ -41,7 +42,7 @@ const getCompanyProfileInformation = async (company_id: string) => {
 
 
 const getEmployeeProfileInformationFromDB = async (employee_id: string) => {
-  const employee = await Employee.findById(employee_id,{user:1, company:1, designation:1, totalOrders:1, totalBudget:1, totalSpentBudget:1}).populate({
+  const employee = await Employee.findById(employee_id,{createdAt:0, updatedAt:0}).populate({
     path: 'user',
     select: {
       name: 1,
@@ -51,6 +52,17 @@ const getEmployeeProfileInformationFromDB = async (employee_id: string) => {
       profile:1,
       status: 1,
     },
+  }).populate({
+    path: 'company',
+    select: {
+      user:1,
+      _id:1,
+    },
+    populate:{
+      path:'user',
+      select:'name email address contact status profile'
+    }
+
   })
 
   if (!employee) {
@@ -249,16 +261,22 @@ try {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Requested user does not exist');
   }
 
-  const updateFields: Partial<{ name: string; email: string; address: string; contact: string; profile: string }> = {};
+  const updateFields: Partial<IEmployee & IUser & {budgetUpdate?:boolean}> = {};
 
-  if (name) updateFields.name = name;
-  if (email) updateFields.email = email;
-  if (address) updateFields.address = address;
-  if (contact) updateFields.contact = contact;
-  if (profile) updateFields.profile = profile;
+  let userCollectionUpdatedFields: Partial<IUser> = {name, email, address, contact, profile};
+
+
+  if (address && Object.keys(address).length > 0) {
+     userCollectionUpdatedFields = handleObjectUpdate(
+      address,
+      userCollectionUpdatedFields,
+      'address'
+    )
+    }
+
   
-  if (Object.keys(updateFields).length > 0) {
-    const updatedUser = await User.findByIdAndUpdate(id, { $set: updateFields }, { new: true, session });
+  if (Object.keys(userCollectionUpdatedFields).length > 0) {
+    const updatedUser = await User.findByIdAndUpdate(id, { $set: userCollectionUpdatedFields }, { new: true, session });
   
     if (!updatedUser) {
       throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update user data');

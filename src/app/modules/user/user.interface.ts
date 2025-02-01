@@ -6,13 +6,18 @@ type IAuthentication = {
   oneTimeCode: number;
   expireAt: Date;
 }
+export type IAddress = {
+  streetAddress: string
+  city: string
+  postalCode: string
+}
 
 export type IUser = {
   _id: Types.ObjectId
   email: string
   name: string
   contact?: string
-  address: string
+  address: IAddress
   password: string
   profile?: string
   status: string

@@ -7,7 +7,7 @@ import { ProductValidations } from './product.validation';
 
 const router = express.Router();
 
-router.post('/',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN), fileUploadHandler(),
+router.post('/',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), fileUploadHandler(),
 (req: Request, res: Response, next: NextFunction) => {
 
     if (req.body.data) {
@@ -18,7 +18,7 @@ router.post('/',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN), fileUpload
     return ProductController.createProduct(req, res, next)
 }
 );
-router.patch('/:id',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN), fileUploadHandler(),
+router.patch('/:id',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), fileUploadHandler(),
 (req: Request, res: Response, next: NextFunction) => {
 
 
@@ -32,6 +32,6 @@ router.patch('/:id',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN), fileUp
 
 router.get('/', ProductController.getAllProduct);
 router.get('/:id', ProductController.getSingleProduct);
-router.delete('/:id',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.SUPER_ADMIN), ProductController.deleteProduct);
+router.delete('/:id',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), ProductController.deleteProduct);
 
 export const ProductRoutes = router;

@@ -6,6 +6,7 @@ const employeeSchema = new Schema<IEmployee, EmployeeModel>(
     company: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     designation: { type: String, required: true },
+
     budget: { type: Number, required: true, default: 1000 },
     totalOrders: { type: Number, required: true, default: 0 },
     totalBudget: { type: Number, required: true, default: 1000 },

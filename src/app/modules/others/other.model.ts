@@ -10,8 +10,25 @@ const otherSchema = new mongoose.Schema({
       enum: ['privacy-policy', 'terms-and-conditions', 'faq'],
       required: true,
    },
+   
 }, {
    timestamps: true,
 });
 
 export const Other = mongoose.model('Other', otherSchema)
+
+const faqSchema = new mongoose.Schema({
+   
+   question: {
+      type: String,
+      required: true,
+   },
+   answer: {
+      type: String,
+      required: true,
+   }
+}, {
+   timestamps: true,
+});
+
+export const Faq = mongoose.model('Faq', faqSchema)

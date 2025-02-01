@@ -14,7 +14,11 @@ const createOrderZodSchema = z.object({
         color: z.string().optional(),
       })
     ).min(1, 'At least one product is required'),
-    address: z.string().optional(),
+    address: z.object({
+      streetAddress: z.string(),
+      city: z.string(),
+      postalCode: z.string(),
+    }).optional(),
     additionalInfo: z.string().optional(),
   }),
 });
