@@ -1,0 +1,10 @@
+{Sat Feb 01 2025 18:22:05} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 400 - 42.042 ms
+{Sat Feb 01 2025 18:24:15} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 400 - 8.056 ms
+{Sat Feb 01 2025 18:24:47} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 21.854 ms
+{Sat Feb 01 2025 18:25:21} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 4.105 ms
+{Sat Feb 01 2025 18:26:06} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 11.109 ms
+{Sat Feb 01 2025 18:28:38} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 7.608 ms
+{Sat Feb 01 2025 18:29:38} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 8.881 ms
+{Sat Feb 01 2025 18:30:17} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 10.267 ms
+{Sat Feb 01 2025 18:35:27} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 236.878 ms
+{Sat Feb 01 2025 18:38:00} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 208.948 ms

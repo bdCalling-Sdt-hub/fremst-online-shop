@@ -81,8 +81,8 @@ const createUserToDB = async (
         createdUser = employeeDoc[0];
 
         // Update company budget and employee count
-        await Company.updateOne(
-          companyId ,
+        await Company.findByIdAndUpdate(
+           new Types.ObjectId(companyId),
           {
             $inc: {
               totalEmployees: 1,
@@ -141,7 +141,7 @@ const updateUserToDB = async (user: JwtPayload, payload: Partial<IUser>) => {
       'address'
     );
   }
-  
+
   const updatedUser = await User.findByIdAndUpdate(user.authId, { $set: updatedUserData }, {
     new: true,
   }).lean()
