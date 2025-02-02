@@ -6,16 +6,6 @@
     "auditLog": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\errors\\.812fb53bf754012e6c4c46caff8a8638b82d3865-audit.json",
     "files": [
         {
-            "date": 1737267082297,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\errors\\sg-2025-01-19-12-error.log",
-            "hash": "9b8390afc39872362a47efc8baba1c08ae682a5a62934430313fb5a4bb5dfb36"
-        },
-        {
-            "date": 1737277161234,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\errors\\sg-2025-01-19-14-error.log",
-            "hash": "24f3da9c45a6d0be30e7c277e5beefde976e7f7b81f22d5216145a090586b4bd"
-        },
-        {
             "date": 1737277393175,
             "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\errors\\sg-2025-01-19-15-error.log",
             "hash": "98b79b63c585034ee602816224dfd24173fa80119377d3a3e623db559d06133d"
@@ -434,6 +424,26 @@
             "date": 1738412525670,
             "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\errors\\sg-2025-02-01-18-error.log",
             "hash": "78b9aa2072ff6ea72e211f3f9c6f2c70432b833da5fe1bc5eaba337615b3b7e5"
+        },
+        {
+            "date": 1738469818967,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\errors\\sg-2025-02-02-10-error.log",
+            "hash": "8ebc3e7213755be048a1e0cb6fe474e960f9bab9b71800e53c5a1472fb48a4f7"
+        },
+        {
+            "date": 1738472422761,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\errors\\sg-2025-02-02-11-error.log",
+            "hash": "7e3b3753bd56d9bc45cdf24b3c4ff02d2d30659f1409231ebaf38ce2e90b4054"
+        },
+        {
+            "date": 1738485818506,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\errors\\sg-2025-02-02-14-error.log",
+            "hash": "ccc3f4513a9d7b723e29b4fd0c2fcc369e692ee5eec2e29eca51c4251a5c25aa"
+        },
+        {
+            "date": 1738486923961,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\errors\\sg-2025-02-02-15-error.log",
+            "hash": "c7d12267c8e83fdb4f66f3ed55a3ca6d588cf5f81a44ca35362a74c248b97cfc"
         }
     ],
     "hashType": "sha256"
