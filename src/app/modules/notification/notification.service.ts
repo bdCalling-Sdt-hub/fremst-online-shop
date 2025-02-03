@@ -8,8 +8,7 @@ const getAllNotification =async (user:JwtPayload) => {
 };
 
 const getSingleNotification = async (id: string) => {
-  const notification = await Notification.findById(id);
   await Notification.findByIdAndUpdate(id, { isRead: true });
-  return notification;
+  return "Notification marked as read successfully.";
 };
 export const NotificationServices = { getAllNotification, getSingleNotification };

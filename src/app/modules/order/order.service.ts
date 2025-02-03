@@ -279,16 +279,16 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
 
     const adminNotification = {
       nameSpace: 'notification',
-      title: `New Order - ${order[0].orderId} placed by ${order[0].name}`,
-      description: `Order - ${order[0].orderId} placed by ${order[0].name} at ${order[0].address} on ${order[0].createdAt.toDateString()} has been placed. Please review and process the order.`,
+      title: `New Order - ${orderId} placed by ${order[0].name}`,
+      description: `Order - ${orderId} placed by ${order[0].name} at ${order[0].address.streetAddress}, ${order[0].address.city}, ${order[0].address.postalCode} on ${order[0].createdAt.toDateString()} has been placed. Please review and process the order.`,
       type: USER_ROLES.ADMIN,
       recipient: config.admin_order_receiving_code || "admin",
     };
     
     const companyNotification = {
       nameSpace: 'notification',
-      title: `New Order - ${order[0].orderId} placed by ${order[0].name}`,
-      description: `Order - ${order[0].orderId} placed by your employee name: ${order[0].name} on ${order[0].createdAt.toDateString()} has been placed.`,
+      title: `New Order - ${orderId} placed by ${order[0].name}`,
+      description: `Order - ${orderId} placed by your employee name: ${order[0].name} on ${order[0].createdAt.toDateString()} has been placed.`,
       type: 'order',
       user: employee.company,
       recipient: employee.company.toString(),
@@ -311,10 +311,10 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
 
     //send email 
 
-    const getPopulatedOrder = await Order.findOne({ _id: order[0]._id }).populate('items.product');
-
+    const getPopulatedOrder = await Order.findById(order[0]._id).populate('items.product').populate<{user:IUser}>('user',{email:1}).session(session);
+console.log(getPopulatedOrder)
     const orderDetails = {
-      email:user.email,
+      email:getPopulatedOrder!.user.email,
       orderNumber: getPopulatedOrder!.orderId,
       customerName: getPopulatedOrder!.name,
       items: getPopulatedOrder!.items.map((item: any) => ({ name: item.product.name, quantity: item.quantity, price: item.price })),

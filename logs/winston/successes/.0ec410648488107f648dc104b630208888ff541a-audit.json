@@ -6,21 +6,6 @@
     "auditLog": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\.0ec410648488107f648dc104b630208888ff541a-audit.json",
     "files": [
         {
-            "date": 1737375612988,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-18-success.log",
-            "hash": "01abda251658aff02374b9825691d95196ae4be977a3571a88dbe9b021d983b5"
-        },
-        {
-            "date": 1737378134364,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-19-success.log",
-            "hash": "2553976e3454325268be2e54cbc6a1c505ba52d916b374a28c450b3894f232e8"
-        },
-        {
-            "date": 1737381602546,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-20-success.log",
-            "hash": "520435f4fcdf0fb2a1fef732b8ed68f94e053ea5d0ec97659307c3a117cda2eb"
-        },
-        {
             "date": 1737431494326,
             "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-21-09-success.log",
             "hash": "c9b1f27cbd419e7e6c082f9884fe743b195018ad1e21333e596c15e65550c881"
@@ -439,6 +424,16 @@
             "date": 1738585066332,
             "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-02-03-18-success.log",
             "hash": "da1765f557f15b00d4b0364310e033fb40ae0a6531b5b90766b0f3d9bcd114f5"
+        },
+        {
+            "date": 1738587678026,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-02-03-19-success.log",
+            "hash": "74ad12d546eab691d432cafeadf4810d2dc677d2308b6d944f9050585ede9fe5"
+        },
+        {
+            "date": 1738591260994,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-02-03-20-success.log",
+            "hash": "da99de48b73d99f38fbf8868a044e522a64f0dd0ac9b7ecf9f2a86365001236c"
         }
     ],
     "hashType": "sha256"

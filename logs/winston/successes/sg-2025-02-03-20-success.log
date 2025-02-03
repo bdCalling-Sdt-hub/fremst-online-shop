@@ -1,0 +1,17 @@
+{Mon Feb 03 2025 20:01:00} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.808 ms
+{Mon Feb 03 2025 20:01:01} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/notification 204 - 0.075 ms
+{Mon Feb 03 2025 20:01:01} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/user/profile 304 - 10.152 ms
+{Mon Feb 03 2025 20:01:01} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/notification 304 - 4.323 ms
+{Mon Feb 03 2025 20:01:01} [FREMST 🦥] info: 115.127.157.41 - GET //images/naruto-kakashi-hatake-grey-minimalist-desktop-wallpaper-cover-1738050861919.jpg 304 - 1.900 ms
+{Mon Feb 03 2025 20:01:05} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/notification/67a0c49f8e2519f49ac0aac3 204 - 0.495 ms
+{Mon Feb 03 2025 20:01:05} [FREMST 🦥] info: 115.127.157.41 - PATCH /api/v1/notification/67a0c49f8e2519f49ac0aac3 200 - 14.780 ms
+{Mon Feb 03 2025 20:01:05} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/notification 200 - 3.425 ms
+{Mon Feb 03 2025 20:01:10} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.121 ms
+{Mon Feb 03 2025 20:01:10} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/notification 204 - 0.058 ms
+{Mon Feb 03 2025 20:01:10} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/user/profile 304 - 4.398 ms
+{Mon Feb 03 2025 20:01:10} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/notification 304 - 2.896 ms
+{Mon Feb 03 2025 20:01:10} [FREMST 🦥] info: 115.127.157.41 - GET //images/naruto-kakashi-hatake-grey-minimalist-desktop-wallpaper-cover-1738050861919.jpg 304 - 0.462 ms
+{Mon Feb 03 2025 20:01:16} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/notification/67a0c5650490aa94f0f9addb 204 - 0.784 ms
+{Mon Feb 03 2025 20:01:16} [FREMST 🦥] info: 115.127.157.41 - PATCH /api/v1/notification/67a0c5650490aa94f0f9addb 200 - 9.372 ms
+{Mon Feb 03 2025 20:01:16} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/notification 204 - 0.064 ms
+{Mon Feb 03 2025 20:01:16} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/notification 200 - 2.872 ms
