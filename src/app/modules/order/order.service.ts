@@ -311,10 +311,10 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
 
     //send email 
 
-    const getPopulatedOrder = await Order.findById(order[0]._id).populate('items.product').populate<{user:IUser}>('user',{email:1}).session(session);
-console.log(getPopulatedOrder)
+    const getPopulatedOrder = await Order.findById(order[0]._id).populate('items.product').session(session);
+    console.log(user, "user")
     const orderDetails = {
-      email:getPopulatedOrder!.user.email,
+      email: user.email,
       orderNumber: getPopulatedOrder!.orderId,
       customerName: getPopulatedOrder!.name,
       items: getPopulatedOrder!.items.map((item: any) => ({ name: item.product.name, quantity: item.quantity, price: item.price })),

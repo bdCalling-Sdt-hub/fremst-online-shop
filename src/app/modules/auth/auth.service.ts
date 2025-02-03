@@ -25,7 +25,7 @@ const loginUser = async (
     {
       email,
     },
-    { role: 1, status: 1 },
+    { role: 1, status: 1, email: 1 },
   ).select('+password')
   if (!isUserExist) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'No user found with this email.')
@@ -238,6 +238,7 @@ const refreshToken = async (
     {
       id: authId,
       userId: userId,
+      email: verifiedToken.email,
       role: role,
     },
     config.jwt.jwt_secret as Secret,
