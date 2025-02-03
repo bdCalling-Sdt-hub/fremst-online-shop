@@ -13,8 +13,6 @@ router.post(
   auth(USER_ROLES.ADMIN, USER_ROLES.COMPANY, USER_ROLES.SUPER_ADMIN),
   fileUploadHandler(),
   (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.body.data)
-    console.log(req.files)
     if (req.body.data) {
       req.body = UserValidations.createUserZodSchema.parse(
         JSON.parse(req.body.data),

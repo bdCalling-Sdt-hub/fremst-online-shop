@@ -8,3 +8,4 @@
 {Sun Feb 02 2025 15:09:01} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
 {Sun Feb 02 2025 15:09:12} [FREMST 🐞] error: 115.127.157.41 - PATCH /api/v1/admin/employee/679e17d2d0426597fb270069 500 - 45.378 ms
 {Sun Feb 02 2025 15:10:43} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
+{Sun Feb 02 2025 15:36:42} [FREMST 🐞] error: Failed to create Super Admin Email already exist!

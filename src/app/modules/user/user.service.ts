@@ -20,7 +20,7 @@ const createUserToDB = async (
 ): Promise<IUser | IEmployee | ICompany | null> => {
   const session = await mongoose.startSession();
   let createdUser: IUser | IEmployee | ICompany | null = null;
-
+  console.log(payload,"🦥🦥🦥🦥")
   try {
     session.startTransaction();
 
@@ -132,17 +132,8 @@ const createUserToDB = async (
 
 const updateUserToDB = async (user: JwtPayload, payload: Partial<IUser>) => {
 
-  const {address, ...restData} = payload;
-  let updatedUserData = { ...restData };
-  if (address && Object.keys(address).length > 0) {
-    updatedUserData = handleObjectUpdate(
-      address,
-      updatedUserData,
-      'address'
-    );
-  }
 
-  const updatedUser = await User.findByIdAndUpdate(user.authId, { $set: updatedUserData }, {
+  const updatedUser = await User.findByIdAndUpdate(user.authId, { $set: payload }, {
     new: true,
   }).lean()
 

@@ -1,0 +1,51 @@
+{Mon Feb 03 2025 18:16:00} [FREMST 🐞] error: 115.127.157.41 - GET /api/v1/notifications 404 - 3.116 ms
+{Mon Feb 03 2025 18:16:04} [FREMST 🐞] error: 115.127.157.41 - GET /api/v1/notification 404 - 9.855 ms
+{Mon Feb 03 2025 18:17:46} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:17:56} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:22:55} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:22:56} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/admin/companies/ 500 - 29.511 ms
+{Mon Feb 03 2025 18:23:11} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:23:17} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:23:24} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:23:33} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:23:33} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/admin/companies/ 500 - 27.136 ms
+{Mon Feb 03 2025 18:24:46} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/admin/companies/ 500 - 4.280 ms
+{Mon Feb 03 2025 18:24:47} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/admin/companies/ 500 - 3.118 ms
+{Mon Feb 03 2025 18:24:48} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/admin/companies/ 500 - 3.067 ms
+{Mon Feb 03 2025 18:24:49} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/admin/companies/ 500 - 2.379 ms
+{Mon Feb 03 2025 18:25:34} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/admin/companies/ 500 - 2.908 ms
+{Mon Feb 03 2025 18:25:35} [FREMST 🐞] error: 10.0.80.49 - GET /api/v1/admin/companies/ 500 - 2.609 ms
+{Mon Feb 03 2025 18:25:44} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:26:49} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:26:51} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:26:59} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:28:11} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:28:23} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:31:43} [FREMST 🐞] error: 115.127.157.41 - GET //images/abstract-gradient-background-with-grain-texture-captivating-noise-airbrush-minimalist-wallpaper-1-1738503269346.png 404 - 3.928 ms
+{Mon Feb 03 2025 18:31:43} [FREMST 🐞] error: 115.127.157.41 - GET //images/handske_litewear_2.0-1738512107600.jpg 404 - 1.534 ms
+{Mon Feb 03 2025 18:31:43} [FREMST 🐞] error: 115.127.157.41 - GET //images/image2-1738576753214.jpg 404 - 1.877 ms
+{Mon Feb 03 2025 18:31:43} [FREMST 🐞] error: 115.127.157.41 - GET //images/group-1738578045020.png 404 - 2.236 ms
+{Mon Feb 03 2025 18:31:43} [FREMST 🐞] error: 115.127.157.41 - GET //images/montagehandske2-1738512783794.jpg 404 - 2.657 ms
+{Mon Feb 03 2025 18:31:43} [FREMST 🐞] error: 115.127.157.41 - GET //images/image2-1738576846695.jpg 404 - 2.959 ms
+{Mon Feb 03 2025 18:31:43} [FREMST 🐞] error: 115.127.157.41 - GET //images/group-1738576978271.png 404 - 0.499 ms
+{Mon Feb 03 2025 18:31:43} [FREMST 🐞] error: 115.127.157.41 - GET //images/group-1738582760396.png 404 - 1.130 ms
+{Mon Feb 03 2025 18:31:43} [FREMST 🐞] error: 115.127.157.41 - GET //images/group-1738585713508.png 404 - 1.284 ms
+{Mon Feb 03 2025 18:32:00} [FREMST 🐞] error: 115.127.157.41 - GET /api/v1/user/profile 404 - 14.323 ms
+{Mon Feb 03 2025 18:32:01} [FREMST 🐞] error: 115.127.157.41 - GET /undefined 404 - 0.350 ms
+{Mon Feb 03 2025 18:32:24} [FREMST 🐞] error: 115.127.157.41 - GET /api/v1/user/profile 404 - 5.994 ms
+{Mon Feb 03 2025 18:32:24} [FREMST 🐞] error: 115.127.157.41 - GET /undefined 404 - 1.656 ms
+{Mon Feb 03 2025 18:33:00} [FREMST 🐞] error: 115.127.157.41 - GET /api/v1/user/profile 404 - 4.059 ms
+{Mon Feb 03 2025 18:33:00} [FREMST 🐞] error: 115.127.157.41 - GET /undefined 404 - 1.317 ms
+{Mon Feb 03 2025 18:33:19} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/auth/login 400 - 224.138 ms
+{Mon Feb 03 2025 18:33:30} [FREMST 🐞] error: 115.127.157.41 - GET /undefined 404 - 0.254 ms
+{Mon Feb 03 2025 18:34:17} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 15.373 ms
+{Mon Feb 03 2025 18:35:52} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:36:06} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 17.279 ms
+{Mon Feb 03 2025 18:40:28} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:40:37} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 11.464 ms
+{Mon Feb 03 2025 18:40:46} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 5.410 ms
+{Mon Feb 03 2025 18:41:10} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/user/create-account 500 - 8.052 ms
+{Mon Feb 03 2025 18:43:49} [FREMST 🐞] error: 115.127.157.41 - GET /undefined 404 - 1.276 ms
+{Mon Feb 03 2025 18:44:40} [FREMST 🐞] error: 115.127.157.41 - GET /undefined 404 - 1.074 ms
+{Mon Feb 03 2025 18:44:51} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
+{Mon Feb 03 2025 18:44:52} [FREMST 🐞] error: 115.127.157.41 - GET /undefined 404 - 0.636 ms

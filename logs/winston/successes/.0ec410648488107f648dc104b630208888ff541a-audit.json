@@ -6,66 +6,6 @@
     "auditLog": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\.0ec410648488107f648dc104b630208888ff541a-audit.json",
     "files": [
         {
-            "date": 1737277393173,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-19-15-success.log",
-            "hash": "477633e56c0005f327f284fc737d86b602dd462fd9d49270c6cd9ae744f451f0"
-        },
-        {
-            "date": 1737284682937,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-19-17-success.log",
-            "hash": "fec2942851965b38ace1b53a14ce0a4331bc60b8e2f79c982b4b434cb8702c80"
-        },
-        {
-            "date": 1737288807807,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-19-18-success.log",
-            "hash": "0b97897bc2773925bfe32af9f3f51270f9e704057470e60040566829040a273c"
-        },
-        {
-            "date": 1737293004433,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-19-19-success.log",
-            "hash": "04ec9b999fde87a10c9cce7ec74b1dbdec5cfaa30d13f9c549fb96d606f6c703"
-        },
-        {
-            "date": 1737347866871,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-10-success.log",
-            "hash": "ba00a677cf5adcd1e147a49923dc9edabfbffe4f4d43e4deadf04f86fd40a674"
-        },
-        {
-            "date": 1737349482168,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-11-success.log",
-            "hash": "e1f87f83ef4bfc14adb5e72bce0eff3a01e724bbc9546f8736490c10fee247fe"
-        },
-        {
-            "date": 1737353249057,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-12-success.log",
-            "hash": "318bc27e20dc49ac9b856adffc6a14cae7d7e0e50a102668c99260a41b76cb83"
-        },
-        {
-            "date": 1737356511104,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-13-success.log",
-            "hash": "8cf4faacb5409e175f81643c0a4320725da3f631707018ba60910fc436a1c32a"
-        },
-        {
-            "date": 1737362166205,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-14-success.log",
-            "hash": "7d2ab5fe8e47f052e038d2989bf59ec229db24038b76fc57ea52ee3e9bff42e1"
-        },
-        {
-            "date": 1737365999989,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-15-success.log",
-            "hash": "b7cd2a469ac3e471ab914d1d6f28e871b1d14ba8218ed30ccf9610ffa06db10c"
-        },
-        {
-            "date": 1737367772877,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-16-success.log",
-            "hash": "bd1aed6ab5653736250809690fd776e793bcf96a4f87a3087f278d3e69a75f08"
-        },
-        {
-            "date": 1737371293975,
-            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-17-success.log",
-            "hash": "ea090c49cf9d84dfcabb2e189eb1366067023b1584f2f0767c3184c730ae7902"
-        },
-        {
             "date": 1737375612988,
             "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-01-20-18-success.log",
             "hash": "01abda251658aff02374b9825691d95196ae4be977a3571a88dbe9b021d983b5"
@@ -469,6 +409,36 @@
             "date": 1738486911588,
             "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-02-02-15-success.log",
             "hash": "d2f78b02132da5bcbe48fbaabbb9f90eac693b7ccecc47161532b2c3c6488ade"
+        },
+        {
+            "date": 1738560495753,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-02-03-11-success.log",
+            "hash": "e3eb103fe963559ee8eaa7dace6c4fa966495bb48af152ef540199252ef88afc"
+        },
+        {
+            "date": 1738564346506,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-02-03-12-success.log",
+            "hash": "d601b5d5ff5614070bb59095b75f57ed39f71c54c9d4aa0c135da4f89f8ec130"
+        },
+        {
+            "date": 1738570470553,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-02-03-14-success.log",
+            "hash": "cfbba5016b68be6fa14da3970bd6698085f3631cd0a50b168257a17554f6455e"
+        },
+        {
+            "date": 1738577935809,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-02-03-16-success.log",
+            "hash": "1f67bb970865e4c0fac1b71668639d6b5094f8eadcd0600abfd5a38dfbd11e03"
+        },
+        {
+            "date": 1738582310735,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-02-03-17-success.log",
+            "hash": "dbda4c82f84719e8dd17292a86e122183c2ca83d53edfad269c2cd10c8c429fd"
+        },
+        {
+            "date": 1738585066332,
+            "name": "C:\\Users\\Asad\\projects\\fremst-online-shop\\logs\\winston\\successes\\sg-2025-02-03-18-success.log",
+            "hash": "da1765f557f15b00d4b0364310e033fb40ae0a6531b5b90766b0f3d9bcd114f5"
         }
     ],
     "hashType": "sha256"

@@ -13,6 +13,12 @@ import { orderSearchableFields } from './order.constants';
 import { IGenericResponse } from '../../../interfaces/response';
 import { generateOrderId } from './order.utils';
 import { Company } from '../company/company.model';
+import { socketDataAndNotificationHelper } from '../../../helpers/socketNotificationAndDataHelper';
+import config from '../../../config';
+import { IProduct } from '../product/product.interface';
+import { emailTemplate } from '../../../shared/emailTemplate';
+import { emailHelper } from '../../../helpers/emailHelper';
+import { USER_ROLES } from '../../../enum/user';
 
 
 interface IMonthlyOrderStats {
@@ -271,8 +277,59 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
       { session }
     );
 
+    const adminNotification = {
+      nameSpace: 'notification',
+      title: `New Order - ${order[0].orderId} placed by ${order[0].name}`,
+      description: `Order - ${order[0].orderId} placed by ${order[0].name} at ${order[0].address} on ${order[0].createdAt.toDateString()} has been placed. Please review and process the order.`,
+      type: USER_ROLES.ADMIN,
+      recipient: config.admin_order_receiving_code || "admin",
+    };
+    
+    const companyNotification = {
+      nameSpace: 'notification',
+      title: `New Order - ${order[0].orderId} placed by ${order[0].name}`,
+      description: `Order - ${order[0].orderId} placed by your employee name: ${order[0].name} on ${order[0].createdAt.toDateString()} has been placed.`,
+      type: 'order',
+      user: employee.company,
+      recipient: employee.company.toString(),
+    };
+    
+    // Send both notifications in parallel
+    await Promise.all([
+      socketDataAndNotificationHelper.sendNotification(adminNotification),
+      socketDataAndNotificationHelper.sendNotification(companyNotification),
+    ]);
+
+
+    // orderNumber: string;
+    // customerName: string;
+    // items: Array<{ name: string; quantity: number; price: number }>;
+    // subtotal: number;
+    // tax: number;
+    // total: number;
+    // shippingAddress: string;
+
+    //send email 
+
+    const getPopulatedOrder = await Order.findOne({ _id: order[0]._id }).populate('items.product');
+
+    const orderDetails = {
+      email:user.email,
+      orderNumber: getPopulatedOrder!.orderId,
+      customerName: getPopulatedOrder!.name,
+      items: getPopulatedOrder!.items.map((item: any) => ({ name: item.product.name, quantity: item.quantity, price: item.price })),
+      subtotal: getPopulatedOrder!.totalAmount,
+      tax: 0, // Calculate tax based on order items
+      total: getPopulatedOrder!.totalAmount,
+      shippingAddress: getPopulatedOrder!.address.city+" "+getPopulatedOrder!.address.streetAddress+" "+getPopulatedOrder!.address.postalCode,
+    };
+
+    emailHelper.sendEmail(emailTemplate.orderConfirmation(orderDetails));
+  
     await session.commitTransaction();
-    console.log(`Order created with ID: ${order[0].orderId}`);
+
+
+
     return order[0];
   } catch (error) {
     await session.abortTransaction();

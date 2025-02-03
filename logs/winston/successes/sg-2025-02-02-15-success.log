@@ -97,3 +97,5 @@
 {Sun Feb 02 2025 15:12:40} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.068 ms
 {Sun Feb 02 2025 15:12:40} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/employees 200 - 4.897 ms
 {Sun Feb 02 2025 15:12:40} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/user/profile 304 - 6.932 ms
+{Sun Feb 02 2025 15:36:42} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Sun Feb 02 2025 15:36:42} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m

@@ -261,10 +261,114 @@ const resetPasswordOTP = ({ email, otp }: { email: string; otp: string }) => ({
     `,
 });
 
+
+const orderConfirmation = (orderDetails: {
+  orderNumber: string;
+  email: string;
+  customerName: string;
+  items: Array<{ name: string; quantity: number; price: number }>;
+  subtotal: number;
+  tax: number;
+  total: number;
+  shippingAddress: string;
+}) => ({
+  to: orderDetails.email,
+  subject: `Order Confirmation - #${orderDetails.orderNumber}`,
+  html: `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Order Confirmation</title>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="min-width:100%;">
+        <tr>
+          <td width="100%" style="min-width:100%;padding:10px;">
+            <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+              <!-- Header -->
+              <tr>
+                <td style="padding:30px 40px;background-color:#292C61;border-radius:8px 8px 0 0;text-align:center;">
+                  <img src="https://res.cloudinary.com/dmvht7o8m/image/upload/v1737624138/Heading_1_Link_FREMST_LOGOTYPE-01.svg_1_txcggv.png" alt="Logo" style="width:100px;margin-bottom:20px;">
+                  <h1 style="color:#ffffff;margin:0;font-size:24px;">Order Confirmation</h1>
+                </td>
+              </tr>
+              
+              <!-- Content -->
+              <tr>
+                <td style="padding:40px;">
+                  <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Dear ${orderDetails.customerName},</h2>
+                  <p style="color:#333333;margin:0 0 15px;">
+                    Thank you for your order! We're pleased to confirm that your order has been received and is being processed. Here are the details of your purchase:
+                  </p>
+                  
+                  <!-- Order Summary -->
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:30px;">
+                    <tr>
+                      <th style="text-align:left;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Product</th>
+                      <th style="text-align:center;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Quantity</th>
+                      <th style="text-align:right;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Price</th>
+                    </tr>
+                    ${orderDetails.items.map(item => `
+                      <tr>
+                        <td style="padding:10px;border-bottom:1px solid #dee2e6;">${item.name}</td>
+                        <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.quantity}</td>
+                        <td style="text-align:right;padding:10px;border-bottom:1px solid #dee2e6;">$${item.price.toFixed(2)}</td>
+                      </tr>
+                    `).join('')}
+                    <tr>
+                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Subtotal:</td>
+                      <td style="text-align:right;padding:10px;">$${orderDetails.subtotal.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Tax:</td>
+                      <td style="text-align:right;padding:10px;">$${orderDetails.tax.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Total:</td>
+                      <td style="text-align:right;padding:10px;font-weight:bold;">$${orderDetails.total.toFixed(2)}</td>
+                    </tr>
+                  </table>
+                  
+                  <p style="color:#333333;margin:0 0 15px;">
+                    <strong>Order Number:</strong> ${orderDetails.orderNumber}<br>
+                    <strong>Shipping Address:</strong> ${orderDetails.shippingAddress}
+                  </p>
+                  
+                  <p style="color:#333333;margin:0 0 15px;">
+                    We'll send you another email when your order has been shipped. If you have any questions, please don't hesitate to contact our customer service.
+                  </p>
+                  
+                  <p style="color:#333333;margin:0;">
+                    Thank you for shopping with us!<br>
+                    The Fremst Team
+                  </p>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="padding:20px;background-color:#f8f9fa;border-radius:0 0 8px 8px;text-align:center;">
+                  <p style="margin:0;color:#666666;font-size:14px;">
+                    This is an automated email, please do not reply directly to this message.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `,
+});
+
+
 export const emailTemplate = {
   createAccount,
   resetPassword,
   contactForm,
   replyContactForm,
-  resetPasswordOTP
+  resetPasswordOTP,
+  orderConfirmation
 }

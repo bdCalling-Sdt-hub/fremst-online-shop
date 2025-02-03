@@ -28,10 +28,10 @@ const createUserZodSchema = z
   designation: z.string().optional(),
   duration: z.number().optional(),
   address: z.object({
-    streetAddress: z.string().optional(),
-    city: z.string().optional(),
-    postalCode: z.string().optional(),
-  }).optional(),
+    streetAddress: z.string({required_error: 'Street address is required'}),
+    city: z.string({required_error: 'City is required'}),
+    postalCode: z.string({required_error: 'Postal code is required'}),
+  },{required_error: 'Address is required'}),
 })
 
 

@@ -6,7 +6,7 @@ const createProductZodSchema = z.object({
   price: z.number().positive('Price must be positive'),
   description: z.string().min(1, 'Description is required'),
   additionalInfo: z.string().optional(),
-  sizes: z.array(z.enum([PRODUCT_SIZE.L, PRODUCT_SIZE.M, PRODUCT_SIZE.S, PRODUCT_SIZE.L, PRODUCT_SIZE.XL, PRODUCT_SIZE.XXL, PRODUCT_SIZE.XXXL])).min(1, 'At least one size is required'),
+  sizes: z.array(z.string()).min(1, 'At least one size is required'),
   colors: z.array(z.string()).min(1, 'At least one color is required'),
   salePrice: z.number().positive('Sale price must be positive'),
   category: z.string().min(1, 'Category is required'),

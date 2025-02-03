@@ -1,0 +1,61 @@
+{Mon Feb 03 2025 16:25:40} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:25:40} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:26:07} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:26:07} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:27:58} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:27:58} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:27:59} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:27:59} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:28:05} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:28:05} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:28:33} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:28:34} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:28:35} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:28:35} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:29:42} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:29:42} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:30:32} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:30:32} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:30:43} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:30:43} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:30:44} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 12.914 ms
+{Mon Feb 03 2025 16:32:21} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:32:21} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:32:25} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:32:26} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:32:48} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:32:48} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:32:49} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 6.557 ms
+{Mon Feb 03 2025 16:39:35} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:39:35} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:39:35} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 8.005 ms
+{Mon Feb 03 2025 16:39:37} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 3.249 ms
+{Mon Feb 03 2025 16:40:14} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:40:14} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:40:15} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 7.694 ms
+{Mon Feb 03 2025 16:42:08} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/employees/ 200 - 9.183 ms
+{Mon Feb 03 2025 16:42:31} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:42:31} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:42:32} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 7.452 ms
+{Mon Feb 03 2025 16:44:17} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:44:17} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:44:18} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 8.088 ms
+{Mon Feb 03 2025 16:44:23} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:44:23} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:44:24} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 6.737 ms
+{Mon Feb 03 2025 16:44:35} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:44:35} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:44:47} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 7.619 ms
+{Mon Feb 03 2025 16:44:52} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 3.181 ms
+{Mon Feb 03 2025 16:46:13} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:46:14} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:46:14} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 6.734 ms
+{Mon Feb 03 2025 16:47:51} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:47:51} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:47:52} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:47:52} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:47:53} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 7.642 ms
+{Mon Feb 03 2025 16:48:00} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:48:00} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 16:48:01} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 16:48:01} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m

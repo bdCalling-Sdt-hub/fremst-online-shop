@@ -1,0 +1,99 @@
+{Mon Feb 03 2025 18:17:46} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:17:46} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:17:56} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:17:56} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:22:55} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:22:55} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:23:11} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:23:11} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:23:11} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 7.588 ms
+{Mon Feb 03 2025 18:23:17} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:23:17} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:23:24} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:23:24} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:23:25} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 6.802 ms
+{Mon Feb 03 2025 18:23:33} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:23:33} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:25:44} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:25:44} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:25:44} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 6.266 ms
+{Mon Feb 03 2025 18:25:46} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 2.845 ms
+{Mon Feb 03 2025 18:26:49} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:26:49} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:26:51} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:26:51} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:26:51} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 7.556 ms
+{Mon Feb 03 2025 18:26:59} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:26:59} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:26:59} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/companies/ 200 - 18.744 ms
+{Mon Feb 03 2025 18:27:16} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/employees/ 200 - 7.617 ms
+{Mon Feb 03 2025 18:27:42} [FREMST 🦥] info: 10.0.80.49 - GET /api/v1/admin/employees/ 200 - 4.269 ms
+{Mon Feb 03 2025 18:28:11} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:28:11} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:28:23} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:28:23} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:32:00} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.573 ms
+{Mon Feb 03 2025 18:32:00} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.210 ms
+{Mon Feb 03 2025 18:32:00} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 200 - 8.607 ms
+{Mon Feb 03 2025 18:32:24} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.247 ms
+{Mon Feb 03 2025 18:32:24} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.215 ms
+{Mon Feb 03 2025 18:32:24} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 304 - 4.142 ms
+{Mon Feb 03 2025 18:33:00} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.108 ms
+{Mon Feb 03 2025 18:33:00} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.178 ms
+{Mon Feb 03 2025 18:33:00} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 304 - 2.425 ms
+{Mon Feb 03 2025 18:33:19} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/auth/login 204 - 0.175 ms
+{Mon Feb 03 2025 18:33:29} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/auth/login 204 - 0.130 ms
+{Mon Feb 03 2025 18:33:30} [FREMST 🦥] info: 115.127.157.41 - POST /api/v1/auth/login 200 - 212.523 ms
+{Mon Feb 03 2025 18:33:30} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.059 ms
+{Mon Feb 03 2025 18:33:30} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/user/profile 200 - 3.627 ms
+{Mon Feb 03 2025 18:33:30} [FREMST 🦥] info: 115.127.157.41 - GET //images/naruto-kakashi-hatake-grey-minimalist-desktop-wallpaper-cover-1738050861919.jpg 304 - 0.750 ms
+{Mon Feb 03 2025 18:34:17} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/create-account 204 - 0.408 ms
+{Mon Feb 03 2025 18:34:17} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.038 ms
+{Mon Feb 03 2025 18:34:17} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 304 - 1.918 ms
+{Mon Feb 03 2025 18:35:52} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:35:52} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:35:57} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.951 ms
+{Mon Feb 03 2025 18:35:57} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.098 ms
+{Mon Feb 03 2025 18:35:57} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 304 - 8.750 ms
+{Mon Feb 03 2025 18:35:57} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/user/profile 304 - 10.138 ms
+{Mon Feb 03 2025 18:35:57} [FREMST 🦥] info: 115.127.157.41 - GET //images/naruto-kakashi-hatake-grey-minimalist-desktop-wallpaper-cover-1738050861919.jpg 304 - 1.843 ms
+{Mon Feb 03 2025 18:36:06} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/create-account 204 - 0.253 ms
+{Mon Feb 03 2025 18:36:06} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.052 ms
+{Mon Feb 03 2025 18:36:06} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 304 - 2.271 ms
+{Mon Feb 03 2025 18:40:28} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:40:28} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:40:37} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/create-account 204 - 0.806 ms
+{Mon Feb 03 2025 18:40:37} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.078 ms
+{Mon Feb 03 2025 18:40:37} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 304 - 4.628 ms
+{Mon Feb 03 2025 18:40:40} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.087 ms
+{Mon Feb 03 2025 18:40:40} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 304 - 5.056 ms
+{Mon Feb 03 2025 18:40:40} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/user/profile 304 - 5.463 ms
+{Mon Feb 03 2025 18:40:40} [FREMST 🦥] info: 115.127.157.41 - GET //images/naruto-kakashi-hatake-grey-minimalist-desktop-wallpaper-cover-1738050861919.jpg 304 - 2.208 ms
+{Mon Feb 03 2025 18:40:46} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/create-account 204 - 0.339 ms
+{Mon Feb 03 2025 18:40:46} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.060 ms
+{Mon Feb 03 2025 18:40:46} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 304 - 2.157 ms
+{Mon Feb 03 2025 18:41:10} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/create-account 204 - 0.391 ms
+{Mon Feb 03 2025 18:41:10} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.057 ms
+{Mon Feb 03 2025 18:41:10} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 304 - 2.000 ms
+{Mon Feb 03 2025 18:43:42} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.220 ms
+{Mon Feb 03 2025 18:43:42} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.062 ms
+{Mon Feb 03 2025 18:43:42} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/user/profile 304 - 6.729 ms
+{Mon Feb 03 2025 18:43:42} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 304 - 1.912 ms
+{Mon Feb 03 2025 18:43:42} [FREMST 🦥] info: 115.127.157.41 - GET //images/naruto-kakashi-hatake-grey-minimalist-desktop-wallpaper-cover-1738050861919.jpg 304 - 2.538 ms
+{Mon Feb 03 2025 18:43:48} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/create-account 204 - 0.345 ms
+{Mon Feb 03 2025 18:43:49} [FREMST 🦥] info: 115.127.157.41 - POST /api/v1/user/create-account 200 - 224.213 ms
+{Mon Feb 03 2025 18:43:49} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.043 ms
+{Mon Feb 03 2025 18:43:49} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 200 - 2.079 ms
+{Mon Feb 03 2025 18:44:39} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/create-account 204 - 0.243 ms
+{Mon Feb 03 2025 18:44:40} [FREMST 🦥] info: 115.127.157.41 - POST /api/v1/user/create-account 200 - 218.381 ms
+{Mon Feb 03 2025 18:44:40} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/companies 204 - 0.056 ms
+{Mon Feb 03 2025 18:44:40} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/companies 200 - 2.660 ms
+{Mon Feb 03 2025 18:44:51} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
+{Mon Feb 03 2025 18:44:51} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
+{Mon Feb 03 2025 18:44:51} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/auth/login 204 - 0.682 ms
+{Mon Feb 03 2025 18:44:52} [FREMST 🦥] info: 115.127.157.41 - POST /api/v1/auth/login 200 - 236.362 ms
+{Mon Feb 03 2025 18:44:52} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/user/profile 204 - 0.180 ms
+{Mon Feb 03 2025 18:44:52} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/user/profile 200 - 14.036 ms
+{Mon Feb 03 2025 18:44:55} [FREMST 🦥] info: 115.127.157.41 - OPTIONS /api/v1/admin/employees 204 - 0.295 ms
+{Mon Feb 03 2025 18:44:55} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/admin/employees 200 - 9.041 ms
+{Mon Feb 03 2025 18:44:55} [FREMST 🦥] info: 115.127.157.41 - GET /api/v1/user/profile 304 - 10.711 ms

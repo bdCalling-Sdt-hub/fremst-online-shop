@@ -82,7 +82,7 @@ const getCompaniesFromDB = async (
 ): Promise<IGenericResponse<ICompany[]>> => {
 
 
-  const { page, limit, skip, sortBy, sortOrder } =
+  const { page, limit, skip, sortBy, sortOrder } = 
     paginationHelper.calculatePagination(paginationOptions)
 
   const { searchTerm, ...filterData } = filters
@@ -138,6 +138,9 @@ const getCompaniesFromDB = async (
               'user.name': 1,
               'user.email': 1,
               'user.address': 1,
+              // 'user.address.streetAddress': 1,
+              // 'user.address.city': 1,
+              // 'user.address.postalCode': 1,
               'user.contact': 1,
               'user.status': 1,
               'user.profile': 1,
@@ -149,7 +152,7 @@ const getCompaniesFromDB = async (
         ],
       },
     },
-  ])
+  ]);
 
   const total = result[0].total[0]?.count || 0
   const data = result[0].data
@@ -213,6 +216,9 @@ const getEmployeesFromDB = async (
               'user.email': 1,
               'user.profile': 1,
               'user.address': 1,
+              // 'user.address.streetAddress': 1,
+              // 'user.address.city': 1,
+              // 'user.address.postalCode': 1,
               'user.contact': 1,
               designation: 1,
               budget: 1,

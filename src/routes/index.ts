@@ -1,3 +1,4 @@
+import { NotificationRoutes } from '../app/modules/notification/notification.route';
 // import { CartRoutes } from '../app/modules/cart/cart.route';
 import { OrderRoutes } from '../app/modules/order/order.route';
 import { SubcategoryRoutes } from '../app/modules/subcategory/subcategory.route';
@@ -25,6 +26,7 @@ export const apiRoutes: { path: string; route: any }[] = [
   { path: '/order', route: OrderRoutes },
   { path: '/others', route: OtherRoutes },
   // { path: '/cart', route: CartRoutes }
+  { path: '/notification', route: NotificationRoutes }
 ]
 
 apiRoutes.forEach(route => router.use(route.path, route.route))

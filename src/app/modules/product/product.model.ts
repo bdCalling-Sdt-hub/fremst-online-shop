@@ -21,7 +21,6 @@ const productSchema = new Schema<IProduct, ProductModel>({
   },
   sizes: {
     type: [String],
-    enum: [PRODUCT_SIZE.L, PRODUCT_SIZE.M, PRODUCT_SIZE.S, PRODUCT_SIZE.L, PRODUCT_SIZE.XL, PRODUCT_SIZE.XXL, PRODUCT_SIZE.XXXL],
     required: true,
   },
   colors: {

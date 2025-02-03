@@ -25,6 +25,8 @@ export default {
   webhook_secret: process.env.WEBHOOK_SECRET,
   frontend_url: process.env.FRONTEND_URL,
   business_email: process.env.BUSINESS_EMAIL,
+
+  admin_order_receiving_code: process.env.ADMIN_ORDER_RECEIVING_CODE,
   email: {
     from: process.env.EMAIL_FROM,
     user: process.env.EMAIL_USER,

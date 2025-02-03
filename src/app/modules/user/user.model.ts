@@ -17,12 +17,12 @@ const userSchema = new Schema<IUser, UserModel>(
       default: 'active',
     },
     password: { type: String, select: 0, required: true },
-    profile: { type: String, required: true },
+    profile: { type: String },
     address: { 
       _id: false,
-      streetAddress: { type: String },
-      city: { type: String },
-      postalCode: { type: String },
+      streetAddress: { type: String , required: true },
+      city: { type: String , required: true },
+      postalCode: { type: String,required: true },
     },
     role: { type: String, required: true },
     authentication: {
