@@ -1,8 +1,0 @@
-{Fri Jan 24 2025 09:17:16} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
-{Fri Jan 24 2025 09:53:32} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
-{Fri Jan 24 2025 09:53:32} [FREMST 🦥] info: [32mSuper Admin created successfully[39m
-{Fri Jan 24 2025 09:53:32} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
-{Fri Jan 24 2025 09:56:22} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
-{Fri Jan 24 2025 09:57:03} [FREMST 🦥] info: [32m🚀 Database connected successfully[39m
-{Fri Jan 24 2025 09:57:03} [FREMST 🦥] info: [33m♻️  Application listening on port:5010[39m
-{Fri Jan 24 2025 09:57:45} [FREMST 🦥] info: 10.0.80.49 - POST /api/v1/auth/login 200 - 228.349 ms

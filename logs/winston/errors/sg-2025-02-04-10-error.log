@@ -1,5 +1,0 @@
-{Tue Feb 04 2025 10:09:45} [FREMST 🐞] error: 115.127.157.41 - GET /api/v1/user/profile 404 - 4.535 ms
-{Tue Feb 04 2025 10:10:51} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/auth/login 400 - 6.947 ms
-{Tue Feb 04 2025 10:10:57} [FREMST 🐞] error: 115.127.157.41 - POST /api/v1/auth/login 400 - 2.987 ms
-{Tue Feb 04 2025 10:16:17} [FREMST 🐞] error: 115.127.157.41 - GET /api/v1/user/profile 404 - 5.961 ms
-{Tue Feb 04 2025 10:20:22} [FREMST 🐞] error: Failed to create Super Admin User validation failed: address.postalCode: Path `address.postalCode` is required., address.city: Path `address.city` is required., address.streetAddress: Path `address.streetAddress` is required.
