@@ -1,2 +1,0 @@
-{Tue Jan 28 2025 12:42:35} [FREMST 🐞] error: 10.0.80.49 - POST /api/v1/user/create-account 500 - 3.569 ms
-{Tue Jan 28 2025 12:53:32} [FREMST 🐞] error: Failed to create Super Admin Email already exist!
