@@ -29,7 +29,9 @@ const loginUser = async (
   ).select('+password')
   if (!isUserExist) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'No user found with this email.')
-  }
+  } 
+
+  console.log(isUserExist, isUserExist.email)
 
   if (isUserExist.status === USER_STATUS.RESTRICTED) {
     throw new ApiError(

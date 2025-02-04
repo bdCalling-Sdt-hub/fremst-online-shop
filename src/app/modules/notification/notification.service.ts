@@ -3,7 +3,7 @@ import { Notification } from './notification.model';
 import { USER_ROLES } from '../../../enum/user';
 const getAllNotification =async (user:JwtPayload) => {
     const query = user.role === USER_ROLES.ADMIN || user.role === USER_ROLES.SUPER_ADMIN ? {type: 'admin'} : { user: user.authId };
-    const notifications = await Notification.find(query) ;
+    const notifications = await Notification.find(query).sort({ createdAt: -1 }) ;
     return notifications || [];
 };
 
