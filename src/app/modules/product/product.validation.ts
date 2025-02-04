@@ -27,7 +27,7 @@ const updateProductZodSchema = z.object({
   price: z.number().positive('Price must be positive').optional(),
   description: z.string().optional(),
   additionalInfo: z.string().optional(),
-  sizes: z.array(z.enum([PRODUCT_SIZE.L, PRODUCT_SIZE.M, PRODUCT_SIZE.S, PRODUCT_SIZE.L, PRODUCT_SIZE.XL, PRODUCT_SIZE.XXL, PRODUCT_SIZE.XXXL])).optional(),
+  sizes: z.array(z.string()).optional(),
   colors: z.array(z.string()).optional(),
   salePrice: z.number().positive('Sale price must be positive').optional(),
   category: z.string().optional(),
