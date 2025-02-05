@@ -40,6 +40,10 @@ const loginUser = async (
     )
   }
 
+  if(isUserExist.status === USER_STATUS.DELETED){
+    throw new ApiError(StatusCodes.NOT_FOUND, 'No user found with this email.')
+  }
+
   const isPasswordMatched = await User.isPasswordMatched(
     password,
     isUserExist.password,

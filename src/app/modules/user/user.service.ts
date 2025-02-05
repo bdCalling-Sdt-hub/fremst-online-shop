@@ -11,6 +11,7 @@ import { Company } from '../company/company.model'
 import { ICompany } from '../company/company.interface'
 import { emailTemplate } from '../../../shared/emailTemplate'
 import { emailHelper } from '../../../helpers/emailHelper'
+import { USER_STATUS } from './user.constants'
 
 
 
@@ -218,10 +219,22 @@ const deleteAdmin = async (user: JwtPayload,id:Types.ObjectId) => {
   return admin
 }
 
+const deleteUser = async (user: JwtPayload, id:Types.ObjectId) => {
+  if(user.role !== USER_ROLES.SUPER_ADMIN && user.role !== USER_ROLES.ADMIN ){
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'You do not have permission to delete this user')
+  }
+  const deletedUser = await User.findByIdAndUpdate(id,{status: USER_STATUS.DELETED},)
+  if (!deletedUser) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'User not found')
+  }
+  return deletedUser
+}
+
 
 export const UserServices = {
   createUserToDB,
   updateUserToDB,
   getUserProfileFromDB,
-  deleteAdmin
+  deleteAdmin,
+  deleteUser
 }

@@ -235,8 +235,7 @@ const getEmployeesFromDB = async (
               [sortBy]: sortOrder === 'asc' ? 1 : -1,
             },
           },
-          { $skip: skip },
-          { $limit: limit },
+
         ],
       },
     },
@@ -244,7 +243,7 @@ const getEmployeesFromDB = async (
 
   const total = result[0].total[0]?.count || 0
   const data = result[0].data
-
+  
   return {
     meta: {
       page,
