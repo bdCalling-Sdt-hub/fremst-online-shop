@@ -38,7 +38,9 @@ router.patch(
   auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.COMPANY),
   fileUploadHandler (),
   (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.files,"😒😒😒😒😒😒😒😒😒😒😒" )
     if (req.body.data) {
+      console.log(req.body.data)
         req.body = AdminValidations.updateEmployeeZodSchema.parse(
             JSON.parse(req.body.data),
         )

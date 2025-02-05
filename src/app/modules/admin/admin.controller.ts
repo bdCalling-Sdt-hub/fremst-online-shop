@@ -65,15 +65,23 @@ const getEmployees = catchAsync(async (req: Request, res: Response) => {
 
 const updateEmployeeProfile = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body
+  
+
+  if(req.files && 'image' in req.files &&  req.files.image[0]){
+    payload.profile = `/images/${req.files.image[0].filename}`
+  }
+
   const employee = await AdminServices.updateEmployee(
     new Types.ObjectId(req.params.id),
     payload,
   )
-  sendResponse<IEmployee>(res, {
+
+  
+  sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
     message: 'Employee updated successfully',
-    data: employee,
+    data: "Employee budget updated successfully",
   })
 })
 

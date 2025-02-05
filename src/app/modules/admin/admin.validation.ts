@@ -11,7 +11,7 @@ const updateEmployeeZodSchema = z.object({
     email: z.string().email().optional(),
     budget: z.number().optional(),
     duration: z.number().optional(),
-    budgetUpdate: z.boolean().optional(),
+    isBudgetUpdated: z.boolean().optional(),
 })
 
 const updateCompanyZodSchema = z.object({

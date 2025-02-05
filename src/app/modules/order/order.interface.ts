@@ -25,7 +25,7 @@ export type IOrder = {
   status: 'pending' | 'delivered' | 'cancelled';
   additionalInfo?: string;
   address: IAddress;
-  pickup:boolean
+  pickup:boolean;
   contact: string;
   createdAt: Date;
   updatedAt: Date;

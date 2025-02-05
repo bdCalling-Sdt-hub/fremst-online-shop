@@ -9,7 +9,8 @@ import { IEmployee } from '../employee/employee.interface'
 import { JwtPayload } from 'jsonwebtoken'
 import { Company } from '../company/company.model'
 import { ICompany } from '../company/company.interface'
-import { handleObjectUpdate } from './user.utils'
+import { emailTemplate } from '../../../shared/emailTemplate'
+import { emailHelper } from '../../../helpers/emailHelper'
 
 
 
@@ -20,7 +21,7 @@ const createUserToDB = async (
 ): Promise<IUser | IEmployee | ICompany | null> => {
   const session = await mongoose.startSession();
   let createdUser: IUser | IEmployee | ICompany | null = null;
-  console.log(payload,"🦥🦥🦥🦥")
+
   try {
     session.startTransaction();
 
@@ -80,6 +81,7 @@ const createUserToDB = async (
 
         createdUser = employeeDoc[0];
 
+
         // Update company budget and employee count
         await Company.findByIdAndUpdate(
            new Types.ObjectId(companyId),
@@ -91,6 +93,17 @@ const createUserToDB = async (
           },
           { session },
         );
+
+
+        
+        //send email with credentials to the new employee
+        const createAccount = emailTemplate.createAccountCredentials({
+          to: payload.email,
+          username: payload.email,
+          password: payload.password
+        });
+        await emailHelper.sendEmail(createAccount);
+
         break;
 
       case USER_ROLES.COMPANY:
@@ -113,6 +126,13 @@ const createUserToDB = async (
         }
 
         createdUser = companyDoc[0];
+        //send email with credentials to the new employee
+        const createCompany = emailTemplate.createAccountCredentials({
+          to: payload.email,
+          username: payload.email,
+          password: payload.password
+        });
+        await emailHelper.sendEmail(createCompany);
         break;
 
       default:

@@ -1,3 +1,4 @@
+import { TagsRoutes } from '../app/modules/tags/tags.route';
 import { NotificationRoutes } from '../app/modules/notification/notification.route';
 // import { CartRoutes } from '../app/modules/cart/cart.route';
 import { OrderRoutes } from '../app/modules/order/order.route';
@@ -26,7 +27,8 @@ export const apiRoutes: { path: string; route: any }[] = [
   { path: '/order', route: OrderRoutes },
   { path: '/others', route: OtherRoutes },
   // { path: '/cart', route: CartRoutes }
-  { path: '/notification', route: NotificationRoutes }
+  { path: '/notification', route: NotificationRoutes },
+  { path: '/tags', route: TagsRoutes }  
 ]
 
 apiRoutes.forEach(route => router.use(route.path, route.route))

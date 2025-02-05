@@ -256,39 +256,45 @@ const getEmployeesFromDB = async (
   }
 }
 
-const updateEmployee = async (id: Types.ObjectId, payload: Partial<IEmployee & IUser & { budgetUpdate?: boolean }>) => {
+const updateEmployee = async (id: Types.ObjectId, payload: Record<string, any>) => {
   const session = await mongoose.startSession();
   session.startTransaction();
 
   try {
     const { name, email, address, contact, profile, ...restData } = payload;
 
-    const isUserExist = await Employee.findOne({ user: id }).populate('user', { name: 1, email: 1, address: 1, contact: 1, status: 1, role: 1 }).session(session);
+    console.log(profile);
+
+    const isUserExist = await Employee.findOne({ user: id })
+      .populate('user', { name: 1, email: 1, address: 1, contact: 1, status: 1, role: 1, budget: 1 })
+      .session(session);
+
     if (!isUserExist) {
       throw new ApiError(StatusCodes.NOT_FOUND, 'Requested user does not exist');
     }
 
-    const updateFields: Partial<IEmployee & IUser & { budgetUpdate?: boolean }> = {};
-
-    let userCollectionUpdatedFields: Partial<IUser> = { name, email, address, contact, profile };
-
+    const updateFields: Partial<IEmployee & IUser & { isBudgetUpdated?: boolean }> = {};
+    const userCollectionUpdatedFields: Partial<IUser> = { name, email, address, contact, profile };
 
     if (address && Object.keys(address).length > 0) {
       userCollectionUpdatedFields.address = address;
     }
 
-
     if (Object.keys(userCollectionUpdatedFields).length > 0) {
-      const updatedUser = await User.findByIdAndUpdate(id, { $set: userCollectionUpdatedFields }, { new: true, session });
+      const updatedUser = await User.findByIdAndUpdate(
+        id,
+        userCollectionUpdatedFields,
+        { new: true, session }
+      );
 
       if (!updatedUser) {
         throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update user data');
       }
     }
 
-    const { budget, duration, budgetUpdate } = restData;
+    const { budget, duration, isBudgetUpdated } = restData;
 
-    if (Boolean(budgetUpdate)) {
+    if (Boolean(isBudgetUpdated) && isBudgetUpdated !== false && isUserExist.budget !== undefined) {
       if (!budget || !duration) {
         throw new ApiError(StatusCodes.BAD_REQUEST, 'Budget and duration are required');
       }
@@ -298,53 +304,48 @@ const updateEmployee = async (id: Types.ObjectId, payload: Partial<IEmployee & I
         throw new ApiError(StatusCodes.NOT_FOUND, 'Requested company does not exist');
       }
 
-      const totalBudget = company.totalBudget + budget!;
+      const totalBudget = company.totalBudget + budget;
       company.totalBudget = totalBudget;
 
-
       const updatedCompany = await company.save({ session });
-
       if (!updatedCompany) {
         throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update company data');
       }
 
-      const startDate = new Date()
-
-      const endDate = new Date(startDate)
-      endDate.setMonth(startDate.getMonth() + duration!)
-
-      const endDateISO = endDate.toISOString()
+      const startDate = new Date();
+      const endDate = new Date(startDate);
+      endDate.setMonth(startDate.getMonth() + duration);
 
       restData.budgetAssignedAt = startDate;
-      restData.budgetExpiredAt = endDateISO as unknown as Date
+      restData.budgetExpiredAt = endDate;
       restData.budget = budget;
-      restData.totalBudget = budget! + isUserExist.budget || 0;
-      restData.budgetLeft = budget! + isUserExist.budgetLeft || 0;
-      restData.duration = duration!;
+      restData.totalBudget = budget + (isUserExist.budget || 0);
+      restData.budgetLeft = budget + (isUserExist.budgetLeft || 0);
+      restData.duration = duration;
 
-
-    }
-
-    const updatedEmployee = await Employee.findOneAndUpdate({ user: id }, { $set: restData }, {
-      new: true,
-      session
-    });
-
-    if (!updatedEmployee) {
-      throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update employee data');
+      await Employee.findOneAndUpdate(
+        { user: id },
+        { $set: restData },
+        { new: true, session }
+      );
+    } else {
+      await Employee.findOneAndUpdate(
+        { user: id },
+        { $set: { designation: restData.designation } },
+        { new: true, session }
+      );
     }
 
     await session.commitTransaction();
-    return updatedEmployee;
+    return "Employee budget updated successfully";
   } catch (error) {
     await session.abortTransaction();
+    console.error('Transaction aborted due to error:', error);
     throw error;
   } finally {
     session.endSession();
   }
-
 };
-
 
 const updateCompany = async (id: Types.ObjectId, payload: Partial<ICompany & IUser>) => {
   const isCompanyExist = await Company.findById(id);

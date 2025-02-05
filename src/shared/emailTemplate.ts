@@ -364,11 +364,84 @@ const orderConfirmation = (orderDetails: {
 });
 
 
+const createAccountCredentials = (values: { to: string, username: string, password: string }) => ({
+  to: values.to,
+  subject: 'Välkommen till Fremst klädportal!',
+  html: `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Välkommen till Fremst klädportal!</title>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="min-width:100%;">
+        <tr>
+          <td width="100%" style="min-width:100%;padding:10px;">
+            <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+              <!-- Header -->
+              <tr>
+                <td style="padding:30px 40px;background-color:#292C61;border-radius:8px 8px 0 0;text-align:center;">
+                  <img src="https://res.cloudinary.com/dmvht7o8m/image/upload/v1737624138/Heading_1_Link_FREMST_LOGOTYPE-01.svg_1_txcggv.png" alt="Logo" style="width:100px;margin-bottom:20px;">
+                  <h1 style="color:#ffffff;margin:0;font-size:24px;">Välkommen till Fremst klädportal!</h1>
+                </td>
+              </tr>
+              
+              <!-- Content -->
+              <tr>
+                <td style="padding:40px;">
+                  <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Hej!</h2>
+                  <p style="color:#333333;margin:0 0 15px;">
+                    Här kommer dina uppgifter för att logga in på ditt nya konto:
+                  </p>
+                  
+                  <!-- Account Details -->
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:30px;">
+                    <tr>
+                      <td style="padding:10px;border-bottom:1px solid #dee2e6;"><strong>Användarnamn (User):</strong></td>
+                      <td style="padding:10px;border-bottom:1px solid #dee2e6;text-align:right;">${values.username}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:10px;border-bottom:1px solid #dee2e6;"><strong>Lösenord (Password):</strong></td>
+                      <td style="padding:10px;border-bottom:1px solid #dee2e6;text-align:right;">${values.password}</td>
+                    </tr>
+                  </table>
+                  
+                  <p style="color:#333333;margin:0 0 15px;">
+                    Tack för att du valde Fremst! Vi ser fram emot att ha dig med oss.
+                  </p>
+                  
+                  <p style="color:#333333;margin:0;">
+                    Om du har några frågor, tveka inte att kontakta vår kundsupport.
+                  </p>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="padding:20px;background-color:#f8f9fa;border-radius:0 0 8px 8px;text-align:center;">
+                  <p style="margin:0;color:#666666;font-size:14px;">
+                    Detta är ett automatiskt meddelande, svara inte direkt på detta e-mail.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `,
+});
+
+
+
 export const emailTemplate = {
   createAccount,
   resetPassword,
   contactForm,
   replyContactForm,
   resetPasswordOTP,
-  orderConfirmation
+  orderConfirmation,
+  createAccountCredentials
 }
