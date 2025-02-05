@@ -147,8 +147,6 @@ const getCompaniesFromDB = async (
             },
           },
           { $sort: { [sortBy]: sortOrder === 'asc' ? 1 : -1 } },
-          { $skip: skip },
-          { $limit: limit },
         ],
       },
     },
