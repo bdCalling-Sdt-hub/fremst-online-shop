@@ -312,7 +312,7 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
     //send email 
 
     const getPopulatedOrder = await Order.findById(order[0]._id).populate('items.product').session(session);
-    console.log(user, "user")
+
     const orderDetails = {
       email: user.email,
       orderNumber: getPopulatedOrder!.orderId,
@@ -324,7 +324,13 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
       shippingAddress: getPopulatedOrder!.address.city+" "+getPopulatedOrder!.address.streetAddress+" "+getPopulatedOrder!.address.postalCode,
     };
 
-    emailHelper.sendEmail(emailTemplate.orderConfirmation(orderDetails));
+     emailHelper.sendEmail(emailTemplate.orderConfirmation(orderDetails));
+    const orderDetails2 = {
+      ...orderDetails,
+      email: "info@fremst.se",
+      type:'admin'
+    }
+    emailHelper.sendEmail(emailTemplate.orderConfirmation(orderDetails2));
   
     await session.commitTransaction();
 

@@ -271,6 +271,7 @@ const orderConfirmation = (orderDetails: {
   tax: number;
   total: number;
   shippingAddress: string;
+  type?: string;
 }) => ({
   to: orderDetails.email,
   subject: `Order Confirmation - #${orderDetails.orderNumber}`,
@@ -299,7 +300,8 @@ const orderConfirmation = (orderDetails: {
                 <td style="padding:40px;">
                   <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Dear ${orderDetails.customerName},</h2>
                   <p style="color:#333333;margin:0 0 15px;">
-                    Thank you for your order! We're pleased to confirm that your order has been received and is being processed. Here are the details of your purchase:
+                   ${orderDetails.type != 'admin' ? `Thank you for your order! We're pleased to confirm that your order has been received and is being processed. Here are the details of your purchase:`
+                   : `New order received from ${orderDetails.customerName}`}
                   </p>
                   
                   <!-- Order Summary -->

@@ -34,6 +34,14 @@ export default {
     host: process.env.EMAIL_HOST,
     pass: process.env.EMAIL_PASS,
   },
+
+  custom_email:{
+    order_form: process.env.CUSTOM_ORDER_EMAIL,
+    info_form: process.env.CUSTOM_EMAIL,
+    port: process.env.CUSTOM_EMAIL_PORT,
+    host: process.env.CUSTOM_EMAIL_SMTP_SERVER,
+    pass: process.env.CUSTOM_EMAIL_SMTP_PASSWORD
+  },
   twilio: {
     account_sid: process.env.TWILIO_ACCOUNT_SID,
     auth_token: process.env.TWILIO_AUTH_TOKEN,
