@@ -27,20 +27,13 @@ export default {
   business_email: process.env.BUSINESS_EMAIL,
 
   admin_order_receiving_code: process.env.ADMIN_ORDER_RECEIVING_CODE,
-  email: {
-    from: process.env.EMAIL_FROM,
-    user: process.env.EMAIL_USER,
+
+  email:{
+    order_form: process.env.ORDER_EMAIL,
+    info_form: process.env.INFO_EMAIL,
     port: process.env.EMAIL_PORT,
     host: process.env.EMAIL_HOST,
-    pass: process.env.EMAIL_PASS,
-  },
-
-  custom_email:{
-    order_form: process.env.CUSTOM_ORDER_EMAIL,
-    info_form: process.env.CUSTOM_EMAIL,
-    port: process.env.CUSTOM_EMAIL_PORT,
-    host: process.env.CUSTOM_EMAIL_SMTP_SERVER,
-    pass: process.env.CUSTOM_EMAIL_SMTP_PASSWORD
+    pass: process.env.EMAIL_PASS
   },
   twilio: {
     account_sid: process.env.TWILIO_ACCOUNT_SID,

@@ -1,7 +1,10 @@
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 export type ITags = {
-  // Define the interface for Tags here
+  name: string;
+  rate: number;
+  companies: Types.ObjectId[];
+  products: Types.ObjectId[];
 };
 
 export type TagsModel = Model<ITags>;

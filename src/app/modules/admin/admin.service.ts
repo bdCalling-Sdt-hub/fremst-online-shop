@@ -14,6 +14,7 @@ import { profile } from 'winston'
 import { USER_ROLES } from '../../../enum/user'
 import { JwtPayload } from 'jsonwebtoken'
 import { handleObjectUpdate } from '../user/user.utils'
+import { USER_STATUS } from '../user/user.constants'
 
 
 
@@ -107,7 +108,11 @@ const getCompaniesFromDB = async (
     })
   }
 
-
+  andConditions.push({
+    'user.status': {
+      $ne: USER_STATUS.DELETED,
+    }
+  })
 
   const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {}
 
@@ -135,6 +140,7 @@ const getCompaniesFromDB = async (
               totalOrders: 1,
               totalBudget: 1,
               totalSpentBudget: 1,
+              'user._id': 1,
               'user.name': 1,
               'user.email': 1,
               'user.address': 1,
@@ -178,7 +184,8 @@ const getEmployeesFromDB = async (
 
   const { searchTerm, companyId } = filters
   companyId ? filters.companyId = companyId : filters.companyId = user.userId
-  console.log(companyId, "companyId")
+  
+  
   const result = await Employee.aggregate([
     {
       $lookup: {
@@ -201,6 +208,7 @@ const getEmployeesFromDB = async (
           ],
         }),
         ...(companyId && { company: new Types.ObjectId(companyId) }),
+        'user.status': { $ne: USER_STATUS.DELETED },
       },
     },
     {

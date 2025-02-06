@@ -3,21 +3,56 @@ import { IProduct, IProductFilters, ProductModel } from './product.interface';
 import { Product } from './product.model';
 import ApiError from '../../../errors/ApiError';
 import { StatusCodes } from 'http-status-codes';
-import { SortOrder, Types } from 'mongoose';
+import mongoose, { SortOrder, Types } from 'mongoose';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import { paginationHelper } from '../../../helpers/paginationHelper';
 import { productSearchableFields } from './product.constants';
+import { Tags } from '../tags/tags.model';
 
 const createProduct = async (payload: IProduct, user: JwtPayload) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
 
+  try {
     payload.createdBy = user.authId;
 
-    const product = await Product.create(payload);
-    if(!product){
-        throw new ApiError(StatusCodes.BAD_REQUEST,'Failed to create product')
+    // Create the product
+    const product = await Product.create([payload], { session });
+    if (!product || product.length === 0) {
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create product');
     }
-    return product
-}
+
+    const createdProduct = product[0];
+
+    // Add product to the tags
+    if (payload.tags && payload.tags.length > 0) {
+      const bulkWriteOps = payload.tags.map((tag) => ({
+        updateOne: {
+          filter: { _id: tag },
+          update: { $push: { products: createdProduct._id } },
+          upsert: true,
+        },
+      }));
+
+      const bulkWriteResult = await Tags.bulkWrite(bulkWriteOps, { session });
+      if (!bulkWriteResult || bulkWriteResult.modifiedCount === 0) {
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update tags');
+      }
+    }
+
+    // Commit the transaction
+    await session.commitTransaction();
+    session.endSession();
+
+    return createdProduct;
+  } catch (error) {
+    // Abort the transaction in case of error
+    await session.abortTransaction();
+    session.endSession();
+    // Re-throw the error
+    throw error;
+  }
+};
 
 const updateProduct = async (id: Types.ObjectId, payload: IProduct & {existingFeaturedImages: string[]}) => {  
 

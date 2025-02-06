@@ -26,6 +26,12 @@ const createUserToDB = async (
   try {
     session.startTransaction();
 
+    //check if the mail already exist
+    const isExistUser = await User.findOne({ email: payload.email, status: { $in: [USER_STATUS.ACTIVE, USER_STATUS.RESTRICTED] } })
+    if(isExistUser){
+      throw new ApiError(StatusCodes.BAD_REQUEST, 'Email already exist!')
+    }
+
     // Validate roles
     if (
       (payload.role === USER_ROLES.SUPER_ADMIN && user.role !== USER_ROLES.SUPER_ADMIN) ||
@@ -220,7 +226,7 @@ const deleteAdmin = async (user: JwtPayload,id:Types.ObjectId) => {
 }
 
 const deleteUser = async (user: JwtPayload, id:Types.ObjectId) => {
-  if(user.role !== USER_ROLES.SUPER_ADMIN && user.role !== USER_ROLES.ADMIN ){
+  if(user.role !== USER_ROLES.SUPER_ADMIN && user.role !== USER_ROLES.ADMIN && user.role !== USER_ROLES.COMPANY){
     throw new ApiError(StatusCodes.BAD_REQUEST, 'You do not have permission to delete this user')
   }
   const deletedUser = await User.findByIdAndUpdate(id,{status: USER_STATUS.DELETED},)
