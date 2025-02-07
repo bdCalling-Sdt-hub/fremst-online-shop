@@ -307,7 +307,7 @@ const updateEmployee = async (id: Types.ObjectId, payload: Record<string, any>) 
         throw new ApiError(StatusCodes.NOT_FOUND, 'Requested company does not exist');
       }
 
-      const totalBudget = company.totalBudget + budget;
+      const totalBudget = (company.totalBudget - isUserExist.budget) + (budget || 0);
       company.totalBudget = totalBudget;
 
       const updatedCompany = await company.save({ session });
