@@ -36,12 +36,28 @@ const deleteTag = catchAsync(async (req: Request, res: Response) => {
 });
 
 const addCustomerOrRemoveFromTag = catchAsync(async (req: Request, res: Response) => {
-    const { tagId, customer } = req.body;
-    const tag = await TagsServices.addCustomerOrRemoveFromTag(new Types.ObjectId(tagId), new Types.ObjectId(customer));
+    const {id} = req.params;
+    const { companies } = req.body;
+
+    const tag = await TagsServices.addCustomerOrRemoveFromTag(new Types.ObjectId(id), companies);
     sendResponse(res, {
         statusCode: StatusCodes.OK,
         success: true,
         message: 'Customer added to tag successfully!',
+        data: tag,
+    });
+});
+
+
+const addOrRemoveProductFromTag = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const { products } = req.body;
+
+    const tag = await TagsServices.addOrRemoveProductFromTag(new Types.ObjectId(id), products);
+    sendResponse(res, {
+        statusCode: StatusCodes.OK,
+        success: true,
+        message: 'Product added to tag successfully!',
         data: tag,
     });
 });
@@ -56,4 +72,4 @@ const getAllTags = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
-export const TagsController = { createTag, updateTag, deleteTag, addCustomerOrRemoveFromTag, getAllTags };
+export const TagsController = { createTag, updateTag, deleteTag, addCustomerOrRemoveFromTag, addOrRemoveProductFromTag, getAllTags };

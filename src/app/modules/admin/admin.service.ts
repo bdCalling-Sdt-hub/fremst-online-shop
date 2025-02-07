@@ -138,7 +138,6 @@ const getCompaniesFromDB = async (
               _id: 1,
               totalEmployees: 1,
               totalOrders: 1,
-              totalBudget: 1,
               totalSpentBudget: 1,
               'user._id': 1,
               'user.name': 1,
@@ -268,7 +267,6 @@ const updateEmployee = async (id: Types.ObjectId, payload: Record<string, any>) 
   try {
     const { name, email, address, contact, profile, ...restData } = payload;
 
-    console.log(profile);
 
     const isUserExist = await Employee.findOne({ user: id })
       .populate('user', { name: 1, email: 1, address: 1, contact: 1, status: 1, role: 1, budget: 1 })
@@ -319,13 +317,23 @@ const updateEmployee = async (id: Types.ObjectId, payload: Record<string, any>) 
 
       const startDate = new Date();
       const endDate = new Date(startDate);
+
+
+
       endDate.setMonth(startDate.getMonth() + duration);
+
+      //check if the end data exceed the current year if so set the end date to the end of the year
+      if (endDate.getFullYear() !== startDate.getFullYear()) {
+        endDate.setFullYear(startDate.getFullYear());
+        endDate.setMonth(11); // December (zero-indexed, so 11 = December)
+        endDate.setDate(31); // Set to the 31st day of December
+      }
 
       restData.budgetAssignedAt = startDate;
       restData.budgetExpiredAt = endDate;
       restData.budget = budget;
-      restData.totalBudget = budget + (isUserExist.budget || 0);
-      restData.budgetLeft = budget + (isUserExist.budgetLeft || 0);
+      // restData.budgetLeft = budget + (isUserExist.budgetLeft || 0);
+      restData.budgetLeft = budget;
       restData.duration = duration;
 
       await Employee.findOneAndUpdate(
@@ -334,6 +342,9 @@ const updateEmployee = async (id: Types.ObjectId, payload: Record<string, any>) 
         { new: true, session }
       );
     } else {
+
+      console.log(restData.designation);
+
       await Employee.findOneAndUpdate(
         { user: id },
         { $set: { designation: restData.designation } },

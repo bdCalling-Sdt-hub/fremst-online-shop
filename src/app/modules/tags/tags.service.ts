@@ -21,7 +21,7 @@ const deleteTag = async (id: Types.ObjectId) => {
 
 const addCustomerOrRemoveFromTag = async (
     id: Types.ObjectId,
-    company: Types.ObjectId
+    companies: Types.ObjectId[]
   ) => {
     // Check if the tag exists
     const tag = await Tags.findById(id);
@@ -29,22 +29,23 @@ const addCustomerOrRemoveFromTag = async (
       throw new ApiError(StatusCodes.NOT_FOUND, 'Tag not found');
     }
   
-    // Check if the company already exists in the tag
-    const companyExists = tag?.companies.includes(company);
-  
+
+    const companyExist = tag?.companies.map((company) => company.toString()).includes(companies.toString());
+
     let updatedTag;
-    if (companyExists) {
+
+    if (companyExist) {
       // Remove the company from the tag
       updatedTag = await Tags.findByIdAndUpdate(
         id,
-        { $pull: { companies: company } },
+        { $pull: { companies: { $in: companies } } },
         { new: true }
       );
     } else {
       // Add the company to the tag
       updatedTag = await Tags.findByIdAndUpdate(
         id,
-        { $addToSet: { companies: company } },
+        { $addToSet: { companies: { $each: companies } } },
         { new: true }
       );
     }
@@ -57,10 +58,54 @@ const addCustomerOrRemoveFromTag = async (
   };
 
 
+  const addOrRemoveProductFromTag = async (
+    id: Types.ObjectId,
+    products: Types.ObjectId[]
+  ) => {
+    // Check if the tag exists
+    const tag = await Tags.findById(id);
+    if (!tag) {
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Tag not found');
+    }
+  
+    // Check if the product already exists in the tag
+    const productExists = tag?.products.some((product) => products.toString().includes(product.toString()));
+    console.log(productExists, "productExists")
+    let updatedTag;
+    if (productExists) {
+      // Remove the product from the tag
+      updatedTag = await Tags.findByIdAndUpdate(
+        id,
+        { $pull: { products: { $in: products } } },
+        { new: true }
+      );
+    } else {
+      // Add the product to the tag
+      updatedTag = await Tags.findByIdAndUpdate(
+        id,
+        { $addToSet: { products: { $each: products } } },
+        { new: true }
+      );
+    }
+  
+    if (!updatedTag) {
+      throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, 'Failed to update tag');
+    }
+  
+    return updatedTag;
+  };
+
 
   const getAllTags = async () => {
-    const tags = await Tags.find();
+    const tags = await Tags.find().populate({
+        path:'companies',
+        select:'_id',
+        populate:{
+            path:'user',
+            select:'_id name'
+        }
+    } ).populate('products', {_id:1, name:1});
     return tags;
   };
 
-export const TagsServices = { createTag, updateTag, deleteTag, addCustomerOrRemoveFromTag, getAllTags };
+export const TagsServices = { createTag, updateTag, deleteTag, addCustomerOrRemoveFromTag, addOrRemoveProductFromTag, getAllTags };

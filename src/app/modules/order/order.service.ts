@@ -269,7 +269,7 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
           totalAmount,
           address,
           contact: employee.user.contact,
-          name: employee.user.name,
+          name: payload.name || employee.user.name,
           additionalInfo: payload.additionalInfo,
           status: 'pending',
         },
@@ -354,13 +354,10 @@ const updateOrderStatus = async (
   session.startTransaction();
 
   try {
-
     const order = await Order.findById(orderId).session(session);
     if (!order) {
       throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
     }
-
-
 
     // If cancelling order, restore product quantities and employee budget
     if (status === 'cancelled') {
@@ -373,9 +370,13 @@ const updateOrderStatus = async (
       }));
       await Product.bulkWrite(productUpdates, { session });
 
-      // Restore employee budget
-      await Employee.findByIdAndUpdate(
-        order.employee,
+      // Restore employee budget with validation
+      const employeeUpdateResult = await Employee.findOneAndUpdate(
+        {
+          _id: order.employee,
+          totalSpentBudget: { $gte: order.totalAmount },
+          totalOrders: { $gte: 1 },
+        },
         {
           $inc: {
             budgetLeft: order.totalAmount,
@@ -383,23 +384,39 @@ const updateOrderStatus = async (
             totalOrders: -1,
           },
         },
-        { session }
+        { session, new: true }
       );
 
-      await Company.findByIdAndUpdate(
-        order.company,
-        { $inc: { totalOrders: -1, totalSpentBudget: -order.totalAmount } },
-        { session }
+      if (!employeeUpdateResult) {
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to restore employee budget due to insufficient total spent budget or total orders');
+      }
+
+      // Restore company budget with validation
+      const companyUpdateResult = await Company.findOneAndUpdate(
+        {
+          _id: order.company,
+          totalSpentBudget: { $gte: order.totalAmount },
+          totalOrders: { $gte: 1 },
+        },
+        {
+          $inc: {
+            totalOrders: -1,
+            totalSpentBudget: -order.totalAmount,
+          },
+        },
+        { session, new: true }
       );
 
+      if (!companyUpdateResult) {
+        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to restore company budget due to insufficient total spent budget or total orders');
+      }
     }
-    
 
     const updatedOrder = await Order.findByIdAndUpdate(
       orderId,
       { status: status },
       { new: true, session }
-    );  
+    );
 
     if (!updatedOrder) {
       throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update order');

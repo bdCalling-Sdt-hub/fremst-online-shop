@@ -6,7 +6,7 @@ import { ISendEmail } from '../interfaces/email'
 const transporter = nodemailer.createTransport({
   host: config.email.host,
   port: Number(config.email.port),
-  secure: true,
+  secure: false,
   auth: {
     user: config.email.order,
     pass: config.email.pass,
@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 const sendEmail = async (values: ISendEmail) => {
   try {
     const info = await transporter.sendMail({
-      from: `"Fremst clothing website" ${config.email.order}`,
+      from: `"Fremst clothing" ${config.email.order}`,
       to: values.to,
       subject: values.subject,  
       html: values.html,
@@ -24,6 +24,7 @@ const sendEmail = async (values: ISendEmail) => {
 
     logger.info('Mail send successfully', info.accepted);
   } catch (error) {
+    console.log(error)
     errorLogger.error('Email', error);
   }
 };

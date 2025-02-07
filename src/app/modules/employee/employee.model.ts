@@ -9,7 +9,7 @@ const employeeSchema = new Schema<IEmployee, EmployeeModel>(
 
     budget: { type: Number, required: true, default: 1000 },
     totalOrders: { type: Number, required: true, default: 0 },
-    totalBudget: { type: Number, required: true, default: 1000 },
+
     totalSpentBudget: { type: Number, required: true, default: 0 },
     budgetLeft: { type: Number, required: true, default: 1000 },
     duration: { type: Number, required: true },

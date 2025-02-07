@@ -2,6 +2,9 @@ import { z } from 'zod';
 
 const createOrderZodSchema = z.object({
   body: z.object({
+    name: z.string({
+      required_error: 'Name is required',
+    }),
     items: z.array(
       z.object({
         product: z.string({

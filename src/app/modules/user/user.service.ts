@@ -63,6 +63,13 @@ const createUserToDB = async (
         const endDate = new Date(startDate);
         endDate.setMonth(startDate.getMonth() + duration);
 
+        //check if the end data exceed the current year if so set the end date to the end of the year 31 december
+        if (endDate.getFullYear() !== startDate.getFullYear()) {
+          endDate.setFullYear(startDate.getFullYear());
+          endDate.setMonth(11); // December (zero-indexed, so 11 = December)
+          endDate.setDate(31); // Set to the 31st day of December
+        }
+        
         const companyId = user.role === USER_ROLES.COMPANY ? user.userId : company;
 
         const employeeDoc = await Employee.create(
@@ -72,7 +79,6 @@ const createUserToDB = async (
               designation,
               user: userDoc[0]._id,
               budget,
-              totalBudget: budget,
               budgetLeft: budget,
               duration,
               budgetExpiredAt: endDate.toISOString(),

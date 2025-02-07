@@ -29,11 +29,11 @@ export default {
   admin_order_receiving_code: process.env.ADMIN_ORDER_RECEIVING_CODE,
 
   email:{
-    order_form: process.env.ORDER_EMAIL,
-    info_form: process.env.INFO_EMAIL,
+    order: process.env.ORDER_EMAIL,
+    info: process.env.INFO_EMAIL,
     port: process.env.EMAIL_PORT,
-    host: process.env.EMAIL_HOST,
-    pass: process.env.EMAIL_PASS
+    host: process.env.EMAIL_SERVER,
+    pass: process.env.EMAIL_PASSWORD
   },
   twilio: {
     account_sid: process.env.TWILIO_ACCOUNT_SID,
