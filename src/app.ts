@@ -6,19 +6,30 @@ import router from './routes'
 import { Morgan } from './shared/morgan'
 import cookieParser from 'cookie-parser'
 import globalErrorHandler from './app/middleware/globalErrorHandler'
+import config from './config'
 const app = express()
 
 //morgan
 app.use(Morgan.successHandler)
 app.use(Morgan.errorHandler)
 //body parser
+const allowedOrigins = config.allowed_origins?.split(',') || [
+  'http://164.90.205.5:3000',
+  'http://164.90.205.5:4174',
+];
+
 app.use(
   cors({
-    origin: ['http://164.90.205.5:3000', 'http://164.90.205.5:4174'],
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
-    
   }),
-)
+);
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())

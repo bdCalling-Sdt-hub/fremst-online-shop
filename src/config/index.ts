@@ -27,7 +27,7 @@ export default {
   business_email: process.env.BUSINESS_EMAIL,
 
   admin_order_receiving_code: process.env.ADMIN_ORDER_RECEIVING_CODE,
-
+  allowed_origins: process.env.ALLOWED_ORIGINS ,
   email:{
     order: process.env.ORDER_EMAIL,
     info: process.env.INFO_EMAIL,
