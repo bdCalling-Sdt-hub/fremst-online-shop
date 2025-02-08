@@ -33,7 +33,7 @@ const createProduct = catchAsync(async (req: Request, res: Response) => {
 const updateProduct = catchAsync(async (req: Request, res: Response) => {
     const payload = req.body;
 
-    console.log(payload,"🦥🦥🦥🦥🦥🦥🦥")
+
 
     if(req.files && 'image' in req.files && req.files.image.length > 0 && req.files.image !== undefined){
         payload.image = `/images/${req.files.image[0].filename}`

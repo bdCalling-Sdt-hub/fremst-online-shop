@@ -616,7 +616,7 @@ if (sortBy && sortOrder) {
     sortCondition[sortBy] = sortOrder;
 }
 
-console.log(objectId)
+
 
 andConditions.push({
   $or: [{ company:objectId }, { employee:objectId }],
@@ -624,7 +624,7 @@ andConditions.push({
 
 
 const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
-console.log(whereConditions, andConditions)
+
 const result = await Order.find(whereConditions)
 .populate('items.product',{name: 1, salePrice: 1, price: 1, sizes: 1, colors: 1, quantity: 1})
 .sort(sortCondition)

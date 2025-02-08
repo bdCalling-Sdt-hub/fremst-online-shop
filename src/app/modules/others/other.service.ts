@@ -47,7 +47,7 @@ const updateFaq = async (id: string, payload: IFaq) => {
 }
 const getFaqs = async () => {
     const faqs = await Faq.find({})
-    console.log(faqs)
+
     return faqs || []
 }
 
