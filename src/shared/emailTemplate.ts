@@ -53,6 +53,20 @@ const resetPassword = (values: IResetPassword) => {
       Thank you,<br>
       The Fremst Team
     </p>
+
+    <!-- Footer -->
+    <div style="margin-top: 30px; padding-top: 20px; text-align: center; font-family: Arial, sans-serif; font-size: 12px; color: #666;">
+      <p style="margin: 0;">
+        Address: <br>
+        Fremst AB <br>
+        Filaregatan 3 <br>
+        242 35 Hörby
+      </p>
+      <p style="margin: 10px 0 0;">
+        Contact details: <br>
+        +46 415 22 000
+      </p>
+    </div>
     `,
   };
   return data;
@@ -63,76 +77,82 @@ const contactForm = (payload: IContactForm) => {
   const data = {
     to: config.business_email as string,
     subject: `Contact Form Submission - ${payload.name}`,
-    html:`
-     <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Contact Form Submission</title>
-</head>
-<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="min-width:100%;">
-    <tr>
-      <td width="100%" style="min-width:100%;padding:10px;">
-        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);">
-          <!-- Header -->
-          <tr>
-            <td style="padding:30px 40px;background-color:#292C61;border-radius:8px 8px 0 0;text-align:center;">
-              <img src="https://res.cloudinary.com/dmvht7o8m/image/upload/v1737624138/Heading_1_Link_FREMST_LOGOTYPE-01.svg_1_txcggv.png" alt="Logo" style="width:100px;margin-bottom:20px;">
-              <h1 style="color:#ffffff;margin:0;font-size:24px;">New Contact Message</h1>
-            </td>
-          </tr>
-          
-          <!-- Content -->
-          <tr>
-            <td style="padding:40px;">
-              <!-- Contact Details -->
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="padding-bottom:30px;">
-                    <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Contact Details</h2>
-                    <div style="background-color:#f8f9fa;padding:20px;border-radius:6px;">
-                      <p style="margin:0 0 10px;">
-                        <span style="color:#666666;">Name:</span>
-                        <strong style="color:#333333;margin-left:10px;">${payload.name}</strong>
-                      </p>
-                      <p style="margin:0 0 10px;">
-                        <span style="color:#666666;">Email:</span>
-                        <strong style="color:#333333;margin-left:10px;">${payload.email}</strong>
-                      </p>
+    html: `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Contact Form Submission</title>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="min-width:100%;">
+        <tr>
+          <td width="100%" style="min-width:100%;padding:10px;">
+            <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+              <!-- Header -->
+              <tr>
+                <td style="padding:30px 40px;background-color:#292C61;border-radius:8px 8px 0 0;text-align:center;">
+                  <img src="https://res.cloudinary.com/dmvht7o8m/image/upload/v1737624138/Heading_1_Link_FREMST_LOGOTYPE-01.svg_1_txcggv.png" alt="Logo" style="width:100px;margin-bottom:20px;">
+                  <h1 style="color:#ffffff;margin:0;font-size:24px;">New Contact Message</h1>
+                </td>
+              </tr>
               
-                    </div>
-                  </td>
-                </tr>
-                
-                <!-- Message -->
-                <tr>
-                  <td>
-                    <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Message</h2>
-                    <div style="background-color:#f8f9fa;padding:20px;border-radius:6px;">
-                      <p style="color:#333333;margin:0;white-space:pre-wrap;">${payload.message}</p>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          
-          <!-- Footer -->
-          <tr>
-            <td style="padding:20px;background-color:#f8f9fa;border-radius:0 0 8px 8px;text-align:center;">
-              <p style="margin:0;color:#666666;font-size:14px;">
-                This email was sent from Fremst Online Shop's contact form
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
-
+              <!-- Content -->
+              <tr>
+                <td style="padding:40px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="padding-bottom:30px;">
+                        <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Contact Details</h2>
+                        <div style="background-color:#f8f9fa;padding:20px;border-radius:6px;">
+                          <p style="margin:0 0 10px;">
+                            <span style="color:#666666;">Name:</span>
+                            <strong style="color:#333333;margin-left:10px;">${payload.name}</strong>
+                          </p>
+                          <p style="margin:0 0 10px;">
+                            <span style="color:#666666;">Email:</span>
+                            <strong style="color:#333333;margin-left:10px;">${payload.email}</strong>
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                        <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Message</h2>
+                        <div style="background-color:#f8f9fa;padding:20px;border-radius:6px;">
+                          <p style="color:#333333;margin:0;white-space:pre-wrap;">${payload.message}</p>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="padding:20px;background-color:#f8f9fa;border-radius:0 0 8px 8px;text-align:center;">
+                  <p style="margin:0;color:#666666;font-size:14px;">
+                    This email was sent from Fremst Online Shop's contact form
+                  </p>
+                  <p style="margin: 10px 0 0;">
+                    Address: <br>
+                    Fremst AB <br>
+                    Filaregatan 3 <br>
+                    242 35 Hörby
+                  </p>
+                  <p style="margin: 10px 0 0;">
+                    Contact details: <br>
+                    +46 415 22 000
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
     `,
   };
   return data;
@@ -145,89 +165,96 @@ const replyContactForm = (payload: IContactForm) => {
     subject: 'Thank You for Contacting Us!',
     html: `
     <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Thank You for Contacting Us</title>
-</head>
-<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="min-width:100%;">
-    <tr>
-      <td width="100%" style="min-width:100%;padding:10px;">
-        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);">
-          <!-- Header -->
-          <tr>
-            <td style="padding:30px 40px;background-color:#292C61;border-radius:8px 8px 0 0;text-align:center;">
-              <img src="https://res.cloudinary.com/dmvht7o8m/image/upload/v1737624138/Heading_1_Link_FREMST_LOGOTYPE-01.svg_1_txcggv.png" alt="Logo" style="width:100px;margin-bottom:20px;">
-              <h1 style="color:#ffffff;margin:0;font-size:24px;">Thank You for Reaching Out</h1>
-            </td>
-          </tr>
-          
-          <!-- Content -->
-          <tr>
-            <td style="padding:40px;">
-              <!-- Greeting -->
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="padding-bottom:30px;">
-                    <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Hello ${payload.name},</h2>
-                    <p style="color:#333333;margin:0 0 15px;">
-                      Thank you for getting in touch with us! We’ve received your message and will get back to you as soon as possible. Here’s a summary of your submission:
-                    </p>
-                  </td>
-                </tr>
-                
-                <!-- Submission Details -->
-                <tr>
-                  <td style="padding-bottom:30px;">
-                    <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Your Message</h2>
-                    <div style="background-color:#f8f9fa;padding:20px;border-radius:6px;">
-                      <p style="margin:0 0 10px;">
-                        <span style="color:#666666;">Name:</span>
-                        <strong style="color:#333333;margin-left:10px;">${payload.name}</strong>
-                      </p>
-                      <p style="margin:0 0 10px;">
-                        <span style="color:#666666;">Email:</span>
-                        <strong style="color:#333333;margin-left:10px;">${payload.email}</strong>
-                      </p>
-                      <p style="margin:0;">
-                        <span style="color:#666666;">Message:</span>
-                        <strong style="color:#333333;margin-left:10px;white-space:pre-wrap;">${payload.message}</strong>
-                      </p>
-                    </div>
-                  </td>
-                </tr>
-                
-                <!-- Additional Info -->
-                <tr>
-                  <td>
-                    <p style="color:#333333;margin:0 0 15px;">
-                      We appreciate your interest and look forward to assisting you further. If you have additional information or inquiries, feel free to reply to this email.
-                    </p>
-                    <p style="color:#333333;margin:0;">
-                      Best regards, <br>
-                      Fremst Online Shop Team
-                    </p>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          
-          <!-- Footer -->
-          <tr>
-            <td style="padding:20px;background-color:#f8f9fa;border-radius:0 0 8px 8px;text-align:center;">
-              <p style="margin:0;color:#666666;font-size:14px;">
-                This email was sent from Fremst Online Shop. If you didn’t contact us, please disregard this email.
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Thank You for Contacting Us</title>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="min-width:100%;">
+        <tr>
+          <td width="100%" style="min-width:100%;padding:10px;">
+            <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+              <!-- Header -->
+              <tr>
+                <td style="padding:30px 40px;background-color:#292C61;border-radius:8px 8px 0 0;text-align:center;">
+                  <img src="https://res.cloudinary.com/dmvht7o8m/image/upload/v1737624138/Heading_1_Link_FREMST_LOGOTYPE-01.svg_1_txcggv.png" alt="Logo" style="width:100px;margin-bottom:20px;">
+                  <h1 style="color:#ffffff;margin:0;font-size:24px;">Thank You for Reaching Out</h1>
+                </td>
+              </tr>
+              
+              <!-- Content -->
+              <tr>
+                <td style="padding:40px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="padding-bottom:30px;">
+                        <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Hello ${payload.name},</h2>
+                        <p style="color:#333333;margin:0 0 15px;">
+                          Thank you for getting in touch with us! We’ve received your message and will get back to you as soon as possible. Here’s a summary of your submission:
+                        </p>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td style="padding-bottom:30px;">
+                        <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Your Message</h2>
+                        <div style="background-color:#f8f9fa;padding:20px;border-radius:6px;">
+                          <p style="margin:0 0 10px;">
+                            <span style="color:#666666;">Name:</span>
+                            <strong style="color:#333333;margin-left:10px;">${payload.name}</strong>
+                          </p>
+                          <p style="margin:0 0 10px;">
+                            <span style="color:#666666;">Email:</span>
+                            <strong style="color:#333333;margin-left:10px;">${payload.email}</strong>
+                          </p>
+                          <p style="margin:0;">
+                            <span style="color:#666666;">Message:</span>
+                            <strong style="color:#333333;margin-left:10px;white-space:pre-wrap;">${payload.message}</strong>
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td>
+                        <p style="color:#333333;margin:0 0 15px;">
+                          We appreciate your interest and look forward to assisting you further. If you have additional information or inquiries, feel free to reply to this email.
+                        </p>
+                        <p style="color:#333333;margin:0;">
+                          Best regards, <br>
+                          Fremst Online Shop Team
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="padding:20px;background-color:#f8f9fa;border-radius:0 0 8px 8px;text-align:center;">
+                  <p style="margin:0;color:#666666;font-size:14px;">
+                    This email was sent from Fremst Online Shop. If you didn’t contact us, please disregard this email.
+                  </p>
+                  <p style="margin: 10px 0 0;">
+                    Address: <br>
+                    Fremst AB <br>
+                    Filaregatan 3 <br>
+                    242 35 Hörby
+                  </p>
+                  <p style="margin: 10px 0 0;">
+                    Contact details: <br>
+                    +46 415 22 000
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
     `,
   };
   return data;
@@ -258,8 +285,15 @@ const resetPasswordOTP = ({ email, otp }: { email: string; otp: string }) => ({
       Thank you,<br>
       The Fremst Team
     </p>
-    `,
+    <!-- Footer -->
+    <div style="text-align: center; margin-top: 40px; font-family: Arial, sans-serif; font-size: 12px; color: #666;">
+      <p style="margin: 0;">Fremst Online Shop</p>
+      <p style="margin: 0;">Email: contact@fremst.com</p>
+      <p style="margin: 0;">Address: 123 Fremst Street, City, Country</p>
+    </div>
+  `,
 });
+
 
 
 const orderConfirmation = (orderDetails: {
@@ -315,20 +349,20 @@ const orderConfirmation = (orderDetails: {
                       <tr>
                         <td style="padding:10px;border-bottom:1px solid #dee2e6;">${item.name}</td>
                         <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.quantity}</td>
-                        <td style="text-align:right;padding:10px;border-bottom:1px solid #dee2e6;">$${item.price.toFixed(2)}</td>
+                        <td style="text-align:right;padding:10px;border-bottom:1px solid #dee2e6;">SEK${item.price.toFixed(2)}</td>
                       </tr>
                     `).join('')}
                     <tr>
                       <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Subtotal:</td>
-                      <td style="text-align:right;padding:10px;">$${orderDetails.subtotal.toFixed(2)}</td>
+                      <td style="text-align:right;padding:10px;">SEK${orderDetails.subtotal.toFixed(2)}</td>
                     </tr>
                     <tr>
                       <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Tax:</td>
-                      <td style="text-align:right;padding:10px;">$${orderDetails.tax.toFixed(2)}</td>
+                      <td style="text-align:right;padding:10px;">SEK${orderDetails.tax.toFixed(2)}</td>
                     </tr>
                     <tr>
                       <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Total:</td>
-                      <td style="text-align:right;padding:10px;font-weight:bold;">$${orderDetails.total.toFixed(2)}</td>
+                      <td style="text-align:right;padding:10px;font-weight:bold;">SEK${orderDetails.total.toFixed(2)}</td>
                     </tr>
                   </table>
                   
@@ -338,7 +372,7 @@ const orderConfirmation = (orderDetails: {
                   </p>
                   
                   <p style="color:#333333;margin:0 0 15px;">
-                    We'll send you another email when your order has been shipped. If you have any questions, please don't hesitate to contact our customer service.
+                    ${orderDetails.type === 'admin' ? `` : `We'll send you another email when your order has been shipped. If you have any questions, please don't hesitate to contact our customer service.` }
                   </p>
                   
                   <p style="color:#333333;margin:0;">
@@ -353,6 +387,14 @@ const orderConfirmation = (orderDetails: {
                 <td style="padding:20px;background-color:#f8f9fa;border-radius:0 0 8px 8px;text-align:center;">
                   <p style="margin:0;color:#666666;font-size:14px;">
                     This is an automated email, please do not reply directly to this message.
+                  </p>
+                  <p style="margin:0;color:#666666;font-size:14px;">
+                    <strong>Address:</strong><br>
+                    Fremst AB<br>
+                    Filaregatan 3<br>
+                    242 35 Hörby<br><br>
+                    <strong>Contact details:</strong><br>
+                    +46 415 22 000
                   </p>
                 </td>
               </tr>
@@ -425,6 +467,129 @@ const createAccountCredentials = (values: { to: string, username: string, passwo
                   <p style="margin:0;color:#666666;font-size:14px;">
                     Detta är ett automatiskt meddelande, svara inte direkt på detta e-mail.
                   </p>
+                  <!-- Contact info in the footer -->
+                  <p style="margin: 0; color: #666666; font-size: 12px;">
+                    Fremst Online Shop | Email: contact@fremst.com | Address: 123 Fremst Street, City, Country
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `,
+});
+
+const orderStatusUpdate = (orderDetails: {
+  orderNumber: string;
+  email: string;
+  customerName: string;
+  items: Array<{ name: string; quantity: number; price: number }>;
+  subtotal: number;
+  tax: number;
+  total: number;
+  shippingAddress: string;
+  status: string; // New status field to determine shipped or canceled
+  type?: string;
+}) => ({
+  to: orderDetails.email,
+  subject: `${orderDetails.status === 'shipped' ? 'Your Order Has Been Shipped' : 'Your Order Has Been Canceled'} - #${orderDetails.orderNumber}`,
+  html: `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Order Status Update</title>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="min-width:100%;">
+        <tr>
+          <td width="100%" style="min-width:100%;padding:10px;">
+            <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background-color:#ffffff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+              <!-- Header -->
+              <tr>
+                <td style="padding:30px 40px;background-color:#292C61;border-radius:8px 8px 0 0;text-align:center;">
+                  <img src="https://res.cloudinary.com/dmvht7o8m/image/upload/v1737624138/Heading_1_Link_FREMST_LOGOTYPE-01.svg_1_txcggv.png" alt="Logo" style="width:100px;margin-bottom:20px;">
+                  <h1 style="color:#ffffff;margin:0;font-size:24px;">
+                    ${orderDetails.status === 'shipped' ? 'Your Order Has Been Shipped' : 'Your Order Has Been Canceled'}
+                  </h1>
+                </td>
+              </tr>
+              
+              <!-- Content -->
+              <tr>
+                <td style="padding:40px;">
+                  <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Dear ${orderDetails.customerName},</h2>
+                  <p style="color:#333333;margin:0 0 15px;">
+                    ${orderDetails.status === 'shipped' ? `We are happy to inform you that your order #${orderDetails.orderNumber} has been shipped and is on its way to the address below.` 
+                    : `We regret to inform you that your order #${orderDetails.orderNumber} has been canceled.`}
+                  </p>
+                  
+                  <p style="color:#333333;margin:0 0 15px;">
+                    <strong>Shipping Address:</strong><br>
+                    ${orderDetails.shippingAddress}
+                  </p>
+
+                  <!-- Items List -->
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:30px;">
+                    <tr>
+                      <th style="text-align:left;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Product</th>
+                      <th style="text-align:center;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Quantity</th>
+                      <th style="text-align:right;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Price</th>
+                    </tr>
+                    ${orderDetails.items.map(item => `
+                      <tr>
+                        <td style="padding:10px;border-bottom:1px solid #dee2e6;">${item.name}</td>
+                        <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.quantity}</td>
+                        <td style="text-align:right;padding:10px;border-bottom:1px solid #dee2e6;">SEK${item.price.toFixed(2)}</td>
+                      </tr>
+                    `).join('')}
+                    <tr>
+                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Subtotal:</td>
+                      <td style="text-align:right;padding:10px;">SEK${orderDetails.subtotal.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Tax:</td>
+                      <td style="text-align:right;padding:10px;">SEK${orderDetails.tax.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Total:</td>
+                      <td style="text-align:right;padding:10px;font-weight:bold;">SEK${orderDetails.total.toFixed(2)}</td>
+                    </tr>
+                  </table>
+
+                  ${orderDetails.status === 'shipped' ? ` 
+                    <p style="color:#333333;margin:0 0 15px;">
+                      You will receive another notification when your package is out for delivery. In the meantime, you can track your order with the carrier if provided.
+                    </p>` 
+                    : `<p style="color:#333333;margin:0 0 15px;">
+                        If you have any questions regarding your cancellation, please don't hesitate to contact our customer service team.
+                      </p>`}
+                  
+                  <p style="color:#333333;margin:0;">
+                    If you have any other questions or concerns, please don't hesitate to reach out to our customer service team.<br>
+                    Thank you for shopping with Fremst!<br>
+                    The Fremst Team
+                  </p>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="padding:20px;background-color:#f8f9fa;border-radius:0 0 8px 8px;text-align:center;">
+                  <p style="margin:0;color:#666666;font-size:14px;">
+                    This is an automated email, please do not reply directly to this message.
+                  </p>
+                  <p style="margin:0;color:#666666;font-size:14px;">
+                    <strong>Address:</strong><br>
+                    Fremst AB<br>
+                    Filaregatan 3<br>
+                    242 35 Hörby<br><br>
+                    <strong>Contact details:</strong><br>
+                    +46 415 22 000
+                  </p>
                 </td>
               </tr>
             </table>
@@ -437,7 +602,6 @@ const createAccountCredentials = (values: { to: string, username: string, passwo
 });
 
 
-
 export const emailTemplate = {
   createAccount,
   resetPassword,
@@ -445,5 +609,6 @@ export const emailTemplate = {
   replyContactForm,
   resetPasswordOTP,
   orderConfirmation,
-  createAccountCredentials
+  createAccountCredentials,
+  orderStatusUpdate
 }

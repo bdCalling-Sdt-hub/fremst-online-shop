@@ -69,7 +69,7 @@ const createUserToDB = async (
           endDate.setMonth(11); // December (zero-indexed, so 11 = December)
           endDate.setDate(31); // Set to the 31st day of December
         }
-        
+
         const companyId = user.role === USER_ROLES.COMPANY ? user.userId : company;
 
         const employeeDoc = await Employee.create(
@@ -209,7 +209,7 @@ if (user.role === USER_ROLES.COMPANY) {
     return employee
 
 }else{
-  console.log(user.authId)
+ 
   const admins = await User.findById(user.authId)
   if(!admins){
     throw new ApiError(StatusCodes.NOT_FOUND, 'Admin not found')

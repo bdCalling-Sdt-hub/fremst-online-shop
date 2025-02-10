@@ -321,7 +321,7 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
       subtotal: getPopulatedOrder!.totalAmount,
       tax: 0, // Calculate tax based on order items
       total: getPopulatedOrder!.totalAmount,
-      shippingAddress: getPopulatedOrder!.address.city+" "+getPopulatedOrder!.address.streetAddress+" "+getPopulatedOrder!.address.postalCode,
+      shippingAddress: getPopulatedOrder!.address.city+", "+getPopulatedOrder!.address.streetAddress+", "+getPopulatedOrder!.address.postalCode,
     };
 
      emailHelper.sendEmail(emailTemplate.orderConfirmation(orderDetails));
@@ -410,6 +410,24 @@ const updateOrderStatus = async (
       if (!companyUpdateResult) {
         throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to restore company budget due to insufficient total spent budget or total orders');
       }
+
+      //send email
+      const orderDetails = {
+        email: user.email,
+        orderNumber: order.orderId,
+        customerName: order.name,
+        items: order.items.map((item: any) => ({ name: item.product.name, quantity: item.quantity, price: item.price })),
+        subtotal: order.totalAmount,
+        tax: 0, // Calculate tax based on order items
+        total: order.totalAmount,
+        shippingAddress: order.address.city+", "+order.address.streetAddress+", "+order.address.postalCode,
+        type: 'customer',
+        status: 'canceled'
+      };
+
+      const orderStatus = emailTemplate.orderStatusUpdate(orderDetails);
+      await emailHelper.sendEmail(orderStatus);
+
     }
 
     const updatedOrder = await Order.findByIdAndUpdate(

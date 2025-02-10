@@ -8,7 +8,7 @@ import { USER_STATUS } from './user.constants'
 
 const userSchema = new Schema<IUser, UserModel>(
   {
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true },
     name: { type: String, required: true },
     contact: { type: String },
     status: {

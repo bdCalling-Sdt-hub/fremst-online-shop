@@ -15,6 +15,7 @@ const transporter = nodemailer.createTransport({
 
 const sendEmail = async (values: ISendEmail) => {
   try {
+    console.log(config.email.order, config.email.pass, config.email.host, Number(config.email.port))
     const info = await transporter.sendMail({
       from: `"Fremst clothing" ${config.email.order}`,
       to: values.to,
