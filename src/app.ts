@@ -14,8 +14,7 @@ app.use(Morgan.errorHandler)
 //body parser
 app.use(
   cors({
-    origin:  '*',
-    credentials: true,
+    origin: ['http://164.90.205.5:3000', 'http://164.90.205.5:4174']
   }),
 )
 app.use(express.json())
