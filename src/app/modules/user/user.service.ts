@@ -231,17 +231,62 @@ const deleteAdmin = async (user: JwtPayload,id:Types.ObjectId) => {
   return admin
 }
 
-const deleteUser = async (user: JwtPayload, id:Types.ObjectId) => {
-  if(user.role !== USER_ROLES.SUPER_ADMIN && user.role !== USER_ROLES.ADMIN && user.role !== USER_ROLES.COMPANY){
-    throw new ApiError(StatusCodes.BAD_REQUEST, 'You do not have permission to delete this user')
+const deleteUser = async (user: JwtPayload, id: Types.ObjectId) => {
+  const allowedRoles = [USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN, USER_ROLES.COMPANY];
+  if (!allowedRoles.includes(user.role)) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'You do not have permission to delete this user');
   }
-  const deletedUser = await User.findByIdAndUpdate(id,{status: USER_STATUS.DELETED},)
-  if (!deletedUser) {
-    throw new ApiError(StatusCodes.NOT_FOUND, 'User not found')
-  }
-  return deletedUser
-}
 
+  const session = await mongoose.startSession();
+  try {
+    await session.withTransaction(async () => {
+      const deletedUser = await User.findByIdAndUpdate(
+        id,
+        { status: USER_STATUS.DELETED },
+        { session }
+      );
+
+      if (!deletedUser) {
+        throw new ApiError(StatusCodes.NOT_FOUND, 'Failed to delete user');
+      }
+
+      if (deletedUser.role === USER_ROLES.EMPLOYEE) {
+        const employee = await Employee.findOne({ user: deletedUser._id }, null, { session });
+        if (!employee) {
+          throw new ApiError(StatusCodes.NOT_FOUND, 'Employee not found');
+        }
+
+        await Company.findOneAndUpdate(
+          { _id: employee.company, totalEmployees: { $gt: 0 } },
+          { $inc: { totalEmployees: -1, totalBudget: -employee.budgetLeft } },
+          { session }
+        );
+      }
+
+      if (deletedUser.role === USER_ROLES.COMPANY) {
+        const company = await Company.findOne({ user: deletedUser._id }, null, { session });
+        if (!company) {
+          throw new ApiError(StatusCodes.NOT_FOUND, 'Company not found');
+        }
+
+        const employees = await Employee.find({ company: company._id }, null, { session });
+        if (employees.length > 0) {
+          const userIds = employees.map((employee) => employee.user);
+          await User.updateMany(
+            { _id: { $in: userIds } },
+            { status: USER_STATUS.DELETED },
+            { session }
+          );
+        }
+      }
+    });
+  } catch (error) {
+    await session.abortTransaction();
+    throw error;
+  } finally {
+    session.endSession();
+  }
+};
 
 export const UserServices = {
   createUserToDB,

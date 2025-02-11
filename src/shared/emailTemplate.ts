@@ -314,7 +314,7 @@ const orderConfirmation = (orderDetails: {
     <html>
     <head>
       <meta charset="UTF-8">
-      <title>Order Confirmation</title>
+      <title>Order Confirmation for ${orderDetails.orderNumber}</title>
     </head>
     <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
       <table width="100%" cellpadding="0" cellspacing="0" style="min-width:100%;">
@@ -332,7 +332,7 @@ const orderConfirmation = (orderDetails: {
               <!-- Content -->
               <tr>
                 <td style="padding:40px;">
-                  <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Dear ${orderDetails.customerName},</h2>
+                  <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Dear ${orderDetails.type != 'admin' ? orderDetails.customerName : 'Admin'},</h2>
                   <p style="color:#333333;margin:0 0 15px;">
                    ${orderDetails.type != 'admin' ? `Thank you for your order! We're pleased to confirm that your order has been received and is being processed. Here are the details of your purchase:`
                    : `New order received from ${orderDetails.customerName}`}
@@ -410,7 +410,7 @@ const orderConfirmation = (orderDetails: {
 
 const createAccountCredentials = (values: { to: string, username: string, password: string }) => ({
   to: values.to,
-  subject: 'Välkommen till Fremst klädportal!',
+  subject: `Välkommen till Fremst klädportal!`,
   html: `
     <!DOCTYPE html>
     <html>
@@ -501,7 +501,7 @@ const orderStatusUpdate = (orderDetails: {
     <html>
     <head>
       <meta charset="UTF-8">
-      <title>Order Status Update</title>
+      <title>Order Status Update for #${orderDetails.orderNumber}</title>
     </head>
     <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
       <table width="100%" cellpadding="0" cellspacing="0" style="min-width:100%;">
