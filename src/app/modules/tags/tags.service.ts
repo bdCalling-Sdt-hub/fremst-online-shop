@@ -70,7 +70,7 @@ const addCustomerOrRemoveFromTag = async (
   
     // Check if the product already exists in the tag
     const productExists = tag?.products.some((product) => products.toString().includes(product.toString()));
-    console.log(productExists, "productExists")
+   
     let updatedTag;
     if (productExists) {
       // Remove the product from the tag

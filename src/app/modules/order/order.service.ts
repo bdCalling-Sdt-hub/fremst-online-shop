@@ -317,7 +317,7 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
       email: user.email,
       orderNumber: getPopulatedOrder!.orderId,
       customerName: getPopulatedOrder!.name,
-      items: getPopulatedOrder!.items.map((item: any) => ({ name: item.product.name, quantity: item.quantity, price: item.price })),
+      items: getPopulatedOrder!.items.map((item: any) => ({ name: item.product.name, quantity: item.quantity, price: item.price, color: item.color, size: item.size })),
       subtotal: getPopulatedOrder!.totalAmount,
       tax: 0, // Calculate tax based on order items
       total: getPopulatedOrder!.totalAmount,
@@ -416,7 +416,7 @@ const updateOrderStatus = async (
         email: user.email,
         orderNumber: order.orderId,
         customerName: order.name,
-        items: order.items.map((item: any) => ({ name: item.product.name, quantity: item.quantity, price: item.price })),
+        items: order.items.map((item: any) => ({ name: item.product.name, quantity: item.quantity, price: item.price, color: item.color, size: item.size })),
         subtotal: order.totalAmount,
         tax: 0, // Calculate tax based on order items
         total: order.totalAmount,

@@ -300,7 +300,7 @@ const orderConfirmation = (orderDetails: {
   orderNumber: string;
   email: string;
   customerName: string;
-  items: Array<{ name: string; quantity: number; price: number }>;
+  items: Array<{ name: string; quantity: number; price: number, size: string, color: string }>;
   subtotal: number;
   tax: number;
   total: number;
@@ -349,6 +349,8 @@ const orderConfirmation = (orderDetails: {
                       <tr>
                         <td style="padding:10px;border-bottom:1px solid #dee2e6;">${item.name}</td>
                         <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.quantity}</td>
+                        <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.size}</td>
+                        <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.color}</td>
                         <td style="text-align:right;padding:10px;border-bottom:1px solid #dee2e6;">SEK${item.price.toFixed(2)}</td>
                       </tr>
                     `).join('')}
@@ -486,7 +488,7 @@ const orderStatusUpdate = (orderDetails: {
   orderNumber: string;
   email: string;
   customerName: string;
-  items: Array<{ name: string; quantity: number; price: number }>;
+  items: Array<{ name: string; quantity: number; price: number, size: string, color: string }>;
   subtotal: number;
   tax: number;
   total: number;
@@ -543,6 +545,8 @@ const orderStatusUpdate = (orderDetails: {
                       <tr>
                         <td style="padding:10px;border-bottom:1px solid #dee2e6;">${item.name}</td>
                         <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.quantity}</td>
+                        <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.size}</td>
+                        <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.color}</td>
                         <td style="text-align:right;padding:10px;border-bottom:1px solid #dee2e6;">SEK${item.price.toFixed(2)}</td>
                       </tr>
                     `).join('')}
