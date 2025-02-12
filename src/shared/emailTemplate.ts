@@ -332,10 +332,11 @@ const orderConfirmation = (orderDetails: {
               <!-- Content -->
               <tr>
                 <td style="padding:40px;">
-                  <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Dear ${orderDetails.type != 'admin' ? orderDetails.customerName : 'Admin'},</h2>
+                  <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Dear ${orderDetails.type !== 'admin' ? orderDetails.customerName : 'Admin'},</h2>
                   <p style="color:#333333;margin:0 0 15px;">
-                   ${orderDetails.type != 'admin' ? `Thank you for your order! We're pleased to confirm that your order has been received and is being processed. Here are the details of your purchase:`
-                   : `New order received from ${orderDetails.customerName}`}
+                    ${orderDetails.type !== 'admin' 
+                      ? "Thank you for your order! We're pleased to confirm that your order has been received and is being processed. Here are the details of your purchase:" 
+                      : `New order received from ${orderDetails.customerName}.`}
                   </p>
                   
                   <!-- Order Summary -->
@@ -343,6 +344,8 @@ const orderConfirmation = (orderDetails: {
                     <tr>
                       <th style="text-align:left;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Product</th>
                       <th style="text-align:center;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Quantity</th>
+                      <th style="text-align:center;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Size</th>
+                      <th style="text-align:center;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Color</th>
                       <th style="text-align:right;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Price</th>
                     </tr>
                     ${orderDetails.items.map(item => `
@@ -351,20 +354,20 @@ const orderConfirmation = (orderDetails: {
                         <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.quantity}</td>
                         <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.size}</td>
                         <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.color}</td>
-                        <td style="text-align:right;padding:10px;border-bottom:1px solid #dee2e6;">SEK${item.price.toFixed(2)}</td>
+                        <td style="text-align:right;padding:10px;border-bottom:1px solid #dee2e6;">SEK ${item.price.toFixed(2)}</td>
                       </tr>
                     `).join('')}
                     <tr>
-                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Subtotal:</td>
-                      <td style="text-align:right;padding:10px;">SEK${orderDetails.subtotal.toFixed(2)}</td>
+                      <td colspan="4" style="text-align:right;padding:10px;font-weight:bold;">Subtotal:</td>
+                      <td style="text-align:right;padding:10px;">SEK ${orderDetails.subtotal.toFixed(2)}</td>
                     </tr>
                     <tr>
-                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Tax:</td>
-                      <td style="text-align:right;padding:10px;">SEK${orderDetails.tax.toFixed(2)}</td>
+                      <td colspan="4" style="text-align:right;padding:10px;font-weight:bold;">Tax:</td>
+                      <td style="text-align:right;padding:10px;">SEK ${orderDetails.tax.toFixed(2)}</td>
                     </tr>
                     <tr>
-                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Total:</td>
-                      <td style="text-align:right;padding:10px;font-weight:bold;">SEK${orderDetails.total.toFixed(2)}</td>
+                      <td colspan="4" style="text-align:right;padding:10px;font-weight:bold;">Total:</td>
+                      <td style="text-align:right;padding:10px;font-weight:bold;">SEK ${orderDetails.total.toFixed(2)}</td>
                     </tr>
                   </table>
                   
@@ -374,7 +377,9 @@ const orderConfirmation = (orderDetails: {
                   </p>
                   
                   <p style="color:#333333;margin:0 0 15px;">
-                    ${orderDetails.type === 'admin' ? `` : `We'll send you another email when your order has been shipped. If you have any questions, please don't hesitate to contact our customer service.` }
+                    ${orderDetails.type !== 'admin' 
+                      ? "We'll send you another email when your order has been shipped. If you have any questions, please don't hesitate to contact our customer service." 
+                      : ""}
                   </p>
                   
                   <p style="color:#333333;margin:0;">
@@ -408,7 +413,6 @@ const orderConfirmation = (orderDetails: {
     </html>
   `,
 });
-
 
 const createAccountCredentials = (values: { to: string, username: string, password: string }) => ({
   to: values.to,
@@ -525,8 +529,9 @@ const orderStatusUpdate = (orderDetails: {
                 <td style="padding:40px;">
                   <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Dear ${orderDetails.customerName},</h2>
                   <p style="color:#333333;margin:0 0 15px;">
-                    ${orderDetails.status === 'shipped' ? `We are happy to inform you that your order #${orderDetails.orderNumber} has been shipped and is on its way to the address below.` 
-                    : `We regret to inform you that your order #${orderDetails.orderNumber} has been canceled.`}
+                    ${orderDetails.status === 'shipped' 
+                      ? `We are happy to inform you that your order #${orderDetails.orderNumber} has been shipped and is on its way to the address below.` 
+                      : `We regret to inform you that your order #${orderDetails.orderNumber} has been canceled.`}
                   </p>
                   
                   <p style="color:#333333;margin:0 0 15px;">
@@ -539,6 +544,8 @@ const orderStatusUpdate = (orderDetails: {
                     <tr>
                       <th style="text-align:left;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Product</th>
                       <th style="text-align:center;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Quantity</th>
+                      <th style="text-align:center;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Size</th>
+                      <th style="text-align:center;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Color</th>
                       <th style="text-align:right;padding:10px;background-color:#f8f9fa;border-bottom:1px solid #dee2e6;">Price</th>
                     </tr>
                     ${orderDetails.items.map(item => `
@@ -547,27 +554,27 @@ const orderStatusUpdate = (orderDetails: {
                         <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.quantity}</td>
                         <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.size}</td>
                         <td style="text-align:center;padding:10px;border-bottom:1px solid #dee2e6;">${item.color}</td>
-                        <td style="text-align:right;padding:10px;border-bottom:1px solid #dee2e6;">SEK${item.price.toFixed(2)}</td>
+                        <td style="text-align:right;padding:10px;border-bottom:1px solid #dee2e6;">SEK ${item.price.toFixed(2)}</td>
                       </tr>
                     `).join('')}
                     <tr>
-                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Subtotal:</td>
-                      <td style="text-align:right;padding:10px;">SEK${orderDetails.subtotal.toFixed(2)}</td>
+                      <td colspan="4" style="text-align:right;padding:10px;font-weight:bold;">Subtotal:</td>
+                      <td style="text-align:right;padding:10px;">SEK ${orderDetails.subtotal.toFixed(2)}</td>
                     </tr>
                     <tr>
-                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Tax:</td>
-                      <td style="text-align:right;padding:10px;">SEK${orderDetails.tax.toFixed(2)}</td>
+                      <td colspan="4" style="text-align:right;padding:10px;font-weight:bold;">Tax:</td>
+                      <td style="text-align:right;padding:10px;">SEK ${orderDetails.tax.toFixed(2)}</td>
                     </tr>
                     <tr>
-                      <td colspan="2" style="text-align:right;padding:10px;font-weight:bold;">Total:</td>
-                      <td style="text-align:right;padding:10px;font-weight:bold;">SEK${orderDetails.total.toFixed(2)}</td>
+                      <td colspan="4" style="text-align:right;padding:10px;font-weight:bold;">Total:</td>
+                      <td style="text-align:right;padding:10px;font-weight:bold;">SEK ${orderDetails.total.toFixed(2)}</td>
                     </tr>
                   </table>
 
-                  ${orderDetails.status === 'shipped' ? ` 
-                    <p style="color:#333333;margin:0 0 15px;">
-                      You will receive another notification when your package is out for delivery. In the meantime, you can track your order with the carrier if provided.
-                    </p>` 
+                  ${orderDetails.status === 'shipped' 
+                    ? `<p style="color:#333333;margin:0 0 15px;">
+                        You will receive another notification when your package is out for delivery. In the meantime, you can track your order with the carrier if provided.
+                      </p>` 
                     : `<p style="color:#333333;margin:0 0 15px;">
                         If you have any questions regarding your cancellation, please don't hesitate to contact our customer service team.
                       </p>`}
@@ -604,7 +611,6 @@ const orderStatusUpdate = (orderDetails: {
     </html>
   `,
 });
-
 
 export const emailTemplate = {
   createAccount,
