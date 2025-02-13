@@ -336,6 +336,9 @@ const updateEmployee = async (id: Types.ObjectId, payload: Record<string, any>) 
       restData.budgetLeft = budget;
       restData.duration = duration;
 
+
+      
+
       await Employee.findOneAndUpdate(
         { user: id },
         { $set: restData },
@@ -343,7 +346,7 @@ const updateEmployee = async (id: Types.ObjectId, payload: Record<string, any>) 
       );
     } else {
 
-      console.log(restData.designation);
+    
 
       await Employee.findOneAndUpdate(
         { user: id },
@@ -368,13 +371,13 @@ const updateCompany = async (id: Types.ObjectId, payload: Partial<ICompany & IUs
   if (!isCompanyExist) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Requested company does not exist');
   }
-  console.log(isCompanyExist, "isCompanyExist")
+
 
   const updatedCompany = await User.findByIdAndUpdate(isCompanyExist.user, { $set: payload }, { new: true });
   if (!updatedCompany) {
     throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update company data');
   }
-  console.log(updatedCompany, "updatedCompany")
+
   return updatedCompany;
 };
 

@@ -6,7 +6,7 @@ import { StatusCodes } from 'http-status-codes'
 import { Types } from 'mongoose'
 
 const createUser = catchAsync(async (req: Request, res: Response) => {
-  console.log(req.body)
+  
   if (req.files && 'image' in req.files && req.files.image.length > 0) {
     req.body.profile = `/images/${req.files.image[0].filename}`
   }

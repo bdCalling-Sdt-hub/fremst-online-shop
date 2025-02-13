@@ -77,7 +77,7 @@ const verifyEmail = catchAsync(async (req: Request, res: Response) => {
 
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
   const {refreshToken} = req.body
-  console.log(refreshToken)
+
   const result = await AuthServices.refreshToken(refreshToken)
   sendResponse(res, {
     statusCode: StatusCodes.OK,
