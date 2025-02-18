@@ -138,8 +138,7 @@ const manageProductAvailability = catchAsync(async (req: Request, res: Response)
 
 const createOrUpdateCompanyBasedProductPrice = catchAsync(async  (req: Request, res: Response)=>{
   const company = req.params.id;
-  const payload = req.body;
-  const result = await AdminServices.createOrUpdateCompanyBasedProductPrice(new Types.ObjectId(company), payload.products);
+  const result = await AdminServices.createOrUpdateCompanyBasedProductPrice(new Types.ObjectId(company), req.body);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,

@@ -23,7 +23,7 @@ import { Cprice } from '../cprice/cprice.model'
 
 //company profile information 
 const getCompanyProfileInformation = async (company_id: string) => {
-  const company = await Company.findById(company_id, { user: 1, totalEmployees: 1, totalOrders: 1, totalBudget: 1,  availableProducts:1, totalSpentBudget: 1 }).populate({
+  const company = await Company.findById(company_id, { user: 1, totalEmployees: 1, totalOrders: 1, totalBudget: 1, totalSpentBudget: 1 }).populate({
     path: 'user',
     select: {
       name: 1,
@@ -32,7 +32,7 @@ const getCompanyProfileInformation = async (company_id: string) => {
       profile: 1,
       contact: 1,
       status: 1,
-
+      availableProducts:1
     },
   })
 

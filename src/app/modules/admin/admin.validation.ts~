@@ -41,4 +41,4 @@ const manageCompanyBasedProductProduct = z.object({
     })
 })
 
-export const AdminValidations = { updateEmployeeZodSchema, updateCompanyZodSchema, manageProductAvailabilityZodSchema,manageCompanyBasedProductProduct };
+export const AdminValidations = { updateEmployeeZodSchema, updateCompanyZodSchema, manageProductAvailabilityZodSchema };

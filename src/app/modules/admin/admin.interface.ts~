@@ -8,3 +8,9 @@ export type IAdmin = {
 
 export type AdminModel = Model<IAdmin>;
 
+
+export type CompanyProductPrice = {
+
+  product:Types.ObjectId;
+  price:number;
+}

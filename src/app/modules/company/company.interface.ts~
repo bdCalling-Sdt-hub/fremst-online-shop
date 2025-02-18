@@ -8,7 +8,7 @@ export type ICompany = {
   totalOrders: number
   totalBudget: number
   totalSpentBudget: number
-  availableProducts: Types.ObjectId[]
+  
   createdAt: Date
   updatedAt: Date
 }
