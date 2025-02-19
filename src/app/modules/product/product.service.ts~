@@ -11,8 +11,8 @@ import { SortOrder, Types } from 'mongoose'
 import { Employee } from '../employee/employee.model'
 import { ICompany } from '../company/company.interface'
 import { USER_ROLES } from '../../../enum/user'
-import { Cprice } from '../cprice/cprice.model'
 import { Company } from '../company/company.model'
+import { updateSalePriceWithCompanyPrices } from './product.utils'
 
 const createProduct = async (payload: IProduct, user: JwtPayload) => {
 
@@ -109,7 +109,7 @@ const getAllProduct = async (user: JwtPayload, filters: IProductFilters, paginat
   }
 
   const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
-  console.log(company,"🦥🦥")
+
   // Fetch user and company details
   const [result, userDetails, companyDetails] = await Promise.all([
     Product.find(whereConditions)
@@ -142,31 +142,7 @@ const getAllProduct = async (user: JwtPayload, filters: IProductFilters, paginat
       : Promise.resolve(null),
   ]);
 
-  // Helper function to filter products by company and update salePrice
-  const filterProductsByCompany = async (products: any[], companyId: string) => {
-    const availableProductIds = companyDetails?.availableProducts?.map((product) => product.toString());
-    const filteredProducts = products.filter((product) => availableProductIds?.includes(product._id.toString()));
 
-    // Fetch company-specific prices
-    const companyPrices = await Cprice.find({
-      company: companyId,
-      product: { $in: availableProductIds },
-    });
-
-    const priceMap = new Map();
-    companyPrices.forEach((cp) => {
-      priceMap.set(cp.product.toString(), cp.price);
-    });
-
-    // Replace salePrice with company-specific price if available
-    return filteredProducts.map((product) => {
-      const companyPrice = priceMap.get(product._id.toString());
-      return {
-        ...product.toObject(),
-        updatedPrice: companyPrice !== undefined ? companyPrice : product.salePrice, // Add updatedPrice
-      };
-    });
-  };
 
   // For employees, return only company-available products with updated prices
   if (user.role === USER_ROLES.EMPLOYEE) {
@@ -174,40 +150,64 @@ const getAllProduct = async (user: JwtPayload, filters: IProductFilters, paginat
       return [];
     }
     return userDetails?.company?._id
-      ? await filterProductsByCompany(result, userDetails.company._id.toString())
+      ? await updateSalePriceWithCompanyPrices(result, userDetails.company._id.toString(), USER_ROLES.EMPLOYEE)
       : [];
   }
 
-  // For other roles, filter by company if provided
+  // For other roles, filter by company if provided and update all product prices
   if (company) {
     if (!companyDetails) {
       return [];
     }
-    return await filterProductsByCompany(result, company);
+    return await updateSalePriceWithCompanyPrices(result, company);
   }
 
-  // If no company filter is provided, return all products
-  return result;
+  // If no company filter is provided, return all products with updated prices
+  return await updateSalePriceWithCompanyPrices(result);
 };
 
 
-const getSingleProduct = async (id: Types.ObjectId) => {
-  const result = await Product.findById(id).populate({
-    path: 'createdBy',
-    select: {
-      _id: 0,
-      name: 1,
-    },
-  }).populate({
-    path: 'category',
-    select: {
-      _id: 1,
-      title: 1,
-      slug: 1,
-    },
-  })
+const getSingleProduct = async (id: Types.ObjectId, user: JwtPayload) => {
+  // Fetch both the product and the employee details concurrently
+  const [product, employee] = await Promise.all([
+    Product.findById(id)
+      .populate({
+        path: 'createdBy',
+        select: {
+          _id: 0,
+          name: 1,
+        },
+      })
+      .populate({
+        path: 'category',
+        select: {
+          _id: 1,
+          title: 1,
+          slug: 1,
+        },
+      }),
 
-  return result;
+    user.role === USER_ROLES.EMPLOYEE
+      ? Employee.findById(user.userId, { company: 1 }).populate<{ company: Partial<ICompany> }>({
+        path: 'company',
+        select: 'availableProducts',
+      })
+      : Promise.resolve(null),
+  ]);
+
+  // If the user is an employee and company details are available
+  if (user.role === USER_ROLES.EMPLOYEE && employee?.company) {
+    const { company } = employee;
+    // Check if the company has the product in availableProducts
+    if (company.availableProducts && company.availableProducts.includes(id)) {
+      // Update the price for employees based on the company
+      const updatedProduct = await updateSalePriceWithCompanyPrices([product], company?._id.toString(), USER_ROLES.EMPLOYEE);
+      return updatedProduct[0]; // Return the first updated product
+    }
+  }
+
+  // For other roles or if the company does not have the product, return the original product
+  return product;
 };
 
 

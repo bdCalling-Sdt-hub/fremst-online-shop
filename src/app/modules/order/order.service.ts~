@@ -2,7 +2,7 @@ import { JwtPayload } from 'jsonwebtoken';
 import mongoose, { SortOrder, Types } from 'mongoose';
 import ApiError from '../../../errors/ApiError';
 import { StatusCodes } from 'http-status-codes';
-import { IOrder, IOrderFilterableFields, IOrderItem, IUpdateOrderStatus } from './order.interface';
+import { IOrder, IOrderFilterableFields, IOrderItem } from './order.interface';
 import { Order } from './order.model';
 import { Employee } from '../employee/employee.model';
 import { Product } from '../product/product.model';
@@ -15,20 +15,19 @@ import { generateOrderId } from './order.utils';
 import { Company } from '../company/company.model';
 import { socketDataAndNotificationHelper } from '../../../helpers/socketNotificationAndDataHelper';
 import config from '../../../config';
-import { IProduct } from '../product/product.interface';
 import { emailTemplate } from '../../../shared/emailTemplate';
 import { emailHelper } from '../../../helpers/emailHelper';
 import { USER_ROLES } from '../../../enum/user';
 import { Cprice } from '../cprice/cprice.model'
 
 
-interface IMonthlyOrderStats {
+type IMonthlyOrderStats ={
   month: number;
   totalOrders: number;
   totalAmount: number;
 }
 
-interface IYearlyOrderStats {
+type IYearlyOrderStats ={
   year: number;
   monthlyStats: IMonthlyOrderStats[];
   totalOrders: number;
@@ -260,7 +259,16 @@ const updateOrderStatus = async (
   session.startTransaction();
 
   try {
-    const order = await Order.findById(orderId).session(session);
+    const order = await Order.findById(orderId).populate<{employee:{user:Partial<IUser>}}>({
+      path:'employee',
+      select:"_id",
+      populate:{
+        path:"user",
+        select: {email:1}
+      }
+    }).session(session);
+
+
     if (!order) {
       throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
     }
@@ -319,7 +327,7 @@ const updateOrderStatus = async (
 
       //send email
       const orderDetails = {
-        email: user.email,
+        email: order.employee.user.email!,
         orderNumber: order.orderId,
         customerName: order.name,
         items: order.items.map((item: any) => ({ name: item.product.name, quantity: item.quantity, price: item.price, color: item.color, size: item.size })),

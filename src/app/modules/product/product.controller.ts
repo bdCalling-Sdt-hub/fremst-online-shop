@@ -65,7 +65,7 @@ const deleteProduct = catchAsync(async (req: Request, res: Response) => {
 
 
 const getSingleProduct = catchAsync(async (req: Request, res: Response) => {
-    const product = await ProductServices.getSingleProduct(new Types.ObjectId(req.params.id));
+    const product = await ProductServices.getSingleProduct(new Types.ObjectId(req.params.id),req.user);
     sendResponse(res, {
       statusCode: StatusCodes.OK,
       success: true,

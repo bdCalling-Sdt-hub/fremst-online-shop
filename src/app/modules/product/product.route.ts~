@@ -30,7 +30,7 @@ router.patch('/:id',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), fileUploadHa
     return ProductController.updateProduct(req, res, next)
 });
 
-router.get('/:id',auth(USER_ROLES.EMPLOYEE, USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN),ProductController.getSingleProduct);
+router.get('/:id',auth(USER_ROLES.EMPLOYEE),ProductController.getSingleProduct);
 router.delete('/:id',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), ProductController.deleteProduct);
 router.get('/',auth(USER_ROLES.EMPLOYEE, USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN), ProductController.getAllProduct);
 

@@ -1,6 +1,4 @@
 import { Order } from "./order.model";
-import { Types } from 'mongoose'
-import { IOrder } from './order.interface'
 
 export const generateOrderId = async (): Promise<string> => {
   const lastOrder = await Order.findOne({}, {}, { sort: { 'createdAt': -1 } });
@@ -18,7 +16,4 @@ export const generateOrderId = async (): Promise<string> => {
 
   return prefix + paddedNumericPart;
 };
-
-
-
 

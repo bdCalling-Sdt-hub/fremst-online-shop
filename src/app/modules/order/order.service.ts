@@ -259,7 +259,16 @@ const updateOrderStatus = async (
   session.startTransaction();
 
   try {
-    const order = await Order.findById(orderId).session(session);
+    const order = await Order.findById(orderId).populate<{employee:{user:Partial<IUser>}}>({
+      path:'employee',
+      select:"_id",
+      populate:{
+        path:"user",
+        select: {email:1}
+      }
+    }).session(session);
+
+
     if (!order) {
       throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
     }
@@ -318,7 +327,7 @@ const updateOrderStatus = async (
 
       //send email
       const orderDetails = {
-        email: user.email,
+        email: order.employee.user.email!,
         orderNumber: order.orderId,
         customerName: order.name,
         items: order.items.map((item: any) => ({ name: item.product.name, quantity: item.quantity, price: item.price, color: item.color, size: item.size })),
@@ -327,7 +336,7 @@ const updateOrderStatus = async (
         total: order.totalAmount,
         shippingAddress: order.address.city+", "+order.address.streetAddress+", "+order.address.postalCode,
         type: 'customer',
-        status: 'canceled'
+        status: 'cancelled'
       };
 
       const orderStatus = emailTemplate.orderStatusUpdate(orderDetails);

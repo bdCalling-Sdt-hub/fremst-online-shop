@@ -11,7 +11,6 @@ import { SortOrder, Types } from 'mongoose'
 import { Employee } from '../employee/employee.model'
 import { ICompany } from '../company/company.interface'
 import { USER_ROLES } from '../../../enum/user'
-import { Cprice } from '../cprice/cprice.model'
 import { Company } from '../company/company.model'
 import { updateSalePriceWithCompanyPrices } from './product.utils'
 
@@ -144,13 +143,14 @@ const getAllProduct = async (user: JwtPayload, filters: IProductFilters, paginat
   ]);
 
 
+
   // For employees, return only company-available products with updated prices
   if (user.role === USER_ROLES.EMPLOYEE) {
     if (!userDetails || !userDetails.company) {
       return [];
     }
     return userDetails?.company?._id
-      ? await updateSalePriceWithCompanyPrices(result, userDetails.company._id.toString())
+      ? await updateSalePriceWithCompanyPrices(result, userDetails.company._id.toString(), USER_ROLES.EMPLOYEE)
       : [];
   }
 
@@ -167,23 +167,47 @@ const getAllProduct = async (user: JwtPayload, filters: IProductFilters, paginat
 };
 
 
-const getSingleProduct = async (id: Types.ObjectId) => {
-  const result = await Product.findById(id).populate({
-    path: 'createdBy',
-    select: {
-      _id: 0,
-      name: 1,
-    },
-  }).populate({
-    path: 'category',
-    select: {
-      _id: 1,
-      title: 1,
-      slug: 1,
-    },
-  })
+const getSingleProduct = async (id: Types.ObjectId, user: JwtPayload) => {
+  // Fetch both the product and the employee details concurrently
+  const [product, employee] = await Promise.all([
+    Product.findById(id)
+      .populate({
+        path: 'createdBy',
+        select: {
+          _id: 0,
+          name: 1,
+        },
+      })
+      .populate({
+        path: 'category',
+        select: {
+          _id: 1,
+          title: 1,
+          slug: 1,
+        },
+      }),
 
-  return result;
+    user.role === USER_ROLES.EMPLOYEE
+      ? Employee.findById(user.userId, { company: 1 }).populate<{ company: Partial<ICompany> }>({
+        path: 'company',
+        select: 'availableProducts',
+      })
+      : Promise.resolve(null),
+  ]);
+
+  // If the user is an employee and company details are available
+  if (user.role === USER_ROLES.EMPLOYEE && employee?.company) {
+    const { company } = employee;
+    // Check if the company has the product in availableProducts
+    if (company.availableProducts && company.availableProducts.includes(id)) {
+      // Update the price for employees based on the company
+      const updatedProduct = await updateSalePriceWithCompanyPrices([product], company._id?.toString(), USER_ROLES.EMPLOYEE);
+      return updatedProduct[0]; // Return the first updated product
+    }
+  }
+
+  // For other roles or if the company does not have the product, return the original product
+  return product;
 };
 
 
