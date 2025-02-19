@@ -13,7 +13,6 @@ import { ICompany } from '../company/company.interface'
 import { USER_ROLES } from '../../../enum/user'
 import { Cprice } from '../cprice/cprice.model'
 import { Company } from '../company/company.model'
-import { updateSalePriceWithCompanyPrices } from './product.utils'
 
 const createProduct = async (payload: IProduct, user: JwtPayload) => {
 
@@ -110,7 +109,7 @@ const getAllProduct = async (user: JwtPayload, filters: IProductFilters, paginat
   }
 
   const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
-
+  console.log(company,"🦥🦥")
   // Fetch user and company details
   const [result, userDetails, companyDetails] = await Promise.all([
     Product.find(whereConditions)
@@ -143,6 +142,31 @@ const getAllProduct = async (user: JwtPayload, filters: IProductFilters, paginat
       : Promise.resolve(null),
   ]);
 
+  // Helper function to filter products by company and update salePrice
+  const filterProductsByCompany = async (products: any[], companyId: string) => {
+    const availableProductIds = companyDetails?.availableProducts?.map((product) => product.toString());
+    const filteredProducts = products.filter((product) => availableProductIds?.includes(product._id.toString()));
+
+    // Fetch company-specific prices
+    const companyPrices = await Cprice.find({
+      company: companyId,
+      product: { $in: availableProductIds },
+    });
+
+    const priceMap = new Map();
+    companyPrices.forEach((cp) => {
+      priceMap.set(cp.product.toString(), cp.price);
+    });
+
+    // Replace salePrice with company-specific price if available
+    return filteredProducts.map((product) => {
+      const companyPrice = priceMap.get(product._id.toString());
+      return {
+        ...product.toObject(),
+        updatedPrice: companyPrice !== undefined ? companyPrice : product.salePrice, // Add updatedPrice
+      };
+    });
+  };
 
   // For employees, return only company-available products with updated prices
   if (user.role === USER_ROLES.EMPLOYEE) {
@@ -150,20 +174,20 @@ const getAllProduct = async (user: JwtPayload, filters: IProductFilters, paginat
       return [];
     }
     return userDetails?.company?._id
-      ? await updateSalePriceWithCompanyPrices(result, userDetails.company._id.toString())
+      ? await filterProductsByCompany(result, userDetails.company._id.toString())
       : [];
   }
 
-  // For other roles, filter by company if provided and update all product prices
+  // For other roles, filter by company if provided
   if (company) {
     if (!companyDetails) {
       return [];
     }
-    return await updateSalePriceWithCompanyPrices(result, company);
+    return await filterProductsByCompany(result, company);
   }
 
-  // If no company filter is provided, return all products with updated prices
-  return await updateSalePriceWithCompanyPrices(result);
+  // If no company filter is provided, return all products
+  return result;
 };
 
 

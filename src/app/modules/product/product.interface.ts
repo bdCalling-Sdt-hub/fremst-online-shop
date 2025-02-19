@@ -41,6 +41,7 @@ export type IProductFilters = {
   searchTerm?: string;
   category?: string;
   subcategory?: string;
+  company?:string;
   brand?: string;
   tag?: string;
   sizes?: string;

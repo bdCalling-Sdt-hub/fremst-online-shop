@@ -2,7 +2,7 @@ import { JwtPayload } from 'jsonwebtoken';
 import mongoose, { SortOrder, Types } from 'mongoose';
 import ApiError from '../../../errors/ApiError';
 import { StatusCodes } from 'http-status-codes';
-import { IOrder, IOrderFilterableFields, IOrderItem } from './order.interface';
+import { IOrder, IOrderFilterableFields, IOrderItem, IUpdateOrderStatus } from './order.interface';
 import { Order } from './order.model';
 import { Employee } from '../employee/employee.model';
 import { Product } from '../product/product.model';
@@ -15,19 +15,20 @@ import { generateOrderId } from './order.utils';
 import { Company } from '../company/company.model';
 import { socketDataAndNotificationHelper } from '../../../helpers/socketNotificationAndDataHelper';
 import config from '../../../config';
+import { IProduct } from '../product/product.interface';
 import { emailTemplate } from '../../../shared/emailTemplate';
 import { emailHelper } from '../../../helpers/emailHelper';
 import { USER_ROLES } from '../../../enum/user';
 import { Cprice } from '../cprice/cprice.model'
 
 
-type IMonthlyOrderStats ={
+interface IMonthlyOrderStats {
   month: number;
   totalOrders: number;
   totalAmount: number;
 }
 
-type IYearlyOrderStats ={
+interface IYearlyOrderStats {
   year: number;
   monthlyStats: IMonthlyOrderStats[];
   totalOrders: number;
