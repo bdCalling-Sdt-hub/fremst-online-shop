@@ -23,16 +23,7 @@ app.use(Morgan.errorHandler)
 //body parser
 app.use(
   cors({
-    origin:  [
-   'http://164.90.205.5:3000',
-   'http://164.90.205.5:4174',
-   'http://admin.fremst.nu',
-   'http://fremst.nu',
-   'https://fremst.nu',
-   'https://admin.fremst.nu',
-   'http://kladportal.fremst.nu',
-   'https://kladportal.fremst.nu',
- ]
+    origin: '*',
   }),
 )
 app.use(express.json())

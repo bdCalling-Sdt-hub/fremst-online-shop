@@ -22,7 +22,7 @@ export type IOrder = {
   company: Types.ObjectId;
   items: IOrderItem[];
   totalAmount: number;
-  status: 'pending' | 'completed' | 'cancelled' | 'dispatched';
+  status: 'pending' | 'delivered' | 'cancelled' | 'dispatched';
   additionalInfo?: string;
   address: IAddress;
   pickup:boolean;

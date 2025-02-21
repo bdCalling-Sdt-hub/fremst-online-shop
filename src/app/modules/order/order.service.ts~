@@ -253,33 +253,61 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
 const updateOrderStatus = async (
   user: JwtPayload,
   orderId: string,
-  status: 'delivered' | 'cancelled' | 'shipped'
+  status: 'completed' | 'cancelled' | 'dispatched' | 'pending'
 ): Promise<IOrder> => {
   const session = await mongoose.startSession();
   session.startTransaction();
 
   try {
-    const order = await Order.findById(orderId).populate<{employee:{user:Partial<IUser>}}>({
-      path:'employee',
-      select:"_id",
-      populate:{
-        path:"user",
-        select: {email:1}
-      }
-    }).session(session);
-
+    const order = await Order.findById(orderId)
+      .populate<{ employee: { user: Partial<IUser> } }>({
+        path: 'employee',
+        select: '_id',
+        populate: {
+          path: 'user',
+          select: { email: 1 },
+        },
+      })
+      .session(session);
 
     if (!order) {
       throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
     }
 
+    // -------------------------
+    // NEW CHECKS START HERE
+    // -------------------------
+
+    // 1. If order is already cancelled, do not allow any other status update
+    if (order.status === 'cancelled' && status !== 'cancelled') {
+      throw new ApiError(
+        StatusCodes.BAD_REQUEST,
+        'Cannot change status of a cancelled order'
+      );
+    }
+
+    // 2. Without being shipped it cannot be marked as delivered
+  console.log(status, order.status)
+    if (status === 'completed' && order.status != 'dispatched') {
+      throw new ApiError(
+        StatusCodes.BAD_REQUEST,
+        'Order must be dispatched before it can be marked as completed'
+      );
+    }
+
+    // -------------------------
+    // NEW CHECKS END HERE
+    // -------------------------
+
     // If cancelling order, restore product quantities and employee budget
     if (status === 'cancelled') {
       // Restore product quantities
-      const productUpdates = order.items.map(item => ({
+      const productUpdates = order.items.map((item) => ({
         updateOne: {
           filter: { _id: item.product },
-          update: { $inc: { quantity: item.quantity, totalSales: -item.quantity } },
+          update: {
+            $inc: { quantity: item.quantity, totalSales: -item.quantity },
+          },
         },
       }));
       await Product.bulkWrite(productUpdates, { session });
@@ -302,7 +330,10 @@ const updateOrderStatus = async (
       );
 
       if (!employeeUpdateResult) {
-        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to restore employee budget due to insufficient total spent budget or total orders');
+        throw new ApiError(
+          StatusCodes.BAD_REQUEST,
+          'Failed to restore employee budget due to insufficient total spent budget or total orders'
+        );
       }
 
       // Restore company budget with validation
@@ -322,26 +353,39 @@ const updateOrderStatus = async (
       );
 
       if (!companyUpdateResult) {
-        throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to restore company budget due to insufficient total spent budget or total orders');
+        throw new ApiError(
+          StatusCodes.BAD_REQUEST,
+          'Failed to restore company budget due to insufficient total spent budget or total orders'
+        );
       }
 
-      //send email
+      // Send cancellation email
       const orderDetails = {
         email: order.employee.user.email!,
         orderNumber: order.orderId,
         customerName: order.name,
-        items: order.items.map((item: any) => ({ name: item.product.name, quantity: item.quantity, price: item.price, color: item.color, size: item.size })),
+        items: order.items.map((item: any) => ({
+          name: item.product.name,
+          quantity: item.quantity,
+          price: item.price,
+          color: item.color,
+          size: item.size,
+        })),
         subtotal: order.totalAmount,
-        tax: 0, // Calculate tax based on order items
+        tax: 0, // Set your tax logic
         total: order.totalAmount,
-        shippingAddress: order.address.city+", "+order.address.streetAddress+", "+order.address.postalCode,
+        shippingAddress:
+          order.address.city +
+          ', ' +
+          order.address.streetAddress +
+          ', ' +
+          order.address.postalCode,
         type: 'customer',
-        status: 'canceled'
+        status: 'cancelled',
       };
 
       const orderStatus = emailTemplate.orderStatusUpdate(orderDetails);
       await emailHelper.sendEmail(orderStatus);
-
     }
 
     const updatedOrder = await Order.findByIdAndUpdate(
@@ -365,12 +409,13 @@ const updateOrderStatus = async (
 };
 
 const getSingleOrder = async (orderId: Types.ObjectId): Promise<IOrder> => {
-  const order = await Order.findById(orderId)
+  const order = await Order.findById(orderId);
   if (!order) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
   }
   return order;
 };
+
 
 const getAllOrders = async (filters:IOrderFilterableFields, paginationOptions:IPaginationOptions): Promise<IGenericResponse<IOrder[]>> => {
     const {searchTerm, ...filtersData} = filters;
