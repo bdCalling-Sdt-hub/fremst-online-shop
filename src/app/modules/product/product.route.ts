@@ -32,6 +32,6 @@ router.patch('/:id',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), fileUploadHa
 
 router.get('/:id',auth(USER_ROLES.EMPLOYEE, USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN),ProductController.getSingleProduct);
 router.delete('/:id',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), ProductController.deleteProduct);
-router.get('/',auth(USER_ROLES.EMPLOYEE, USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN), ProductController.getAllProduct);
+router.get('/',auth(USER_ROLES.EMPLOYEE, USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN,USER_ROLES.COMPANY), ProductController.getAllProduct);
 
 export const ProductRoutes = router;

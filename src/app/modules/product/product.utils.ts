@@ -2,6 +2,7 @@
 
 import { Cprice } from '../cprice/cprice.model'
  import { Company } from '../company/company.model'
+ import { USER_ROLES } from '../../../enum/user'
 
 
  export const updateSalePriceWithCompanyPrices = async (products: any[], companyId?: string, role?: string) => {
@@ -18,7 +19,7 @@ import { Cprice } from '../cprice/cprice.model'
    });
 
    // If the user role is 'employee', filter the products based on company availability
-   if (role === 'employee' && companyId) {
+   if ((role === USER_ROLES.EMPLOYEE && companyId) || (role === USER_ROLES.COMPANY && companyId)) {
      // Fetch the company document to get available products
      const company = await Company.findById(companyId).select('availableProducts');
 
