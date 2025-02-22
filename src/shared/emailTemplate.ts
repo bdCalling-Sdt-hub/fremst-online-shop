@@ -378,7 +378,7 @@ const orderConfirmation = (orderDetails: {
                   
                   <p style="color:#333333;margin:0 0 15px;">
                     ${orderDetails.type !== 'admin' 
-                      ? "We'll send you another email when your order has been shipped. If you have any questions, please don't hesitate to contact our customer service." 
+                      ? "We'll send you another email when your order has been dispatched. If you have any questions, please don't hesitate to contact our customer service." 
                       : ""}
                   </p>
                   
@@ -501,7 +501,7 @@ const orderStatusUpdate = (orderDetails: {
   type?: string;
 }) => ({
   to: orderDetails.email,
-  subject: `${orderDetails.status === 'shipped' ? 'Your Order Has Been Shipped' : 'Your Order Has Been Canceled'} - #${orderDetails.orderNumber}`,
+  subject: `${orderDetails.status === 'dispatched' ? 'Your Order Has Been dispatched' : 'Your Order Has Been Cancelled'} - #${orderDetails.orderNumber}`,
   html: `
     <!DOCTYPE html>
     <html>
@@ -519,7 +519,7 @@ const orderStatusUpdate = (orderDetails: {
                 <td style="padding:30px 40px;background-color:#292C61;border-radius:8px 8px 0 0;text-align:center;">
                   <img src="https://res.cloudinary.com/dmvht7o8m/image/upload/v1737624138/Heading_1_Link_FREMST_LOGOTYPE-01.svg_1_txcggv.png" alt="Logo" style="width:100px;margin-bottom:20px;">
                   <h1 style="color:#ffffff;margin:0;font-size:24px;">
-                    ${orderDetails.status === 'shipped' ? 'Your Order Has Been Shipped' : 'Your Order Has Been Canceled'}
+                    ${orderDetails.status === 'dispatched' ? 'Your Order Has Been dispatched' : 'Your Order Has Been Cancelled'}
                   </h1>
                 </td>
               </tr>
@@ -529,9 +529,9 @@ const orderStatusUpdate = (orderDetails: {
                 <td style="padding:40px;">
                   <h2 style="color:#292C61;font-size:18px;margin:0 0 15px;">Dear ${orderDetails.customerName},</h2>
                   <p style="color:#333333;margin:0 0 15px;">
-                    ${orderDetails.status === 'shipped' 
-                      ? `We are happy to inform you that your order #${orderDetails.orderNumber} has been shipped and is on its way to the address below.` 
-                      : `We regret to inform you that your order #${orderDetails.orderNumber} has been canceled.`}
+                    ${orderDetails.status === 'dispatched' 
+                      ? `We are happy to inform you that your order #${orderDetails.orderNumber} has been dispatched and is on its way to the address below.` 
+                      : `We regret to inform you that your order #${orderDetails.orderNumber} has been cancelled.`}
                   </p>
                   
                   <p style="color:#333333;margin:0 0 15px;">
@@ -571,7 +571,7 @@ const orderStatusUpdate = (orderDetails: {
                     </tr>
                   </table>
 
-                  ${orderDetails.status === 'shipped' 
+                  ${orderDetails.status === 'dispatched' 
                     ? `<p style="color:#333333;margin:0 0 15px;">
                         You will receive another notification when your package is out for delivery. In the meantime, you can track your order with the carrier if provided.
                       </p>` 

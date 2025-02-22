@@ -66,29 +66,6 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
     const orderItems: IOrderItem[] = [];
     let totalAmount = 0;
 
-    // const productValidationPromises = payload.items.map(async (item) => {
-    //   const product = await Product.findById(item.product).session(session);
-    //   if (!product) {
-    //     throw new ApiError(StatusCodes.NOT_FOUND, `Product not found with id: ${item.product}`);
-    //   }
-    //   if (product.quantity < item.quantity) {
-    //     throw new ApiError(StatusCodes.BAD_REQUEST, `Insufficient stock for product: ${product.name}`);
-    //   }
-    //   const itemPrice = product.salePrice ?? product.price;
-    //   if (typeof itemPrice !== 'number' || itemPrice <= 0) {
-    //     throw new ApiError(StatusCodes.BAD_REQUEST, `Invalid price for product: ${product.name}`);
-    //   }
-    //   const itemTotal = itemPrice * item.quantity;
-    //   totalAmount += itemTotal;
-    //
-    //   orderItems.push({
-    //     product: product._id,
-    //     quantity: item.quantity,
-    //     price: itemPrice,
-    //     color: item.color,
-    //     size: item.size,
-    //   });
-    // });
 
 
     const productValidationPromises = payload.items.map(async (item) => {
@@ -286,9 +263,8 @@ const updateOrderStatus = async (
       );
     }
 
-    // 2. Without being shipped it cannot be marked as delivered
-  console.log(status, order.status)
-    if (status === 'completed' && order.status != 'dispatched') {
+    // 2. Without being dispatched it cannot be marked as completed
+    if (status === 'completed' && order.status !== 'dispatched') {
       throw new ApiError(
         StatusCodes.BAD_REQUEST,
         'Order must be dispatched before it can be marked as completed.'
@@ -298,6 +274,31 @@ const updateOrderStatus = async (
     // -------------------------
     // NEW CHECKS END HERE
     // -------------------------
+
+
+    const orderDetails = {
+      email: order.employee.user.email!,
+      orderNumber: order.orderId,
+      customerName: order.name,
+      items: order.items.map((item: any) => ({
+        name: item.product.name,
+        quantity: item.quantity,
+        price: item.price,
+        color: item.color,
+        size: item.size,
+      })),
+      subtotal: order.totalAmount,
+      tax: 0, // Set your tax logic
+      total: order.totalAmount,
+      shippingAddress:
+        order.address.city +
+        ', ' +
+        order.address.streetAddress +
+        ', ' +
+        order.address.postalCode,
+      type: 'customer',
+      status: status
+    };
 
     // If cancelling order, restore product quantities and employee budget
     if (status === 'cancelled') {
@@ -359,33 +360,7 @@ const updateOrderStatus = async (
         );
       }
 
-      // Send cancellation email
-      const orderDetails = {
-        email: order.employee.user.email!,
-        orderNumber: order.orderId,
-        customerName: order.name,
-        items: order.items.map((item: any) => ({
-          name: item.product.name,
-          quantity: item.quantity,
-          price: item.price,
-          color: item.color,
-          size: item.size,
-        })),
-        subtotal: order.totalAmount,
-        tax: 0, // Set your tax logic
-        total: order.totalAmount,
-        shippingAddress:
-          order.address.city +
-          ', ' +
-          order.address.streetAddress +
-          ', ' +
-          order.address.postalCode,
-        type: 'customer',
-        status: 'cancelled',
-      };
 
-      const orderStatus = emailTemplate.orderStatusUpdate(orderDetails);
-      await emailHelper.sendEmail(orderStatus);
     }
 
     const updatedOrder = await Order.findByIdAndUpdate(
@@ -393,6 +368,10 @@ const updateOrderStatus = async (
       { status: status },
       { new: true, session }
     );
+
+    // Send cancellation email
+    const orderStatus = emailTemplate.orderStatusUpdate(orderDetails);
+    await emailHelper.sendEmail(orderStatus);
 
     if (!updatedOrder) {
       throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to update order');

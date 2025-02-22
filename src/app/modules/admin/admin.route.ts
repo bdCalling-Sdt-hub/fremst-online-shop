@@ -10,7 +10,7 @@ const router = express.Router()
 
 router.get(
   '/companies',
-  // auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN),
+  auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN),
   AdminController.getCompanies,
 )
 
@@ -66,10 +66,10 @@ router.patch(
   }
 )
 
-router.patch('/manage-product-price/:id', validateRequest(AdminValidations.manageCompanyBasedProductProduct), AdminController.createOrUpdateCompanyBasedProductPrice)
+router.patch('/manage-product-price/:id',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), validateRequest(AdminValidations.manageCompanyBasedProductProduct), AdminController.createOrUpdateCompanyBasedProductPrice)
 
 
-router.patch('/manage-product-availability/:id',validateRequest(AdminValidations.manageProductAvailabilityZodSchema) ,AdminController.manageProductAvailability )
+router.patch('/manage-product-availability/:id',auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), validateRequest(AdminValidations.manageProductAvailabilityZodSchema) ,AdminController.manageProductAvailability )
 
 router.get('/admins', auth(USER_ROLES.SUPER_ADMIN, USER_ROLES.ADMIN), AdminController.getAllAdmin)
 
