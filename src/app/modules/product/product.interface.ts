@@ -16,6 +16,7 @@ export type IProduct = {
   name: string;
   price: number;
   description: string;
+  status:'deleted' | 'active';
   additionalInfo: string;
   sizes: string[];
   colors: string[];

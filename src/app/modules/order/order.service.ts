@@ -77,6 +77,11 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
         throw new ApiError(StatusCodes.BAD_REQUEST, `Insufficient stock for product: ${product.name}`);
       }
 
+       // Check if the product will be out of stock after this order
+       if (product.quantity - item.quantity === 0) {
+        product.availability = false; // Mark the product as unavailable
+      }
+
       // Get the price from the Cprice collection, based on the employee's company
       const cprice = await Cprice.findOne({ company: employee.company, product: item.product }).session(session);
 
@@ -104,7 +109,14 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
         color: item.color,
         size: item.size,
       });
+
+      // Save the updated product status if it's marked as unavailable
+      if (product.availability === false) {
+        await product.save({ session });
+      }
     });
+
+    
 
     await Promise.all(productValidationPromises);
 
@@ -174,7 +186,7 @@ const createOrder = async (user: JwtPayload, payload: IOrder): Promise<IOrder> =
       type: USER_ROLES.ADMIN,
       recipient: config.admin_order_receiving_code || "admin",
     };
-    
+
     const companyNotification = {
       nameSpace: 'notification',
       title: `New Order - ${orderId} placed by ${order[0].name}`,
@@ -251,10 +263,6 @@ const updateOrderStatus = async (
       throw new ApiError(StatusCodes.NOT_FOUND, 'Order not found');
     }
 
-    // -------------------------
-    // NEW CHECKS START HERE
-    // -------------------------
-
     // 1. If order is already cancelled, do not allow any other status update
     if (order.status === 'cancelled' && status !== 'cancelled') {
       throw new ApiError(
@@ -270,10 +278,6 @@ const updateOrderStatus = async (
         'Order must be dispatched before it can be marked as completed.'
       );
     }
-
-    // -------------------------
-    // NEW CHECKS END HERE
-    // -------------------------
 
 
     const orderDetails = {
@@ -302,13 +306,30 @@ const updateOrderStatus = async (
 
     // If cancelling order, restore product quantities and employee budget
     if (status === 'cancelled') {
-      // Restore product quantities
       const productUpdates = order.items.map((item) => ({
         updateOne: {
           filter: { _id: item.product },
-          update: {
-            $inc: { quantity: item.quantity, totalSales: -item.quantity },
-          },
+          update: [
+            // First stage: Increment quantity and totalSales
+            {
+              $set: {
+                quantity: { $add: ["$quantity", item.quantity] },
+                totalSales: { $add: ["$totalSales", -item.quantity] },
+              },
+            },
+            // Second stage: Update availability based on the new quantity
+            {
+              $set: {
+                availability: {
+                  $cond: {
+                    if: { $gt: ["$quantity", 0] }, // Uses the updated quantity
+                    then: true,
+                    else: false,
+                  },
+                },
+              },
+            },
+          ],
         },
       }));
       await Product.bulkWrite(productUpdates, { session });

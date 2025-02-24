@@ -53,7 +53,7 @@ const updateProduct = async (
 }
 
 const deleteProduct = async (id: Types.ObjectId) => {
-  const product = await Product.findByIdAndDelete(id)
+  const product = await Product.findByIdAndUpdate(id, { $set: { status: 'deleted' } }, { new: true })
   if (!product) {
     throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to delete product')
   }
@@ -119,6 +119,12 @@ const getAllProduct = async (user: JwtPayload, filters: IProductFilters, paginat
       });
     }
   }
+
+  andConditions.push({
+    status: {
+      $ne: 'deleted',
+    },
+  })
 
   const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
 

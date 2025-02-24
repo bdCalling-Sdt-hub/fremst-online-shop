@@ -11,6 +11,11 @@ const productSchema = new Schema<IProduct, ProductModel>({
     type: Number,
     required: true,
   },
+  status:{
+    type: String,
+    enum: ['deleted', 'active'],
+    default: 'active',
+  },
   description: {
     type: String,
     required: true,
