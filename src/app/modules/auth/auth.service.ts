@@ -24,6 +24,7 @@ const loginUser = async (
   const isUserExist = await User.findOne(
     {
       email,
+      status: { $in: [USER_STATUS.ACTIVE, USER_STATUS.RESTRICTED] },
     },
     { role: 1, status: 1, email: 1 },
   ).select('+password')
