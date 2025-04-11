@@ -211,8 +211,7 @@ const getUserProfileFromDB = async (user: JwtPayload) => {
     const employee = await Employee.findById(user.userId)
       .populate({
         path: 'user',
-        select:
-          'name email address contact status role profile budgetLeft budget totalBudget totalSpentBudget duration budgetExpiredAt company',
+        select: 'name email address contact status role profile',
       })
       .populate({
         path: 'company',

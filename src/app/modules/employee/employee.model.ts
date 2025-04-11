@@ -7,11 +7,11 @@ const employeeSchema = new Schema<IEmployee, EmployeeModel>(
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     designation: { type: String, required: true },
 
-    budget: { type: Number, required: true, default: 1000 },
+    budget: { type: Number, required: true, default: 0 },
     totalOrders: { type: Number, required: true, default: 0 },
 
     totalSpentBudget: { type: Number, required: true, default: 0 },
-    budgetLeft: { type: Number, required: true, default: 1000 },
+    budgetLeft: { type: Number, required: true, default: 0 },
     duration: { type: Number, required: true },
     budgetAssignedAt: { type: Date, required: true, default: Date.now },
     budgetExpiredAt: { type: Date, required: true },
