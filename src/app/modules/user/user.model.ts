@@ -8,7 +8,7 @@ import { USER_STATUS } from './user.constants'
 
 const userSchema = new Schema<IUser, UserModel>(
   {
-    email: { type: String, required: true },
+    email: { type: String, required: true, lowercase: true, trim: true },
     name: { type: String, required: true },
     contact: { type: String },
     status: {
@@ -16,13 +16,13 @@ const userSchema = new Schema<IUser, UserModel>(
       enum: [USER_STATUS.ACTIVE, USER_STATUS.RESTRICTED],
       default: 'active',
     },
-    password: { type: String, select: 0, required: true },
+    password: { type: String, select: 0, required: true, trim: true },
     profile: { type: String },
-    address: { 
+    address: {
       _id: false,
-      streetAddress: { type: String , required: true },
-      city: { type: String , required: true },
-      postalCode: { type: String,required: true },
+      streetAddress: { type: String, required: true },
+      city: { type: String, required: true },
+      postalCode: { type: String, required: true },
     },
     role: { type: String, required: true },
     authentication: {
